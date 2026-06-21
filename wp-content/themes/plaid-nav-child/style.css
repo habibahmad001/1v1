@@ -17,7 +17,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
    ============================================ */
 :root {
 	/* Navigation */
-	--plaid-nav-height: 72px;
+	--plaid-nav-height: 64px;
 	--plaid-nav-bg: #ffffff;
 	--plaid-nav-text: #1a1a1a;
 	--plaid-nav-text-secondary: #666666;
@@ -31,26 +31,26 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	--plaid-nav-spacing-unit: 8px;
 
 	/* Typography */
-	--plaid-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--plaid-font-family: "PlaidSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	--plaid-nav-font-size: 15px;
 	--plaid-nav-font-weight: 500;
 	--plaid-nav-letter-spacing: -0.01em;
 
 	/* Spacing */
-	--plaid-nav-padding: 12px 16px;
+	--plaid-nav-padding: 8px 16px;
 	--plaid-nav-gap: 32px;
-	--plaid-nav-item-gap: 8px;
+	--plaid-nav-item-gap: 24px;
 	--plaid-nav-container-padding: 32px;
 
 	/* Border Radius */
 	--plaid-nav-radius-sm: 6px;
-	--plaid-nav-radius-md: 12px;
-	--plaid-nav-radius-lg: 8px;
+	--plaid-nav-radius-md: 8px;
+	--plaid-nav-radius-lg: 12px;
 
 	/* Mega Menu */
 	--plaid-mega-menu-min-width: 280px;
 	--plaid-mega-menu-max-width: 900px;
-	--plaid-mega-menu-padding: 24px;
+	--plaid-mega-menu-padding: 32px;
 	--plaid-mega-menu-gap: 32px;
 }
 
@@ -133,7 +133,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 /* ============================================
-   Header Container
+   Header Container - Simple Plaid.com Style
    ============================================ */
 .plaid-header {
 	position: fixed;
@@ -166,7 +166,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 /* ============================================
-   Logo
+   Logo - Plaid.com Style
    ============================================ */
 .plaid-logo {
 	display: flex;
@@ -174,10 +174,11 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	gap: 12px;
 	font-size: 20px;
 	font-weight: 700;
-	color: var(--plaid-nav-text);
+	color: #000000;
 	transition: opacity 0.2s;
 	text-decoration: none;
 	white-space: nowrap;
+	flex-shrink: 0;
 }
 
 .plaid-logo:hover {
@@ -198,13 +199,15 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 .plaid-logo-text {
-	font-size: 20px;
+	font-size: 18px;
 	letter-spacing: -0.02em;
 	font-family: var(--plaid-font-family);
+	font-weight: 700;
+	color: #000000;
 }
 
 /* ============================================
-   Desktop Navigation
+   Desktop Navigation - Plaid.com Style
    ============================================ */
 .plaid-nav-desktop {
 	display: none;
@@ -215,7 +218,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 		display: flex;
 		align-items: center;
 		flex: 1;
-		justify-content: space-between;
+		justify-content: center;
 	}
 
 	.plaid-nav-list {
@@ -239,12 +242,12 @@ Tags: custom-menu, mega-menu, accessibility-ready
 		font-weight: var(--plaid-nav-font-weight);
 		color: var(--plaid-nav-text);
 		border-radius: var(--plaid-nav-radius-sm);
-		transition: color 0.2s ease, background-color 0.2s ease;
+		transition: color 0.2s ease;
 		cursor: pointer;
 		white-space: nowrap;
 		text-decoration: none;
 		position: relative;
-		line-height: 1.4;
+		line-height: 1.5;
 		background: transparent;
 		font-family: var(--plaid-font-family);
 		letter-spacing: var(--plaid-nav-letter-spacing);
@@ -256,34 +259,13 @@ Tags: custom-menu, mega-menu, accessibility-ready
 		background-color: transparent;
 	}
 
-	.plaid-nav-link::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%) scaleX(0);
-		width: calc(100% - 32px);
-		height: 2px;
-		background: var(--plaid-nav-accent);
-		transition: transform 0.2s ease;
-		border-radius: 1px;
-	}
-
-	.plaid-nav-link:hover::after {
-		transform: translateX(-50%) scaleX(1);
-	}
-
 	.plaid-nav-link:focus-visible {
 		outline: 2px solid var(--plaid-nav-accent);
 		outline-offset: 2px;
 	}
 
 	.plaid-nav-link[aria-expanded="true"] {
-		color: var(--plaid-nav-accent);
-	}
-
-	.plaid-nav-link[aria-expanded="true"]::after {
-		transform: translateX(-50%) scaleX(1);
+		color: var(--plaid-nav-text);
 	}
 
 	/* Show mega menu on parent hover */
@@ -311,7 +293,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 		width: 12px;
 		height: 12px;
 		transition: transform 0.2s ease;
-		color: currentColor;
+		color: var(--plaid-nav-text-secondary);
 	}
 
 	.plaid-nav-link[aria-expanded="true"] .plaid-nav-arrow {
@@ -320,13 +302,14 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 /* ============================================
-   CTA Buttons
+   CTA Buttons - Plaid.com Style
    ============================================ */
 .plaid-nav-cta {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: 16px;
 	margin-left: auto;
+	flex-shrink: 0;
 }
 
 .plaid-nav-button {
@@ -373,7 +356,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 /* ============================================
-   Mega Menu
+   Mega Menu - Plaid.com Style
    ============================================ */
 .plaid-mega-menu {
 	position: absolute;
@@ -384,7 +367,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	max-width: var(--plaid-mega-menu-max-width);
 	background: var(--plaid-nav-overlay-bg);
 	border: 1px solid var(--plaid-nav-border);
-	border-radius: var(--plaid-nav-radius-md);
+	border-radius: var(--plaid-nav-radius-lg);
 	box-shadow: var(--plaid-nav-shadow);
 	opacity: 0;
 	visibility: hidden;
@@ -419,7 +402,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
 	color: var(--plaid-nav-text-secondary);
-	margin: 0 0 12px 0;
+	margin: 0 0 16px 0;
 	padding: 0 4px;
 	font-family: var(--plaid-font-family);
 }
@@ -442,7 +425,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 .plaid-mega-menu-link {
 	display: flex;
 	flex-direction: column;
-	padding: 10px 12px;
+	padding: 12px 16px;
 	border-radius: var(--plaid-nav-radius-sm);
 	transition: background-color 0.2s ease;
 	text-decoration: none;
@@ -792,6 +775,7 @@ body {
 	margin: 0 0 16px 0;
 	font-size: 28px;
 	font-weight: 600;
+	color: var(--plaid-nav-text);
 }
 
 .entry-title a {
@@ -820,6 +804,7 @@ body {
 @media (max-width: 1279px) {
 	:root {
 		--plaid-nav-container-padding: 24px;
+		--plaid-nav-item-gap: 16px;
 	}
 
 	.plaid-mega-menu {
@@ -902,5 +887,18 @@ body {
 	.plaid-mobile-toggle,
 	.plaid-mobile-overlay {
 		display: none;
+	}
+}
+
+/* ============================================
+   WordPress Admin Bar Compatibility
+   ============================================ */
+body.admin-bar .plaid-header {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	body.admin-bar .plaid-header {
+		top: 46px;
 	}
 }
