@@ -1,0 +1,293 @@
+/**
+ * Navigation Styles Extension
+ * Additional CSS that extends the main style.css
+ *
+ * @package PlaidNavChild
+ */
+
+/* ============================================
+   Additional Layout Adjustments
+   ============================================ */
+
+/* Ensure proper z-index stacking */
+.plaid-header {
+	z-index: 1000;
+}
+
+.plaid-mega-menu {
+	z-index: 100;
+}
+
+.plaid-mobile-overlay {
+	z-index: 999;
+}
+
+.plaid-mobile-backdrop {
+	z-index: 998;
+}
+
+/* Fix mega menu positioning for edge cases */
+.plaid-nav-item:first-child .plaid-mega-menu {
+	left: 0;
+	transform: translateX(0) translateY(-8px);
+}
+
+.plaid-nav-item:first-child .plaid-mega-menu.active,
+.plaid-nav-item:first-child:hover .plaid-mega-menu {
+	transform: translateX(0) translateY(0);
+}
+
+.plaid-nav-item:last-child .plaid-mega-menu {
+	left: auto;
+	right: 0;
+	transform: translateX(0) translateY(-8px);
+}
+
+.plaid-nav-item:last-child .plaid-mega-menu.active,
+.plaid-nav-item:last-child:hover .plaid-mega-menu {
+	transform: translateX(0) translateY(0);
+}
+
+/* Content push for fixed header */
+body.admin-bar .plaid-header {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	body.admin-bar .plaid-header {
+		top: 46px;
+	}
+}
+
+/* ============================================
+   Focus Management
+   ============================================ */
+
+/* Ensure focus states are visible */
+.plaid-nav-link:focus,
+.plaid-mobile-toggle:focus,
+.plaid-mobile-toggle-btn:focus,
+.plaid-nav-button:focus,
+.plaid-logo:focus {
+	outline: 2px solid var(--plaid-nav-accent);
+	outline-offset: 2px;
+}
+
+/* Remove focus for mouse users */
+.plaid-nav-link:focus:not(:focus-visible),
+.plaid-mobile-toggle:focus:not(:focus-visible),
+.plaid-mobile-toggle-btn:focus:not(:focus-visible),
+.plaid-nav-button:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* ============================================
+   Mobile Navigation Fixes
+   ============================================ */
+
+/* Ensure mobile menu doesn't overlap content */
+.plaid-mobile-overlay {
+	padding-bottom: 100px;
+}
+
+/* Mobile menu scrollbar styling */
+.plaid-mobile-overlay::-webkit-scrollbar {
+	width: 6px;
+}
+
+.plaid-mobile-overlay::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+.plaid-mobile-overlay::-webkit-scrollbar-thumb {
+	background: #c1c1c1;
+	border-radius: 3px;
+}
+
+.plaid-mobile-overlay::-webkit-scrollbar-thumb:hover {
+	background: #a1a1a1;
+}
+
+/* ============================================
+   Mega Menu Enhancements
+   ============================================ */
+
+/* Mega menu section spacing */
+.plaid-mega-menu-inner > .plaid-mega-menu-section:not(:last-child) {
+	margin-bottom: 24px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+/* Mega menu link hover animation */
+.plaid-mega-menu-link {
+	position: relative;
+	overflow: hidden;
+}
+
+.plaid-mega-menu-link::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 3px;
+	background: var(--plaid-nav-accent);
+	transform: scaleY(0);
+	transition: transform 0.2s ease;
+}
+
+.plaid-mega-menu-link:hover::before {
+	transform: scaleY(1);
+}
+
+/* ============================================
+   Animation Enhancements
+   ============================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+	/* Stagger animation for mega menu items */
+	.plaid-mega-menu-item {
+		opacity: 0;
+		transform: translateY(10px);
+		animation: fadeInUp 0.3s ease forwards;
+	}
+
+	.plaid-mega-menu-item:nth-child(1) { animation-delay: 0.05s; }
+	.plaid-mega-menu-item:nth-child(2) { animation-delay: 0.1s; }
+	.plaid-mega-menu-item:nth-child(3) { animation-delay: 0.15s; }
+	.plaid-mega-menu-item:nth-child(4) { animation-delay: 0.2s; }
+	.plaid-mega-menu-item:nth-child(5) { animation-delay: 0.25s; }
+	.plaid-mega-menu-item:nth-child(6) { animation-delay: 0.3s; }
+
+	@keyframes fadeInUp {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Only animate when menu is active */
+	.plaid-mega-menu:not(.active) .plaid-mega-menu-item {
+		animation: none;
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* ============================================
+   Header States
+   ============================================ */
+
+/* Mobile menu active state on body */
+body.mobile-menu-open {
+	overflow: hidden;
+}
+
+body.mobile-menu-open .plaid-header {
+	border-bottom-color: transparent;
+}
+
+/* ============================================
+   Touch Device Optimizations
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+	/* Disable hover on touch devices */
+	.plaid-nav-item:hover .plaid-mega-menu {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	/* Only show on click/tap */
+	.plaid-nav-item.active .plaid-mega-menu {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+
+/* Prevent FOUC */
+.plaid-header {
+	opacity: 1;
+}
+
+.plaid-nav-loading {
+	position: relative;
+	pointer-events: none;
+}
+
+.plaid-nav-loading::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ============================================
+   Search Integration (if needed)
+   ============================================ */
+
+.plaid-nav-search {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.plaid-nav-search-input {
+	padding: 8px 12px;
+	border: 1px solid var(--plaid-nav-border);
+	border-radius: var(--plaid-nav-radius-sm);
+	font-size: 14px;
+	font-family: inherit;
+	transition: border-color 0.2s ease;
+}
+
+.plaid-nav-search-input:focus {
+	outline: none;
+	border-color: var(--plaid-nav-accent);
+}
+
+/* ============================================
+   Theme Compatibility
+   ============================================ */
+
+/* Ensure WordPress admin bar doesn't interfere */
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		position: fixed !important;
+	}
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+/* GPU acceleration for smooth animations */
+.plaid-mega-menu,
+.plaid-mobile-overlay,
+.plaid-nav-arrow,
+.plaid-mobile-toggle-bar {
+	will-change: transform, opacity;
+}
+
+/* Remove will-change when not animating */
+@media (prefers-reduced-motion: reduce) {
+	.plaid-mega-menu,
+	.plaid-mobile-overlay,
+	.plaid-nav-arrow,
+	.plaid-mobile-toggle-bar {
+		will-change: auto;
+	}
+}
