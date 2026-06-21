@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1544 500">
+  <defs>
+    <linearGradient id="bannerBg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4A3FBF"/>
+      <stop offset="50%" stop-color="#7164e6"/>
+      <stop offset="100%" stop-color="#9580FF"/>
+    </linearGradient>
+    <linearGradient id="bannerBgV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#00000022"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1544" height="500" fill="url(#bannerBg)"/>
+  <rect width="1544" height="500" fill="url(#bannerBgV)"/>
+
+  <!-- Decorative circle accents -->
+  <circle cx="1400" cy="-40" r="260" fill="white" fill-opacity="0.06"/>
+  <circle cx="1500" cy="520" r="220" fill="white" fill-opacity="0.05"/>
+  <circle cx="60" cy="480" r="160" fill="white" fill-opacity="0.04"/>
+
+  <!-- ── Icon (left pad) ────────────────────────────────── -->
+  <!-- Spreadsheet -->
+  <rect x="96" y="92" width="188" height="228" rx="14" fill="none" stroke="white" stroke-width="14"/>
+  <line x1="96" y1="152" x2="284" y2="152" stroke="white" stroke-width="14"/>
+  <line x1="96" y1="208" x2="284" y2="208" stroke="white" stroke-width="14"/>
+  <line x1="96" y1="260" x2="284" y2="260" stroke="white" stroke-width="14"/>
+  <line x1="190" y1="152" x2="190" y2="320" stroke="white" stroke-width="14"/>
+
+  <!-- Export arrow (up) -->
+  <line x1="340" y1="124" x2="340" y2="184" stroke="white" stroke-width="14" stroke-linecap="round"/>
+  <polyline points="310,136 340,96 370,136" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Import arrow (down) -->
+  <line x1="340" y1="216" x2="340" y2="276" stroke="white" stroke-width="14" stroke-linecap="round"/>
+  <polyline points="310,264 340,304 370,264" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ── Text ─────────────────────────────────────────── -->
+  <text x="444" y="208" font-family="'Segoe UI',Arial,Helvetica,sans-serif" font-size="80" font-weight="700" fill="white" letter-spacing="-1">Taxonomy CSV</text>
+  <text x="444" y="304" font-family="'Segoe UI',Arial,Helvetica,sans-serif" font-size="80" font-weight="700" fill="white" letter-spacing="-1">Import Export</text>
+  <text x="448" y="372" font-family="'Segoe UI',Arial,Helvetica,sans-serif" font-size="30" fill="rgba(255,255,255,0.82)" letter-spacing="0.2">Manage WordPress taxonomies &amp; users via CSV — fast and effortlessly.</text>
+
+  <!-- ── "WordPress Plugin" badge ───────────────────── -->
+  <rect x="1168" y="188" width="304" height="124" rx="20" fill="rgba(255,255,255,0.13)" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <text x="1320" y="240" text-anchor="middle" font-family="'Segoe UI',Arial,Helvetica,sans-serif" font-size="22" fill="rgba(255,255,255,0.75)" letter-spacing="2.4">WORDPRESS</text>
+  <text x="1320" y="284" text-anchor="middle" font-family="'Segoe UI',Arial,Helvetica,sans-serif" font-size="34" font-weight="600" fill="white">Plugin</text>
+</svg>

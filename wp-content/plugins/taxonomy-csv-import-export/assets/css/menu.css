@@ -1,0 +1,670 @@
+/* =============================================
+   Variables
+   ============================================= */
+:root {
+    --tc-purple:       #7164e6;
+    --tc-purple-dark:  #5a51d4;
+    --tc-purple-deep:  #4a42c0;
+    --tc-purple-light: #f4f3fd;
+    --tc-border:       #c3c4c7;
+    --tc-border-inner: #f0f0f1;
+    --tc-text:         #1d2327;
+    --tc-text-mid:     #3c434a;
+    --tc-text-soft:    #50575e;
+    --tc-text-muted:   #8c8f94;
+    --tc-bg:           #fff;
+    --tc-bg-soft:      #fafafa;
+    --tc-shadow:       0 2px 10px rgba(0,0,0,.07);
+    --tc-radius:       10px;
+    --tc-radius-sm:    6px;
+}
+
+/* =============================================
+   Outer wrapper
+   ============================================= */
+.taxocsie-wrap {
+    margin: 16px 0 40px;
+    max-width: 1200px;
+}
+
+/* =============================================
+   Page header
+   ============================================= */
+.taxocsie-page-header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--tc-border);
+}
+
+.taxocsie-page-header__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--tc-text);
+    margin: 0 0 4px;
+    padding: 0;
+    line-height: 1.3;
+}
+
+.taxocsie-page-header__desc {
+    font-size: 13px;
+    color: var(--tc-text-soft);
+    margin: 0;
+}
+
+/* =============================================
+   Tab bar
+   ============================================= */
+.taxocsie-tabs {
+    display: inline-flex;
+    background: var(--tc-bg);
+    border: 1px solid var(--tc-border);
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.taxocsie-tab {
+    padding: 8px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tc-text-mid);
+    background: transparent;
+    border: none;
+    border-radius: var(--tc-radius-sm);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    line-height: 1.4;
+}
+
+.taxocsie-tab:hover {
+    background: var(--tc-purple-light);
+    color: var(--tc-purple);
+}
+
+.taxocsie-tab.is-active {
+    background: var(--tc-purple);
+    color: #fff;
+}
+
+/* =============================================
+   Panel card
+   ============================================= */
+.taxocsie-panel {
+    background: var(--tc-bg);
+    border: 1px solid var(--tc-border);
+    border-radius: var(--tc-radius);
+    box-shadow: var(--tc-shadow);
+    overflow: hidden;
+}
+
+.taxocsie-panel--mt {
+    margin-top: 16px;
+}
+
+.taxocsie-panel__title {
+    background: linear-gradient(120deg, var(--tc-purple) 0%, #5ba4b8 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .2px;
+    padding: 14px 24px;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0,0,0,.12);
+}
+
+/* =============================================
+   Panel form area
+   ============================================= */
+.taxocsie-panel__form {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.taxocsie-panel__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+/* =============================================
+   Form fields
+   ============================================= */
+.taxocsie-panel__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.taxocsie-panel__field-label,
+.taxocsie-panel__field > p.taxocsie-panel__field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tc-text-mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.taxocsie-required {
+    color: #d63638;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.taxocsie-optional {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--tc-text-muted);
+}
+
+.taxocsie-field-hint {
+    font-size: 11px;
+    color: var(--tc-text-muted);
+    margin-top: 2px;
+    display: block;
+    line-height: 1.4;
+}
+
+.taxocsie-panel__input {
+    width: 100%;
+    font-size: 14px;
+    padding: 7px 10px;
+    border: 1px solid var(--tc-border);
+    border-radius: 4px;
+    background: var(--tc-bg);
+    color: var(--tc-text-mid);
+    box-sizing: border-box;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.taxocsie-panel__input:focus {
+    outline: none;
+    border-color: var(--tc-purple);
+    box-shadow: 0 0 0 2px rgba(113,100,230,.15);
+}
+
+.taxocsie-panel__textarea {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 1px solid var(--tc-border);
+    border-radius: 4px;
+    background: var(--tc-bg);
+    color: var(--tc-text-mid);
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 80px;
+    font-family: sans-serif;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.taxocsie-panel__textarea:focus {
+    outline: none;
+    border-color: var(--tc-purple);
+    box-shadow: 0 0 0 2px rgba(113,100,230,.15);
+}
+
+.taxocsie-panel__select {
+    font-size: 14px;
+    font-family: sans-serif;
+    color: var(--tc-text-mid);
+    border: 1px solid var(--tc-border);
+    border-radius: 4px;
+    padding: 6px 28px 6px 10px;
+    height: 36px;
+    min-width: 260px;
+    max-width: 100%;
+    -webkit-appearance: none;
+    background: var(--tc-bg) url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E") no-repeat right 6px center;
+    background-size: 14px 14px;
+    cursor: pointer;
+    transition: border-color .2s;
+    box-shadow: none;
+}
+
+.taxocsie-panel__select:focus {
+    outline: none;
+    border-color: var(--tc-purple);
+    box-shadow: 0 0 0 2px rgba(113,100,230,.15);
+}
+
+.taxocsie-panel__file {
+    flex: 1;
+    min-width: 200px;
+    font-size: 13px;
+    padding: 6px 10px;
+    border: 1px solid var(--tc-border);
+    border-radius: 4px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+}
+
+.taxocsie-panel__file--block {
+    display: block;
+    width: 100%;
+    flex: none;
+}
+
+.taxocsie-panel__file:hover {
+    border-color: var(--tc-purple);
+    background: var(--tc-bg);
+}
+
+/* =============================================
+   Buttons
+   ============================================= */
+.taxocsie-panel__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.taxocsie-panel__btn-submit.button-primary {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 18px;
+    height: 36px;
+    line-height: 1;
+    background: var(--tc-purple);
+    border-color: var(--tc-purple-dark);
+    color: #fff;
+    text-shadow: none;
+    box-shadow: none;
+    transition: background .2s, border-color .2s;
+}
+
+.taxocsie-panel__btn-submit.button-primary:hover,
+.taxocsie-panel__btn-submit.button-primary:focus {
+    background: var(--tc-purple-dark);
+    border-color: var(--tc-purple-deep);
+    color: #fff;
+}
+
+.taxocsie-panel__btn-preview.button {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 16px;
+    height: 36px;
+    line-height: 1;
+    color: var(--tc-purple);
+    border-color: var(--tc-purple);
+    background: var(--tc-bg);
+    transition: background .2s, color .2s;
+}
+
+.taxocsie-panel__btn-preview.button:hover {
+    background: var(--tc-purple-light);
+    color: var(--tc-purple-dark);
+    border-color: var(--tc-purple-dark);
+}
+
+/* =============================================
+   Notice + table inside card
+   ============================================= */
+.taxocsie-panel .taxocsie-panel__notice {
+    margin: 16px 24px 0;
+}
+
+.taxocsie-panel__tablewrap {
+    margin: 16px 24px 24px;
+    border: 1px solid #dcdcde;
+    border-radius: var(--tc-radius-sm);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.taxocsie-panel__tablewrap--flush {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--tc-border-inner);
+    box-shadow: none;
+}
+
+table.taxocsie-panel__table.widefat thead th,
+.taxocsie-panel__table thead th {
+    background-color: var(--tc-purple) !important;
+    color: #fff !important;
+    vertical-align: middle;
+    font-size: 13px;
+    padding: 10px 12px;
+}
+
+.taxocsie-panel__table thead th a,
+.taxocsie-panel__table thead th a:link,
+.taxocsie-panel__table thead th a:visited {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.taxocsie-panel__table td {
+    padding: 9px 12px;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+/* =============================================
+   Export preview
+   ============================================= */
+.taxocsie-panel__preview {
+    padding: 0 24px 24px;
+}
+
+.taxocsie-export__preview-count {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 16px 0 10px;
+    color: var(--tc-text-mid);
+    padding: 9px 14px;
+    background: #f6f7f7;
+    border-left: 3px solid var(--tc-purple);
+    border-radius: 0 4px 4px 0;
+}
+
+.taxocsie-export__preview-tablewrap {
+    border: 1px solid #dcdcde;
+    border-radius: var(--tc-radius-sm);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+table.taxocsie-export__preview-table.widefat thead th,
+.taxocsie-export__preview-table thead th {
+    background-color: var(--tc-purple) !important;
+    color: #fff !important;
+    vertical-align: middle;
+    font-size: 13px;
+    padding: 10px 12px;
+}
+
+.taxocsie-export__preview-table td {
+    padding: 9px 12px;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.taxocsie-export__preview-error {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 16px;
+}
+
+.taxocsie-export__preview-empty {
+    color: #856404;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 16px;
+}
+
+.taxocsie-muted {
+    color: #bbb;
+    font-style: italic;
+}
+
+/* =============================================
+   Create Term — accordion list
+   ============================================= */
+.taxocsie-taxonomy-list {
+    padding: 0;
+}
+
+.taxocsie-taxonomy-row {
+    border-bottom: 1px solid var(--tc-border-inner);
+}
+
+.taxocsie-taxonomy-row:last-child {
+    border-bottom: none;
+}
+
+.taxocsie-taxonomy-row__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background .15s;
+}
+
+.taxocsie-taxonomy-row__header:hover,
+.taxocsie-taxonomy-row__header.is-open {
+    background: var(--tc-purple-light);
+}
+
+.taxocsie-taxonomy-row__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tc-text);
+    flex: 1;
+}
+
+.taxocsie-taxonomy-row__slug {
+    font-size: 11px;
+    color: var(--tc-text-muted);
+    font-family: monospace;
+    background: var(--tc-border-inner);
+    padding: 2px 7px;
+    border-radius: 3px;
+}
+
+.taxocsie-taxonomy-row__arrow {
+    font-size: 18px;
+    color: var(--tc-purple);
+    line-height: 1;
+    transition: transform .2s;
+}
+
+.taxocsie-taxonomy-row__header.is-open .taxocsie-taxonomy-row__arrow {
+    transform: rotate(180deg);
+}
+
+.taxocsie-taxonomy-row__body {
+    padding: 20px 24px 20px;
+    background: var(--tc-bg-soft);
+    border-top: 1px solid var(--tc-border-inner);
+}
+
+.taxocsie-taxonomy-row__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    margin-bottom: 16px;
+}
+
+.taxocsie-taxonomy-row__footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.taxocsie-row-feedback {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 0;
+}
+
+.taxocsie-row-feedback code {
+    background: rgba(0,0,0,.07);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.taxocsie-row-feedback--success {
+    color: #0a3622;
+    background: #d1e7dd;
+    border: 1px solid #a3cfbb;
+}
+
+.taxocsie-row-feedback--error {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* =============================================
+   Register Taxonomy — form grid
+   ============================================= */
+.taxocsie-reg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px 24px;
+}
+
+/* Type selector cards */
+.taxocsie-type-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.taxocsie-type-option {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 20px;
+    border: 2px solid var(--tc-border);
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 180px;
+    background: var(--tc-bg);
+    transition: border-color .2s, background .2s;
+}
+
+.taxocsie-type-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.taxocsie-type-option:hover {
+    border-color: var(--tc-purple);
+}
+
+.taxocsie-type-option--active {
+    border-color: var(--tc-purple);
+    background: var(--tc-purple-light);
+}
+
+.taxocsie-type-option__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tc-text);
+}
+
+.taxocsie-type-option--active .taxocsie-type-option__title {
+    color: var(--tc-purple);
+}
+
+.taxocsie-type-option__desc {
+    font-size: 12px;
+    color: var(--tc-text-muted);
+    line-height: 1.4;
+}
+
+/* Post types checkboxes */
+.taxocsie-post-types-grid,
+.taxocsie-roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px 16px;
+    margin-top: 4px;
+}
+
+.taxocsie-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--tc-text-mid);
+    cursor: pointer;
+}
+
+.taxocsie-checkbox-label input[type="checkbox"] {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+/* Register feedback */
+.taxocsie-reg-feedback {
+    font-size: 13px;
+    padding: 8px 14px;
+    border-radius: 4px;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.taxocsie-reg-feedback--success {
+    color: #0a3622;
+    background: #d1e7dd;
+    border: 1px solid #a3cfbb;
+}
+
+.taxocsie-reg-feedback--error {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* =============================================
+   Users — two-column layout
+   ============================================= */
+.taxocsie-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 1024px) {
+    .taxocsie-reg-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .taxocsie-two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .taxocsie-reg-grid {
+        grid-template-columns: 1fr;
+    }
+    .taxocsie-type-options {
+        flex-direction: column;
+    }
+    .taxocsie-type-option {
+        min-width: 0;
+    }
+    .taxocsie-taxonomy-row__fields {
+        grid-template-columns: 1fr;
+    }
+}

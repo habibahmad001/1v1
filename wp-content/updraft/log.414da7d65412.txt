@@ -1,0 +1,176 @@
+0000.001 () Opened log file at time: Fri, 19 Jun 2026 19:29:16 +0000 on https://1v1.herwiki.org
+0000.001 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.26.5 WP: 7.0 PHP: 8.3.30 (litespeed, Linux us-phx-web1288.main-hosting.eu 4.18.0-553.109.1.lve.el8.x86_64 #1 SMP Thu Mar 5 20:23:46 UTC 2026 x86_64) MySQL: 11.8.6-MariaDB-log (max packet size=1073741824) WPLANG: en_US Server: LiteSpeed safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 7.3M | 10M) multisite: N openssl: OpenSSL 1.1.1w  11 Sep 2023 mcrypt: N LANG:  WP Proxy: disabled ZipArchive::addFile: Y
+0000.001 () Free space on disk containing Updraft's temporary directory: 4419688.7 MB
+0000.021 () Restore setup, now closing connection and starting restore over AJAX.
+0000.001 () Opened log file at time: Fri, 19 Jun 2026 19:29:18 +0000 on https://1v1.herwiki.org
+0000.001 () UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.26.5 WP: 7.0 PHP: 8.3.30 (litespeed, Linux us-phx-web1288.main-hosting.eu 4.18.0-553.109.1.lve.el8.x86_64 #1 SMP Thu Mar 5 20:23:46 UTC 2026 x86_64) MySQL: 11.8.6-MariaDB-log (max packet size=1073741824) WPLANG: en_US Server: LiteSpeed safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 4.7M | 6M) multisite: N openssl: OpenSSL 1.1.1w  11 Sep 2023 mcrypt: N LANG:  WP Proxy: disabled ZipArchive::addFile: Y
+0000.001 () Free space on disk containing Updraft's temporary directory: 4419690.2 MB
+0000.002 () Ensuring WP_Filesystem is setup for a restore
+0000.002 () WP_Filesystem is setup and ready for a restore
+0000.003 () Restore job started. Entities to restore: plugins, themes, uploads, others, db. Restore options: {"include_unspecified_tables":false,"tables_to_restore":["wp_options","wp_users","wp_usermeta","wp_commentmeta","wp_comments","wp_links","wp_postmeta","wp_posts","wp_term_relationships","wp_term_taxonomy","wp_termmeta","wp_terms","wp_actionscheduler_actions","wp_actionscheduler_claims","wp_actionscheduler_groups","wp_actionscheduler_logs","wp_hostinger_reach_carts","wp_hostinger_reach_contact_lists","wp_hostinger_reach_forms","wp_pmxe_exports","wp_pmxe_google_cats","wp_pmxe_posts","wp_pmxe_templates","wp_pmxi_files","wp_pmxi_hash","wp_pmxi_history","wp_pmxi_images","wp_pmxi_imports","wp_pmxi_posts","wp_pmxi_templates"],"tables_to_skip":[],"updraft_encryptionphrase":"","updraft_restorer_wpcore_includewpconfig":false,"updraft_incremental_restore_point":-1}
+0000.005 () Entity: db
+0000.005 () restore_backup(backup_file=backup_2026-06-19-1214_HerWiki_7adafd0505a3-db.gz, type=db, info=a:0:{}, last_one=)
+0000.006 () Unpacking backup... (backup_2026-06-19-1214_HerWiki_7adafd0505a3-db.gz, 0.1 Mb)
+0000.006 () Database successfully unpacked
+0000.006 () Restoring the database (on a large site this can take a long time - if it times out (which can happen if your web hosting company has configured your hosting to limit resources) then you should use a different method, such as phpMyAdmin)...
+0000.007 () Using direct MySQL access; value of use_mysqli is: 1
+0000.007 () SQL compatibility mode is: NO_AUTO_VALUE_ON_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+0000.033 () Max packet size: 1024 MB
+0000.033 () Entering maintenance mode
+0000.033 () Enabling Maintenance mode&#8230;
+0000.039 () Backup of: https://1v1.herwiki.org
+0000.040 () Content URL: https://1v1.herwiki.org/wp-content
+0000.040 () Uploads URL: https://1v1.herwiki.org/wp-content/uploads
+0000.040 () Old table prefix: wp_
+0000.040 () UpdraftPlus plugin slug: updraftplus/updraftplus.php
+0000.040 () Site information: multisite=0
+0000.040 () Site information: sql_mode=NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+0000.040 () Skipped execution of SQL statement (unwanted or internally handled type=18): /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+0000.041 () New table prefix: rc_
+0000.048 () Processing table (InnoDB): wp_options - will restore as: rc_options
+0000.071 () Atomic restore: dropping original table (wp_options)
+0000.080 () Atomic restore: renaming new table (rc_options) to final table name (wp_options)
+0000.081 () Restoring prior UD configuration (table: wp_options; keys: 4)
+0000.086 () Processing table (InnoDB): wp_users - will restore as: rc_users
+0000.109 () Atomic restore: dropping original table (wp_users)
+0000.117 () Atomic restore: renaming new table (rc_users) to final table name (wp_users)
+0000.118 () Processing table (InnoDB): wp_usermeta - will restore as: rc_usermeta
+0000.132 () Atomic restore: dropping original table (wp_usermeta)
+0000.140 () Atomic restore: renaming new table (rc_usermeta) to final table name (wp_usermeta)
+0000.141 () Processing table (InnoDB): wp_commentmeta - will restore as: rc_commentmeta
+0000.154 () Atomic restore: dropping original table (wp_commentmeta)
+0000.160 () Atomic restore: renaming new table (rc_commentmeta) to final table name (wp_commentmeta)
+0000.161 () Processing table (InnoDB): wp_comments - will restore as: rc_comments
+0000.174 () Atomic restore: dropping original table (wp_comments)
+0000.181 () Atomic restore: renaming new table (rc_comments) to final table name (wp_comments)
+0000.183 () Processing table (InnoDB): wp_links - will restore as: rc_links
+0000.196 () Atomic restore: dropping original table (wp_links)
+0000.207 () Atomic restore: renaming new table (rc_links) to final table name (wp_links)
+0000.208 () Processing table (InnoDB): wp_postmeta - will restore as: rc_postmeta
+0000.222 () Atomic restore: dropping original table (wp_postmeta)
+0000.229 () Atomic restore: renaming new table (rc_postmeta) to final table name (wp_postmeta)
+0000.231 () Processing table (InnoDB): wp_posts - will restore as: rc_posts
+0000.258 () Atomic restore: dropping original table (wp_posts)
+0000.271 () Atomic restore: renaming new table (rc_posts) to final table name (wp_posts)
+0000.272 () Processing table (InnoDB): wp_term_relationships - will restore as: rc_term_relationships
+0000.285 () Atomic restore: dropping original table (wp_term_relationships)
+0000.297 () Atomic restore: renaming new table (rc_term_relationships) to final table name (wp_term_relationships)
+0000.299 () Processing table (InnoDB): wp_term_taxonomy - will restore as: rc_term_taxonomy
+0000.311 () Atomic restore: dropping original table (wp_term_taxonomy)
+0000.318 () Atomic restore: renaming new table (rc_term_taxonomy) to final table name (wp_term_taxonomy)
+0000.319 () Processing table (InnoDB): wp_termmeta - will restore as: rc_termmeta
+0000.330 () Atomic restore: dropping original table (wp_termmeta)
+0000.337 () Atomic restore: renaming new table (rc_termmeta) to final table name (wp_termmeta)
+0000.338 () Processing table (InnoDB): wp_terms - will restore as: rc_terms
+0000.350 () Atomic restore: dropping original table (wp_terms)
+0000.356 () Atomic restore: renaming new table (rc_terms) to final table name (wp_terms)
+0000.358 () Processing table (InnoDB): wp_actionscheduler_actions - will restore as: rc_actionscheduler_actions
+0000.374 () Atomic restore: dropping original table (wp_actionscheduler_actions)
+0000.380 () Atomic restore: renaming new table (rc_actionscheduler_actions) to final table name (wp_actionscheduler_actions)
+0000.382 () Processing table (InnoDB): wp_actionscheduler_claims - will restore as: rc_actionscheduler_claims
+0000.394 () Atomic restore: dropping original table (wp_actionscheduler_claims)
+0000.400 () Atomic restore: renaming new table (rc_actionscheduler_claims) to final table name (wp_actionscheduler_claims)
+0000.401 () Processing table (InnoDB): wp_actionscheduler_groups - will restore as: rc_actionscheduler_groups
+0000.414 () Atomic restore: dropping original table (wp_actionscheduler_groups)
+0000.421 () Atomic restore: renaming new table (rc_actionscheduler_groups) to final table name (wp_actionscheduler_groups)
+0000.422 () Processing table (InnoDB): wp_actionscheduler_logs - will restore as: rc_actionscheduler_logs
+0000.435 () Database queries processed: 50 in 0.43 seconds
+0000.436 () Atomic restore: dropping original table (wp_actionscheduler_logs)
+0000.443 () Atomic restore: renaming new table (rc_actionscheduler_logs) to final table name (wp_actionscheduler_logs)
+0000.445 () Processing table (InnoDB): wp_hostinger_reach_carts - will restore as: rc_hostinger_reach_carts
+0000.456 () Atomic restore: dropping original table (wp_hostinger_reach_carts)
+0000.463 () Atomic restore: renaming new table (rc_hostinger_reach_carts) to final table name (wp_hostinger_reach_carts)
+0000.465 () Processing table (InnoDB): wp_hostinger_reach_contact_lists - will restore as: rc_hostinger_reach_contact_lists
+0000.475 () Atomic restore: dropping original table (wp_hostinger_reach_contact_lists)
+0000.481 () Atomic restore: renaming new table (rc_hostinger_reach_contact_lists) to final table name (wp_hostinger_reach_contact_lists)
+0000.483 () Processing table (InnoDB): wp_hostinger_reach_forms - will restore as: rc_hostinger_reach_forms
+0000.499 () Atomic restore: dropping original table (wp_hostinger_reach_forms)
+0000.509 () Atomic restore: renaming new table (rc_hostinger_reach_forms) to final table name (wp_hostinger_reach_forms)
+0000.511 () Processing table (InnoDB): wp_pmxe_exports - will restore as: rc_pmxe_exports
+0000.524 () Atomic restore: dropping original table (wp_pmxe_exports)
+0000.530 () Atomic restore: renaming new table (rc_pmxe_exports) to final table name (wp_pmxe_exports)
+0000.531 () Processing table (InnoDB): wp_pmxe_google_cats - will restore as: rc_pmxe_google_cats
+0000.609 () Atomic restore: dropping original table (wp_pmxe_google_cats)
+0000.622 () Atomic restore: renaming new table (rc_pmxe_google_cats) to final table name (wp_pmxe_google_cats)
+0000.623 () Processing table (InnoDB): wp_pmxe_posts - will restore as: rc_pmxe_posts
+0000.640 () Atomic restore: dropping original table (wp_pmxe_posts)
+0000.651 () Atomic restore: renaming new table (rc_pmxe_posts) to final table name (wp_pmxe_posts)
+0000.653 () Processing table (InnoDB): wp_pmxe_templates - will restore as: rc_pmxe_templates
+0000.667 () Atomic restore: dropping original table (wp_pmxe_templates)
+0000.679 () Atomic restore: renaming new table (rc_pmxe_templates) to final table name (wp_pmxe_templates)
+0000.680 () Processing table (InnoDB): wp_pmxi_files - will restore as: rc_pmxi_files
+0000.697 () Atomic restore: dropping original table (wp_pmxi_files)
+0000.709 () Atomic restore: renaming new table (rc_pmxi_files) to final table name (wp_pmxi_files)
+0000.710 () Processing table (InnoDB): wp_pmxi_hash - will restore as: rc_pmxi_hash
+0000.726 () Atomic restore: dropping original table (wp_pmxi_hash)
+0000.733 () Atomic restore: renaming new table (rc_pmxi_hash) to final table name (wp_pmxi_hash)
+0000.734 () Processing table (InnoDB): wp_pmxi_history - will restore as: rc_pmxi_history
+0000.748 () Atomic restore: dropping original table (wp_pmxi_history)
+0000.759 () Atomic restore: renaming new table (rc_pmxi_history) to final table name (wp_pmxi_history)
+0000.760 () Processing table (InnoDB): wp_pmxi_images - will restore as: rc_pmxi_images
+0000.770 () Atomic restore: dropping original table (wp_pmxi_images)
+0000.776 () Atomic restore: renaming new table (rc_pmxi_images) to final table name (wp_pmxi_images)
+0000.778 () Processing table (InnoDB): wp_pmxi_imports - will restore as: rc_pmxi_imports
+0000.791 () Atomic restore: dropping original table (wp_pmxi_imports)
+0000.798 () Atomic restore: renaming new table (rc_pmxi_imports) to final table name (wp_pmxi_imports)
+0000.799 () Processing table (InnoDB): wp_pmxi_posts - will restore as: rc_pmxi_posts
+0000.810 () Atomic restore: dropping original table (wp_pmxi_posts)
+0000.818 () Atomic restore: renaming new table (rc_pmxi_posts) to final table name (wp_pmxi_posts)
+0000.819 () Processing table (InnoDB): wp_pmxi_templates - will restore as: rc_pmxi_templates
+0000.823 () Skipped execution of SQL statement (unwanted or internally handled type=18): /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+0000.825 () UpdraftVault: this site has not been connected - check your settings
+0001.651 () Unlocking database and leaving maintenance mode
+0001.651 () Disabling Maintenance mode&#8230;
+0001.651 () Atomic restore: dropping original table (wp_pmxi_templates)
+0001.660 () Atomic restore: renaming new table (rc_pmxi_templates) to final table name (wp_pmxi_templates)
+0001.661 () Finished: lines processed: 90 in 1.65 seconds
+0001.662 () Cleaning up rubbish...
+0001.662 () Begin search and replace (updraftplus_restored_db)
+0001.662 () [Database-replace-site-url] Database: search and replace site URL
+0001.662 () This option was not selected.
+0001.665 () Entity: plugins
+0001.665 () restore_backup(backup_file=backup_2026-06-19-1214_HerWiki_7adafd0505a3-plugins.zip, type=plugins, info=a:3:{s:4:"path";s:71:"/home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/plugins";s:11:"description";s:7:"Plugins";s:20:"singular_description";s:6:"Plugin";}, last_one=)
+0001.666 () Unpacking backup... (backup_2026-06-19-1214_HerWiki_7adafd0505a3-plugins.zip, 21.7 MB)
+0001.666 () Unzipping backup_2026-06-19-1214_HerWiki_7adafd0505a3-plugins.zip to /home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/upgrade/19705dd2/ using UpdraftPlus_ZipArchive, starting index 0
+0001.923 () Unzip progress: 1002 out of 4500 files (4.4 MB, plugins/advanced-custom-fields/schemas/fields/v1/radio.json)
+0002.355 () Unzip progress: 2003 out of 4500 files (37.3 MB, plugins/updraftplus/languages/updraftplus-th.po)
+0002.632 () Unzip progress: 3004 out of 4500 files (53.2 MB, plugins/wp-all-import/vendor/composer/pcre/src/MatchWithOffsetsResult.php)
+0002.901 () Unzip progress: 4005 out of 4500 files (65.5 MB, plugins/wp-all-import/vendor/markbaker/complex/examples/testFunctions.php)
+0003.043 () Unzip progress: 4500 out of 4500 files (69.7 MB, plugins/wp-all-export/static/js/jquery/css/smoothness/images/ui-icons_888888_256x240.png)
+0003.050 () Moving old data: filesystem method / updraft_dir is potentially possible
+0003.050 () Moving old data: can potentially use wp_filesystem method / -old
+0003.050 () Moving old data out of the way...
+0003.443 () Top-level entities being moved: advanced-custom-fields, custom-post-type-ui, updraftplus, wp-all-import, wp-all-export, index.php
+0003.444 () Moving unpacked backup into place...
+0003.740 () Top-level entities being moved: advanced-custom-fields, custom-post-type-ui, updraftplus, wp-all-import, wp-all-export, index.php
+0003.743 () Cleaning up rubbish...
+0003.744 () Entity: themes
+0003.744 () restore_backup(backup_file=backup_2026-06-19-1214_HerWiki_7adafd0505a3-themes.zip, type=themes, info=a:3:{s:4:"path";s:70:"/home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/themes";s:11:"description";s:6:"Themes";s:20:"singular_description";s:5:"Theme";}, last_one=)
+0003.744 () Unpacking backup... (backup_2026-06-19-1214_HerWiki_7adafd0505a3-themes.zip, 7.8 MB)
+0003.744 () Unzipping backup_2026-06-19-1214_HerWiki_7adafd0505a3-themes.zip to /home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/upgrade/0afe38f4/ using UpdraftPlus_ZipArchive, starting index 0
+0003.829 () Unzip progress: 259 out of 259 files (8.2 MB, themes/twentytwentyfive/parts/footer-columns.html)
+0003.832 () Moving old data: filesystem method / updraft_dir is potentially possible
+0003.832 () Moving old data: can potentially use wp_filesystem method / -old
+0003.832 () Moving old data out of the way...
+0003.850 () Top-level entities being moved: twentytwentyfive, index.php
+0003.851 () Moving unpacked backup into place...
+0003.868 () Top-level entities being moved: twentytwentyfive, index.php
+0003.868 () Cleaning up rubbish...
+0003.869 () Entity: uploads
+0003.869 () restore_backup(backup_file=backup_2026-06-19-1214_HerWiki_7adafd0505a3-uploads.zip, type=uploads, info=a:2:{s:4:"path";s:71:"/home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/uploads";s:11:"description";s:7:"Uploads";}, last_one=)
+0003.870 () Unpacking backup... (backup_2026-06-19-1214_HerWiki_7adafd0505a3-uploads.zip, 2.2 MB)
+0003.870 () Unzipping backup_2026-06-19-1214_HerWiki_7adafd0505a3-uploads.zip to /home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/upgrade/3b756db9/ using UpdraftPlus_ZipArchive, starting index 0
+0003.900 () Unzip progress: 73 out of 73 files (2.6 MB, uploads/fonts/q5uSsoa5M_tv7IihmnkabAReu49Y_Bo-HVKMBi5KfJs-dtC4yZNE.woff2)
+0003.901 () Moving old data: filesystem method / updraft_dir is potentially possible
+0003.901 () Moving old data: can potentially use wp_filesystem method / -old
+0003.901 () Moving old data out of the way...
+0003.908 () Moving unpacked backup into place...
+0003.913 () Cleaning up rubbish...
+0003.914 () Entity: others
+0003.914 () restore_backup(backup_file=backup_2026-06-19-1214_HerWiki_7adafd0505a3-others.zip, type=others, info=a:2:{s:4:"path";s:63:"/home/u244462117/domains/herwiki.org/public_html/1v1/wp-content";s:11:"description";s:6:"Others";}, last_one=1)
+0003.914 () Unpacking backup... (backup_2026-06-19-1214_HerWiki_7adafd0505a3-others.zip, 0 MB)
+0003.914 () Unzipping backup_2026-06-19-1214_HerWiki_7adafd0505a3-others.zip to /home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/upgrade/ea5d2392/ using UpdraftPlus_ZipArchive, starting index 0
+0003.915 () Unzip progress: 1 out of 1 files (28 B, index.php)
+0003.916 () Cleaning up rubbish...
+0003.926 () Restore successful!
+0003.926 () Restore successful

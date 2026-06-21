@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<node>
+		<title><![CDATA[TESTING IMPORTS]]></title>
+		<content><![CDATA[<!-- wp:paragraph -->
+<p>Journalist, suffrage supporter and political activist</p>
+<!-- /wp:paragraph -->]]></content>
+		<excerpt><![CDATA[]]></excerpt>
+		<date><![CDATA[2025-09-09]]></date>
+		<posttype><![CDATA[events]]></posttype>
+		<imagefeatured><![CDATA[https://herwiki.org/wp-content/uploads/Harriet-Shaw-Weaver.png]]></imagefeatured>
+		<thisdayinwomenshistory><![CDATA[September 1]]></thisdayinwomenshistory>
+		<figures><![CDATA[Harriet Shaw Weaver]]></figures>
+		<event_year><![CDATA[1876]]></event_year>
+		<_event_year><![CDATA[field_689c7e196f9bb]]></_event_year>
+		<event_date_end><![CDATA[1961]]></event_date_end>
+		<status><![CDATA[publish]]></status>
+		<authorid><![CDATA[1]]></authorid>
+	</node>
+</data>

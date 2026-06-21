@@ -1,0 +1,356 @@
+0000.000 (0) Opened log file at time: Fri, 19 Jun 2026 22:41:26 +0000 on https://1v1.herwiki.org
+0000.001 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.26.5 WP: 7.0 PHP: 8.3.30 (litespeed, Linux us-phx-web1288.main-hosting.eu 4.18.0-553.109.1.lve.el8.x86_64 #1 SMP Thu Mar 5 20:23:46 UTC 2026 x86_64) MySQL: 11.8.6-MariaDB-log (max packet size=1073741824) WPLANG: en_US Server: LiteSpeed safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 4.8M | 6M) multisite: N openssl: OpenSSL 1.1.1w  11 Sep 2023 mcrypt: N LANG:  WP Proxy: disabled ZipArchive::addFile: Y
+0000.001 (0) Free space on disk containing Updraft's temporary directory: 4418519.3 MB
+0000.004 (0) Tasks: Backup files: 1 (schedule: manual) Backup DB: 1 (schedule: manual)
+0000.005 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.006 (0) Set semaphore last lock (fd) time to 2026-06-19 22:41:26
+0000.006 (0) Semaphore lock (fd) complete
+0000.007 (0) Backup run: resumption=0, nonce=6615ccb2011b, file_nonce=6615ccb2011b begun at=1781908886 (0s ago), job type=backup
+0000.008 (0) Scheduling a resumption (1) after 300 seconds (1781909186) in case this run gets aborted
+0000.009 (0) Checking if we have a zip executable available
+0000.009 (0) Testing: /usr/bin/zip
+0000.012 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.013 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.013 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.013 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.013 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.018 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.019 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.020 (0) Working binary zip found: /usr/bin/zip
+0000.020 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.021 (0) Creation of backups of directories: beginning
+0000.022 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0000.418 (0) Total entities for the zip file: 639 directories, 3903 files (0 skipped as non-modified), 69.9 MB
+0000.426 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0000.434 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0000.441 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0000.449 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0000.456 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0000.463 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 600 files added (on-disk size: 0 KB)
+0000.469 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 700 files added (on-disk size: 0 KB)
+0000.471 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25 MB, 3903 files batched, 732 (732) added so far); re-opening (prior size: 0 KB)
+0001.396 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: size is now: 7.40 MB
+0001.397 (0) A useful amount of data was added after this amount of zip processing: 2.2 s (normalised: 2.2 s, rate: 11827.9 KB/s)
+0001.398 (0) Performance is good - will increase the amount of data we attempt to batch (time=2.1647760868073, normalised_time=2.1643728429045, max_time=1.3972489833832, data points known=1, old_max_bytes=26214400, new_max_bytes=72670658)
+0001.403 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 800 files added (on-disk size: 7599.9 KB)
+0001.410 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 900 files added (on-disk size: 7599.9 KB)
+0001.417 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1000 files added (on-disk size: 7599.9 KB)
+0001.424 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1100 files added (on-disk size: 7599.9 KB)
+0001.431 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1200 files added (on-disk size: 7599.9 KB)
+0001.440 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1300 files added (on-disk size: 7599.9 KB)
+0001.448 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1400 files added (on-disk size: 7599.9 KB)
+0001.456 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1500 files added (on-disk size: 7599.9 KB)
+0001.463 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1600 files added (on-disk size: 7599.9 KB)
+0001.472 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1700 files added (on-disk size: 7599.9 KB)
+0001.476 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (25 MB, 3903 files batched, 1001 (1733) added so far); re-opening (prior size: 7599.9 KB)
+0002.441 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: size is now: 14.50 MB
+0002.447 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1800 files added (on-disk size: 14813.3 KB)
+0002.456 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 1900 files added (on-disk size: 14813.3 KB)
+0002.465 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2000 files added (on-disk size: 14813.3 KB)
+0002.473 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2100 files added (on-disk size: 14813.3 KB)
+0002.481 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2200 files added (on-disk size: 14813.3 KB)
+0002.488 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2300 files added (on-disk size: 14813.3 KB)
+0002.495 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2400 files added (on-disk size: 14813.3 KB)
+0002.502 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2500 files added (on-disk size: 14813.3 KB)
+0002.509 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2600 files added (on-disk size: 14813.3 KB)
+0002.516 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2700 files added (on-disk size: 14813.3 KB)
+0002.519 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (8.2 MB, 3903 files batched, 1001 (2734) added so far); re-opening (prior size: 14813.3 KB)
+0002.976 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2800 files added (on-disk size: 17749.1 KB)
+0002.983 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 2900 files added (on-disk size: 17749.1 KB)
+0002.991 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3000 files added (on-disk size: 17749.1 KB)
+0002.997 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3100 files added (on-disk size: 17749.1 KB)
+0003.003 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3200 files added (on-disk size: 17749.1 KB)
+0003.009 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3300 files added (on-disk size: 17749.1 KB)
+0003.014 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3400 files added (on-disk size: 17749.1 KB)
+0003.020 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3500 files added (on-disk size: 17749.1 KB)
+0003.026 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3600 files added (on-disk size: 17749.1 KB)
+0003.033 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3700 files added (on-disk size: 17749.1 KB)
+0003.036 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (10.4 MB, 3903 files batched, 1001 (3735) added so far); re-opening (prior size: 17749.1 KB)
+0003.488 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: size is now: 21.30 MB
+0003.493 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3800 files added (on-disk size: 21821.7 KB)
+0003.499 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.tmp: 3900 files added (on-disk size: 21821.7 KB)
+0003.630 (0) Creating zip file manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.list-temp.tmp)
+0003.644 (0) Successfully created zip file manifest (size: 352309)
+0003.813 (0) Created plugins zip (0) - 22379.5 KB in 3.8 s (5906.5 KB/s) (sha1: 41222bef390204994af5ee7d2a47e501cdc69913, sha256: 31006ce6509a8499363054ac9ee9ba09f893521b459d2bc664191004f7224610)
+0003.819 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0003.820 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-c943fb09c3fbfc8b5bb742211cb4c998)
+0004.452 (0) Google Drive: quota usage: used=0.5 MB, total=15360 MB, available=15359.5 MB
+0004.453 (0) Google Drive: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip: Attempting to upload to Google Drive (into folder id: 1n1EPhNwrUQVJRN2a_q0ztaIT6f5sUPfS)
+0005.268 (0) Googledrive chunked upload: 4.6 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 5.6 / 12)
+0005.560 (0) Googledrive chunked upload: 13.7 % uploaded (3145728 - increasing chunk size to 4096 KB - memory usage: 5.6 / 12)
+0005.906 (0) Googledrive chunked upload: 32 % uploaded (7340032 - increasing chunk size to 8192 KB - memory usage: 5.6 / 12)
+0006.287 (0) Googledrive chunked upload: 68.6 % uploaded (15728640 - increasing chunk size to 16384 KB - memory usage: 5.6 / 12)
+0007.813 (0) Googledrive chunked upload: 100 % uploaded (15728640)
+0007.814 (0) Google Drive: OK: Archive backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip uploaded in 3.36 seconds
+0007.815 (0) Recording as successfully uploaded: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip
+0007.823 (0) Deleting local file: backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip: OK
+0007.825 (0) Beginning creation of dump of themes (split every: 400 MB)
+0007.839 (0) Total entities for the zip file: 23 directories, 236 files (0 skipped as non-modified), 8.2 MB
+0007.844 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0007.849 (0) Zip: backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0008.070 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip.tmp: size is now: 7.80 MB
+0008.074 (0) Creating zip file manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip.list-temp.tmp)
+0008.075 (0) Successfully created zip file manifest (size: 17247)
+0008.136 (0) Created themes zip (0) - 8020.2 KB in 0.3 s (25843.9 KB/s) (sha1: 7b669d2286ff9367f778184b86f77e7b8d8bb414, sha256: bb175a7088bec4e1c98600f38f02b8918d41278530c3948a929b9fa92255b5f7)
+0008.138 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0008.138 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-c943fb09c3fbfc8b5bb742211cb4c998)
+0008.326 (0) Google Drive: quota usage: used=0.5 MB, total=15360 MB, available=15359.5 MB
+0008.327 (0) Google Drive: backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip: Attempting to upload to Google Drive (into folder id: 1n1EPhNwrUQVJRN2a_q0ztaIT6f5sUPfS)
+0009.039 (0) Googledrive chunked upload: 12.8 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 5 / 12)
+0009.231 (0) Googledrive chunked upload: 38.3 % uploaded (3145728 - increasing chunk size to 4096 KB - memory usage: 5.1 / 12)
+0009.557 (0) Googledrive chunked upload: 89.4 % uploaded (7340032 - increasing chunk size to 8192 KB - memory usage: 5.1 / 12)
+0010.873 (0) Googledrive chunked upload: 100 % uploaded (7340032)
+0010.874 (0) Google Drive: OK: Archive backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip uploaded in 2.55 seconds
+0010.874 (0) Recording as successfully uploaded: backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip
+0010.878 (0) Deleting local file: backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip: OK
+0010.880 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots,wp-staging
+0010.880 (0) Looking for candidates to backup in: /home/u244462117/domains/herwiki.org/public_html/1v1/wp-content/uploads
+0010.880 (0) finding files: fonts: adding to list (1)
+0010.881 (0) finding files: wpallexport: adding to list (2)
+0010.881 (0) finding files: wpallimport: adding to list (3)
+0010.881 (0) finding files: 2026: adding to list (4)
+0010.881 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0010.889 (0) Total entities for the zip file: 15 directories, 66 files (0 skipped as non-modified), 11.7 MB
+0011.306 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip.tmp: size is now: 4.20 MB
+0011.308 (0) Creating zip file manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip.list-temp.tmp)
+0011.308 (0) Successfully created zip file manifest (size: 5144)
+0011.340 (0) Created uploads zip (0) - 4311.2 KB in 0.5 s (9419.9 KB/s) (sha1: dc842462d1abd65c46abc0fd3b3f9d44dde61ccd, sha256: 31ce13fab61968b9b60f73b0cc8d4b33d26d9e3ee34ca1d93797559f641647f9)
+0011.342 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0011.342 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-c943fb09c3fbfc8b5bb742211cb4c998)
+0011.534 (0) Google Drive: quota usage: used=0.5 MB, total=15360 MB, available=15359.5 MB
+0011.535 (0) Google Drive: backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip: Attempting to upload to Google Drive (into folder id: 1n1EPhNwrUQVJRN2a_q0ztaIT6f5sUPfS)
+0012.346 (0) Googledrive chunked upload: 23.8 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 5 / 12)
+0012.679 (0) Googledrive chunked upload: 71.3 % uploaded (3145728 - increasing chunk size to 4096 KB - memory usage: 5 / 12)
+0014.191 (0) Googledrive chunked upload: 100 % uploaded (3145728)
+0014.192 (0) Google Drive: OK: Archive backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip uploaded in 2.66 seconds
+0014.192 (0) Recording as successfully uploaded: backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip
+0014.194 (0) Deleting local file: backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip: OK
+0014.195 (0) No backup of mu-plugins: excluded by user's options
+0014.196 (0) Beginning backup of other directories found in the content directory (index: 0)
+0014.196 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0014.196 (0) Looking for candidates to backup in: /home/u244462117/domains/herwiki.org/public_html/1v1/wp-content
+0014.196 (0) finding files: plugins: skipping: this is the plugins directory
+0014.197 (0) finding files: updraft: skipping: this is the updraft directory
+0014.197 (0) finding files: uploads: skipping: this is the uploads directory
+0014.197 (0) finding files: themes: skipping: this is the themes directory
+0014.197 (0) finding files: upgrade: skipping: excluded by options
+0014.198 (0) finding files: mu-plugins: skipping: this is the mu-plugins directory
+0014.198 (0) finding files: index.php: adding to list (1)
+0014.199 (0) Total entities for the zip file: 0 directories, 1 files (0 skipped as non-modified), 0 MB
+0014.207 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip.tmp: size is now: 0.00 MB
+0014.210 (0) Creating zip file manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip.list-temp.tmp)
+0014.212 (0) Successfully created zip file manifest (size: 43)
+0014.216 (0) Created others zip (0) - 0.2 KB in 0 s (11.2 KB/s) (sha1: c832b9b813edb04af85c4485b62fdaf619052d96, sha256: 87dd5405bb72700ad728fd917583b03b219062ac1f7ef3af9db18338862c09ba)
+0014.217 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0014.218 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-c943fb09c3fbfc8b5bb742211cb4c998)
+0014.425 (0) Google Drive: quota usage: used=22.4 MB, total=15360 MB, available=15337.6 MB
+0014.425 (0) Google Drive: backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip: Attempting to upload to Google Drive (into folder id: 1n1EPhNwrUQVJRN2a_q0ztaIT6f5sUPfS)
+0016.404 (0) Googledrive chunked upload: 100 % uploaded
+0016.405 (0) Google Drive: OK: Archive backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip uploaded in 1.98 seconds
+0016.406 (0) Recording as successfully uploaded: backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip
+0016.408 (0) Deleting local file: backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip: OK
+0016.410 (0) Saving backup status to database (elements: 8)
+0016.411 (0) Beginning creation of database dump (WordPress DB)
+0016.411 (0) SQL compatibility mode is: NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+0016.414 (0) Testing potential mysqldump binary: /usr/bin/mysqldump
+0016.437 (0) Output: /*M!999999\- enable the sandbox mode */ \n/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;\nDROP TABLE IF EXISTS `wp_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_c (truncated - 1609 bytes total)
+0016.438 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0016.444 (0) Table wp_options: Total expected rows (via COUNT): 268
+0016.444 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.551 (0) Table wp_options: Rows added in this batch (next record: 1059): 260 (uncompressed bytes in this segment=4427026) in 0.11 seconds
+0016.554 (0) Table wp_options: finishing file(s) (2, 553.8 KB)
+0016.557 (0) Table wp_users: Total expected rows (via COUNT): 2
+0016.558 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.559 (0) Table wp_users: Rows added in this batch (next record: 2): 2 (uncompressed bytes in this segment=1408) in 0.00 seconds
+0016.561 (0) Table wp_users: finishing file(s) (2, 0.7 KB)
+0016.564 (0) Table wp_usermeta: Total expected rows (via COUNT): 43
+0016.565 (0) Table is relatively small; fetch_rows will thus be: 50 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.566 (0) Table wp_usermeta: Rows added in this batch (next record: 44): 43 (uncompressed bytes in this segment=3780) in 0.00 seconds
+0016.568 (0) Table wp_usermeta: finishing file(s) (2, 1.6 KB)
+0016.571 (0) Table wp_commentmeta: Total expected rows (via COUNT): 0
+0016.572 (0) Table wp_commentmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=634) in 0.00 seconds
+0016.575 (0) Table wp_commentmeta: finishing file(s) (2, 0.4 KB)
+0016.577 (0) Table wp_comments: Total expected rows (via COUNT): 0
+0016.578 (0) Table wp_comments: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1466) in 0.00 seconds
+0016.580 (0) Table wp_comments: finishing file(s) (2, 0.5 KB)
+0016.582 (0) Table wp_links: Total expected rows (via COUNT): 0
+0016.583 (0) Table wp_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1027) in 0.00 seconds
+0016.585 (0) Table wp_links: finishing file(s) (2, 0.5 KB)
+0016.588 (0) Table wp_postmeta: Total expected rows (via COUNT): 46
+0016.589 (0) Table is relatively small; fetch_rows will thus be: 50 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.590 (0) Table wp_postmeta: Rows added in this batch (next record: 670): 46 (uncompressed bytes in this segment=4783) in 0.00 seconds
+0016.593 (0) Table wp_postmeta: finishing file(s) (2, 1.2 KB)
+0016.596 (0) Table wp_posts: Total expected rows (via COUNT): 64
+0016.596 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.599 (0) Table wp_posts: Rows added in this batch (next record: 375): 64 (uncompressed bytes in this segment=87199) in 0.01 seconds
+0016.601 (0) Table wp_posts: finishing file(s) (2, 7.1 KB)
+0016.604 (0) Table wp_term_relationships: Total expected rows (approximate): 1
+0016.605 (0) Table wp_term_relationships: Rows added in this batch (next record: 100000): 1 (uncompressed bytes in this segment=696) in 0.00 seconds
+0016.607 (0) Table wp_term_relationships: finishing file(s) (2, 0.4 KB)
+0016.610 (0) Table wp_term_taxonomy: Total expected rows (via COUNT): 275
+0016.610 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.613 (0) Table wp_term_taxonomy: Rows added in this batch (next record: 354): 275 (uncompressed bytes in this segment=10743) in 0.00 seconds
+0016.615 (0) Table wp_term_taxonomy: finishing file(s) (2, 2.4 KB)
+0016.618 (0) Table wp_termmeta: Total expected rows (via COUNT): 0
+0016.619 (0) Table wp_termmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=607) in 0.00 seconds
+0016.621 (0) Table wp_termmeta: finishing file(s) (2, 0.4 KB)
+0016.624 (0) Table wp_terms: Total expected rows (via COUNT): 275
+0016.624 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.627 (0) Table wp_terms: Rows added in this batch (next record: 354): 275 (uncompressed bytes in this segment=14838) in 0.00 seconds
+0016.629 (0) Table wp_terms: finishing file(s) (2, 5.6 KB)
+0016.632 (0) Table wp_actionscheduler_actions: Total expected rows (via COUNT): 5
+0016.633 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.634 (0) Table wp_actionscheduler_actions: Rows added in this batch (next record: 10): 5 (uncompressed bytes in this segment=4024) in 0.00 seconds
+0016.637 (0) Table wp_actionscheduler_actions: finishing file(s) (2, 1 KB)
+0016.639 (0) Table wp_actionscheduler_claims: Total expected rows (via COUNT): 0
+0016.640 (0) Table wp_actionscheduler_claims: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=623) in 0.00 seconds
+0016.642 (0) Table wp_actionscheduler_claims: finishing file(s) (2, 0.4 KB)
+0016.645 (0) Table wp_actionscheduler_groups: Total expected rows (via COUNT): 3
+0016.645 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.646 (0) Table wp_actionscheduler_groups: Rows added in this batch (next record: 3): 3 (uncompressed bytes in this segment=708) in 0.00 seconds
+0016.649 (0) Table wp_actionscheduler_groups: finishing file(s) (2, 0.4 KB)
+0016.651 (0) Table wp_actionscheduler_logs: Total expected rows (via COUNT): 11
+0016.651 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0016.652 (0) Table wp_actionscheduler_logs: Rows added in this batch (next record: 11): 11 (uncompressed bytes in this segment=1710) in 0.00 seconds
+0016.654 (0) Table wp_actionscheduler_logs: finishing file(s) (2, 0.6 KB)
+0016.657 (0) Table wp_hostinger_reach_carts: Total expected rows (approximate): 0
+0016.658 (0) Table wp_hostinger_reach_carts: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=831) in 0.00 seconds
+0016.659 (0) Table wp_hostinger_reach_carts: finishing file(s) (2, 0.4 KB)
+0016.662 (0) Table wp_hostinger_reach_contact_lists: Total expected rows (via COUNT): 0
+0016.663 (0) Table wp_hostinger_reach_contact_lists: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=583) in 0.00 seconds
+0016.664 (0) Table wp_hostinger_reach_contact_lists: finishing file(s) (2, 0.3 KB)
+0016.667 (0) Table wp_hostinger_reach_forms: Total expected rows (via COUNT): 0
+0016.668 (0) Table wp_hostinger_reach_forms: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=828) in 0.00 seconds
+0016.669 (0) Table wp_hostinger_reach_forms: finishing file(s) (2, 0.4 KB)
+0016.672 (0) Table wp_pmxe_exports: Total expected rows (via COUNT): 0
+0016.673 (0) Table wp_pmxe_exports: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1291) in 0.00 seconds
+0016.676 (0) Table wp_pmxe_exports: finishing file(s) (2, 0.5 KB)
+0016.678 (0) Table wp_pmxe_google_cats: Total expected rows (approximate): 5512
+0016.704 (0) Table wp_pmxe_google_cats: Rows added in this batch (next record: 505832): 5371 (uncompressed bytes in this segment=327515) in 0.03 seconds
+0016.705 (0) Table wp_pmxe_google_cats: finishing file(s) (2, 75.3 KB)
+0016.707 (0) Table wp_pmxe_posts: Total expected rows (via COUNT): 0
+0016.708 (0) Table wp_pmxe_posts: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=545) in 0.00 seconds
+0016.709 (0) Table wp_pmxe_posts: finishing file(s) (2, 0.3 KB)
+0016.712 (0) Table wp_pmxe_templates: Total expected rows (via COUNT): 0
+0016.712 (0) Table wp_pmxe_templates: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=516) in 0.00 seconds
+0016.714 (0) Table wp_pmxe_templates: finishing file(s) (2, 0.3 KB)
+0016.716 (0) Table wp_pmxi_files: Total expected rows (via COUNT): 0
+0016.716 (0) Table wp_pmxi_files: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=598) in 0.00 seconds
+0016.718 (0) Table wp_pmxi_files: finishing file(s) (2, 0.4 KB)
+0016.720 (0) Table wp_pmxi_hash: Total expected rows (approximate): 0
+0016.720 (0) Table wp_pmxi_hash: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=522) in 0.00 seconds
+0016.722 (0) Table wp_pmxi_hash: finishing file(s) (2, 0.3 KB)
+0016.724 (0) Table wp_pmxi_history: Total expected rows (via COUNT): 0
+0016.725 (0) Table wp_pmxi_history: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=696) in 0.00 seconds
+0016.726 (0) Table wp_pmxi_history: finishing file(s) (2, 0.4 KB)
+0016.729 (0) Table wp_pmxi_images: Total expected rows (via COUNT): 0
+0016.729 (0) Table wp_pmxi_images: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=539) in 0.00 seconds
+0016.731 (0) Table wp_pmxi_images: finishing file(s) (2, 0.3 KB)
+0016.734 (0) Table wp_pmxi_imports: Total expected rows (via COUNT): 0
+0016.734 (0) Table wp_pmxi_imports: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1846) in 0.00 seconds
+0016.737 (0) Table wp_pmxi_imports: finishing file(s) (2, 0.6 KB)
+0016.739 (0) Table wp_pmxi_posts: Total expected rows (via COUNT): 0
+0016.739 (0) Table wp_pmxi_posts: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=678) in 0.00 seconds
+0016.741 (0) Table wp_pmxi_posts: finishing file(s) (2, 0.4 KB)
+0016.744 (0) Table wp_pmxi_templates: Total expected rows (via COUNT): 0
+0016.744 (0) Table wp_pmxi_templates: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=812) in 0.00 seconds
+0016.747 (0) Table wp_pmxi_templates: finishing file(s) (2, 0.4 KB)
+0016.747 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_options.table.tmpr1060.gz (1/30/fopen): adding to final database dump
+0016.754 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_options.table.gz (2/30/fopen): adding to final database dump
+0016.755 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_users.table.tmpr3.gz (3/30/fopen): adding to final database dump
+0016.755 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_users.table.gz (4/30/fopen): adding to final database dump
+0016.755 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_usermeta.table.tmpr45.gz (5/30/fopen): adding to final database dump
+0016.756 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_usermeta.table.gz (6/30/fopen): adding to final database dump
+0016.756 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_commentmeta.table.tmpr0.gz (7/30/fopen): adding to final database dump
+0016.756 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_commentmeta.table.gz (8/30/fopen): adding to final database dump
+0016.757 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_comments.table.tmpr0.gz (9/30/fopen): adding to final database dump
+0016.757 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_comments.table.gz (10/30/fopen): adding to final database dump
+0016.757 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_links.table.tmpr0.gz (11/30/fopen): adding to final database dump
+0016.757 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_links.table.gz (12/30/fopen): adding to final database dump
+0016.758 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_postmeta.table.tmpr671.gz (13/30/fopen): adding to final database dump
+0016.758 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_postmeta.table.gz (14/30/fopen): adding to final database dump
+0016.758 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_posts.table.tmpr376.gz (15/30/fopen): adding to final database dump
+0016.759 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_posts.table.gz (16/30/fopen): adding to final database dump
+0016.759 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_term_relationships.table.tmpr100001.gz (17/30/fopen): adding to final database dump
+0016.759 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_term_relationships.table.gz (18/30/fopen): adding to final database dump
+0016.760 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_term_taxonomy.table.tmpr355.gz (19/30/fopen): adding to final database dump
+0016.760 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_term_taxonomy.table.gz (20/30/fopen): adding to final database dump
+0016.760 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_termmeta.table.tmpr0.gz (21/30/fopen): adding to final database dump
+0016.761 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_termmeta.table.gz (22/30/fopen): adding to final database dump
+0016.761 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_terms.table.tmpr355.gz (23/30/fopen): adding to final database dump
+0016.761 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_terms.table.gz (24/30/fopen): adding to final database dump
+0016.762 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_actions.table.tmpr11.gz (25/30/fopen): adding to final database dump
+0016.762 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_actions.table.gz (26/30/fopen): adding to final database dump
+0016.762 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_claims.table.tmpr0.gz (27/30/fopen): adding to final database dump
+0016.762 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_claims.table.gz (28/30/fopen): adding to final database dump
+0016.763 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_groups.table.tmpr4.gz (29/30/fopen): adding to final database dump
+0016.763 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_groups.table.gz (30/30/fopen): adding to final database dump
+0016.763 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_logs.table.tmpr12.gz (31/30/fopen): adding to final database dump
+0016.764 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_actionscheduler_logs.table.gz (32/30/fopen): adding to final database dump
+0016.764 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_hostinger_reach_carts.table.tmpr1.gz (33/30/fopen): adding to final database dump
+0016.764 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_hostinger_reach_carts.table.gz (34/30/fopen): adding to final database dump
+0016.765 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_hostinger_reach_contact_lists.table.tmpr0.gz (35/30/fopen): adding to final database dump
+0016.765 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_hostinger_reach_contact_lists.table.gz (36/30/fopen): adding to final database dump
+0016.765 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_hostinger_reach_forms.table.tmpr0.gz (37/30/fopen): adding to final database dump
+0016.765 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_hostinger_reach_forms.table.gz (38/30/fopen): adding to final database dump
+0016.766 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_exports.table.tmpr0.gz (39/30/fopen): adding to final database dump
+0016.766 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_exports.table.gz (40/30/fopen): adding to final database dump
+0016.766 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_google_cats.table.tmpr505833.gz (41/30/fopen): adding to final database dump
+0016.768 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_google_cats.table.gz (42/30/fopen): adding to final database dump
+0016.768 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_posts.table.tmpr0.gz (43/30/fopen): adding to final database dump
+0016.768 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_posts.table.gz (44/30/fopen): adding to final database dump
+0016.768 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_templates.table.tmpr0.gz (45/30/fopen): adding to final database dump
+0016.769 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxe_templates.table.gz (46/30/fopen): adding to final database dump
+0016.769 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_files.table.tmpr0.gz (47/30/fopen): adding to final database dump
+0016.769 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_files.table.gz (48/30/fopen): adding to final database dump
+0016.770 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_hash.table.tmpr1.gz (49/30/fopen): adding to final database dump
+0016.770 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_hash.table.gz (50/30/fopen): adding to final database dump
+0016.770 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_history.table.tmpr0.gz (51/30/fopen): adding to final database dump
+0016.771 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_history.table.gz (52/30/fopen): adding to final database dump
+0016.771 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_images.table.tmpr0.gz (53/30/fopen): adding to final database dump
+0016.771 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_images.table.gz (54/30/fopen): adding to final database dump
+0016.772 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_imports.table.tmpr0.gz (55/30/fopen): adding to final database dump
+0016.772 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_imports.table.gz (56/30/fopen): adding to final database dump
+0016.772 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_posts.table.tmpr0.gz (57/30/fopen): adding to final database dump
+0016.773 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_posts.table.gz (58/30/fopen): adding to final database dump
+0016.773 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_templates.table.tmpr0.gz (59/30/fopen): adding to final database dump
+0016.773 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db-table-wp_pmxi_templates.table.gz (60/30/fopen): adding to final database dump
+0016.777 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz: finished writing out complete database file (657.6 KB)
+0016.792 (0) Total database tables backed up: 30 (backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz, size: 673457, sha1: 14efb79e1f8cf1035b3601ac0b5f03b21a477a0e, sha256: e55c67d05000c3cf3cf875090ae121160381da1fa4a41f40fccb6b744ce34b5c)
+0016.794 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip: plugins: This file has already been successfully uploaded
+0016.794 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip: themes: This file has already been successfully uploaded
+0016.795 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip: uploads: This file has already been successfully uploaded
+0016.795 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip: others: This file has already been successfully uploaded
+0016.795 (0) backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz: db: This file has not yet been successfully uploaded: will queue
+0016.795 (0) Saving backup history. Total backup size: 34.5 MB
+0016.796 (0) Requesting upload of the files that have not yet been successfully uploaded (1)
+0016.797 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0016.798 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-c943fb09c3fbfc8b5bb742211cb4c998)
+0017.000 (0) Google Drive: quota usage: used=30.2 MB, total=15360 MB, available=15329.8 MB
+0017.001 (0) Google Drive: backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz: Attempting to upload to Google Drive (into folder id: 1n1EPhNwrUQVJRN2a_q0ztaIT6f5sUPfS)
+0019.007 (0) Googledrive chunked upload: 100 % uploaded
+0019.008 (0) Google Drive: OK: Archive backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz uploaded in 2.01 seconds
+0019.008 (0) Recording as successfully uploaded: backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz
+0019.009 (0) Deleting local file: backup_2026-06-19-1541_HerWiki_6615ccb2011b-db.gz: OK
+0019.010 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0019.010 (0) Number of backup sets in history: 1; groups (db): 1
+0019.011 (0) Examining (for databases) backup set with group_id=0, nonce=6615ccb2011b, datestamp=1781908886 (Jun 19 2026 22:41:26)
+0019.011 (0) This backup set is the backup set just made, so will not be deleted.
+0019.011 (0) Number of backup sets in history: 1; groups (files): 1
+0019.011 (0) Examining (for files) backup set with nonce=6615ccb2011b, datestamp=1781908886 (Jun 19 2026 22:41:26)
+0019.011 (0) This backup set is the backup set just made, so will not be deleted.
+0019.011 (0) This backup set is the backup set just made, so will not be deleted.
+0019.011 (0) This backup set is the backup set just made, so will not be deleted.
+0019.011 (0) This backup set is the backup set just made, so will not be deleted.
+0019.012 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0019.012 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0019.013 (0) Resume backup (6615ccb2011b, 0): finish run
+0019.013 (0) Decremented the semaphore (fd) by 1
+0019.014 (0) Semaphore (fd) unlocked
+0019.014 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0019.016 (0) Deleting zip manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-plugins.zip.list.tmp)
+0019.016 (0) Deleting zip manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-themes.zip.list.tmp)
+0019.017 (0) Deleting zip manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-uploads.zip.list.tmp)
+0019.017 (0) Deleting zip manifest (backup_2026-06-19-1541_HerWiki_6615ccb2011b-others.zip.list.tmp)
+0019.018 (0) No email will/can be sent - the user has not configured an email address.
+0019.018 (0) The backup succeeded and is now complete

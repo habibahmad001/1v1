@@ -1,0 +1,271 @@
+# Copyright (C) 2026 Md.Rakib Hossen
+# This file is distributed under the GPL2+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Taxonomy CSV Import Export 1.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/taxonomy-csv-import-export\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-05-26T12:41:16+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: taxonomy-csv-import-export\n"
+
+#. Plugin Name of the plugin
+#: C:\Users\Asus\Herd\wordpress\wp-content\plugins\taxonomy-csv-import-export\taxonomy-csv-import-export.php
+msgid "Taxonomy CSV Import Export"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: C:\Users\Asus\Herd\wordpress\wp-content\plugins\taxonomy-csv-import-export\taxonomy-csv-import-export.php
+msgid "https://wordpress.org/plugins/taxonomy-csv-import-export"
+msgstr ""
+
+#. Description of the plugin
+#: C:\Users\Asus\Herd\wordpress\wp-content\plugins\taxonomy-csv-import-export\taxonomy-csv-import-export.php
+msgid "Export and import all registered taxonomies with terms to/from CSV. Includes parent relationships."
+msgstr ""
+
+#. Author of the plugin
+#: C:\Users\Asus\Herd\wordpress\wp-content\plugins\taxonomy-csv-import-export\taxonomy-csv-import-export.php
+msgid "Md.Rakib Hossen"
+msgstr ""
+
+#. Author URI of the plugin
+#: C:\Users\Asus\Herd\wordpress\wp-content\plugins\taxonomy-csv-import-export\taxonomy-csv-import-export.php
+msgid "https://rlorakib.com/"
+msgstr ""
+
+#: includes/helper.php:185
+msgid "Taxonomy"
+msgstr ""
+
+#: includes/helper.php:191
+msgid "Users"
+msgstr ""
+
+#: includes/helper.php:197
+#: includes/menu.php:168
+#: includes/menu.php:218
+msgid "Create Term"
+msgstr ""
+
+#: includes/helper.php:203
+#: includes/menu.php:244
+#: includes/menu.php:326
+msgid "Register Taxonomy"
+msgstr ""
+
+#: includes/menu.php:20
+msgid "Import Export"
+msgstr ""
+
+#: includes/menu.php:52
+msgid "Taxonomy Import / Export"
+msgstr ""
+
+#: includes/menu.php:53
+msgid "Export taxonomy terms to a CSV file, or import terms from a CSV."
+msgstr ""
+
+#: includes/menu.php:58
+#: includes/menu.php:87
+#: includes/menu.php:414
+msgid "Export CSV"
+msgstr ""
+
+#: includes/menu.php:61
+#: includes/menu.php:116
+msgid "Import CSV"
+msgstr ""
+
+#: includes/menu.php:68
+msgid "Export Taxonomy"
+msgstr ""
+
+#: includes/menu.php:75
+#: includes/menu.php:106
+msgid "Select Taxonomy"
+msgstr ""
+
+#: includes/menu.php:84
+msgid "Preview"
+msgstr ""
+
+#: includes/menu.php:99
+msgid "Import Taxonomy"
+msgstr ""
+
+#: includes/menu.php:127
+msgid "Import completed successfully."
+msgstr ""
+
+#: includes/menu.php:133
+#: includes/menu.php:192
+msgid "Title"
+msgstr ""
+
+#: includes/menu.php:134
+#: includes/menu.php:274
+#: includes/menu.php:343
+msgid "Slug"
+msgstr ""
+
+#: includes/menu.php:135
+#: includes/menu.php:204
+#: includes/menu.php:284
+msgid "Description"
+msgstr ""
+
+#: includes/menu.php:136
+msgid "Parent Slug"
+msgstr ""
+
+#: includes/menu.php:169
+msgid "Select a taxonomy then add a new term with a title and optional description."
+msgstr ""
+
+#: includes/menu.php:174
+msgid "Choose a Taxonomy"
+msgstr ""
+
+#: includes/menu.php:198
+msgid "Enter term title…"
+msgstr ""
+
+#: includes/menu.php:205
+#: includes/menu.php:267
+#: includes/menu.php:285
+#: includes/menu.php:399
+msgid "(optional)"
+msgstr ""
+
+#: includes/menu.php:210
+msgid "Enter description…"
+msgstr ""
+
+#: includes/menu.php:245
+msgid "Create a new custom taxonomy and attach it to one or more post types."
+msgstr ""
+
+#: includes/menu.php:250
+msgid "New Taxonomy"
+msgstr ""
+
+#: includes/menu.php:258
+msgid "Label (Plural)"
+msgstr ""
+
+#: includes/menu.php:261
+msgid "e.g. Genres"
+msgstr ""
+
+#: includes/menu.php:266
+msgid "Singular Label"
+msgstr ""
+
+#: includes/menu.php:269
+msgid "e.g. Genre"
+msgstr ""
+
+#: includes/menu.php:277
+msgid "e.g. genre"
+msgstr ""
+
+#: includes/menu.php:278
+msgid "Auto-generated. Lowercase, no spaces."
+msgstr ""
+
+#: includes/menu.php:287
+msgid "Describe what this taxonomy is used for…"
+msgstr ""
+
+#: includes/menu.php:292
+msgid "Taxonomy Type"
+msgstr ""
+
+#: includes/menu.php:298
+#: includes/menu.php:354
+msgid "Tags"
+msgstr ""
+
+#: includes/menu.php:299
+msgid "Non-hierarchical. Flat list of terms."
+msgstr ""
+
+#: includes/menu.php:303
+#: includes/menu.php:354
+msgid "Categories"
+msgstr ""
+
+#: includes/menu.php:304
+msgid "Hierarchical. Terms can have parent terms."
+msgstr ""
+
+#: includes/menu.php:311
+msgid "Attach to Post Types"
+msgstr ""
+
+#: includes/menu.php:336
+msgid "Registered Custom Taxonomies"
+msgstr ""
+
+#: includes/menu.php:342
+msgid "Label"
+msgstr ""
+
+#: includes/menu.php:344
+msgid "Type"
+msgstr ""
+
+#: includes/menu.php:345
+msgid "Post Types"
+msgstr ""
+
+#: includes/menu.php:346
+msgid "Actions"
+msgstr ""
+
+#: includes/menu.php:358
+msgid "Delete"
+msgstr ""
+
+#: includes/menu.php:383
+msgid "User Import / Export"
+msgstr ""
+
+#: includes/menu.php:384
+msgid "Export users to a CSV file filtered by role, or import users from a CSV."
+msgstr ""
+
+#: includes/menu.php:392
+msgid "Export Users"
+msgstr ""
+
+#: includes/menu.php:398
+msgid "Filter by Role"
+msgstr ""
+
+#: includes/menu.php:409
+msgid "Leave all unchecked to export every user."
+msgstr ""
+
+#: includes/menu.php:424
+#: includes/menu.php:448
+msgid "Import Users"
+msgstr ""
+
+#: includes/menu.php:430
+msgid "Users imported successfully!"
+msgstr ""
+
+#: includes/menu.php:439
+msgid "CSV File"
+msgstr ""
+
+#: includes/menu.php:443
+msgid "Columns: username, email, password_hash, roles, first_name, last_name, meta"
+msgstr ""
