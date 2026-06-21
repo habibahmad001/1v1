@@ -1,0 +1,130 @@
+# ===================================================================
+# WordPress .gitignore
+# ===================================================================
+
+# Core configuration files (each environment has its own)
+wp-config.php
+wp-config-local.php
+
+# ===================================================================
+# WordPress Specific
+# ===================================================================
+
+# WordPress uploads directory - user generated content
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# Backup and temp directories
+wp-content/backup-db/
+wp-content/backups/
+wp-content/temp/
+wp-content/ai1wm-backups/
+wp-content/updraft/
+
+# Plugin cache directories
+wp-content/cache/wp-cache-*
+wp-content/cache/comet-cache/
+wp-content/cache/supercache/
+wp-content/plugins/all-in-one-wp-migration/storage/
+wp-content/plugins/wordfence/tmp/
+
+# ===================================================================
+# Development/Debug Tools
+# ===================================================================
+
+# Admin/debug tools - should NOT be in production
+file-manager.php
+wp-dbadmin.php
+runtime.php
+*.log
+
+# ===================================================================
+# OS Specific
+# ===================================================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# ===================================================================
+# IDE/Editor Specific
+# ===================================================================
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PhpStorm / IntelliJ IDEA
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ===================================================================
+# Dependency/Build Tools
+# ===================================================================
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Composer
+/vendor/
+composer.lock
+
+# ===================================================================
+# Security & Sensitive Files
+# ===================================================================
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# SSL certificates
+*.key
+*.pem
+*.crt
+
+# Database dumps
+*.sql
+*.sql.gz
+*.zip
+
+# ===================================================================
+# Misc
+# ===================================================================
+
+# Hidden files generally
+.*
+
+# But keep important dotfiles
+!.gitignore
+!.gitkeep
+!.htaccess
+!.env.example
