@@ -16,9 +16,9 @@ define('DB_MANAGER_PASSWORD', 'change_me_123'); // CHANGE THIS!
 define('DB_MANAGER_SESSION', 'db_manager_auth');
 
 // ==================== DATABASE CREDENTIALS ====================
-define('DB_NAME', 'webpooch_4Y3pXG');
-define('DB_USER', 'webpooch_4Y3pXG');
-define('DB_PASSWORD', 'Jp8SFSo9aolYJzB');
+define('DB_NAME', 'u244462117_6b1Qo');
+define('DB_USER', 'u244462117_PUa4W');
+define('DB_PASSWORD', '#k%1#$zYB8YuJ9mpwD&y');
 define('DB_HOST', 'localhost');
 
 // ==================== START SESSION ====================

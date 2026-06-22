@@ -107,12 +107,16 @@
 				// Click to toggle menu - CLICK ONLY (no hover)
 				link.addEventListener('click', (e) => {
 					e.preventDefault();
+					e.stopPropagation(); // Prevent bubbling to document click handler
 					this.toggleMenu(item);
 				});
 
-				// Keyboard navigation - focus opens menu
-				link.addEventListener('focus', () => {
-					this.handleMenuFocus(item);
+				// Keyboard navigation - focus opens menu (but not after click)
+				link.addEventListener('focus', (e) => {
+					// Only handle focus from keyboard tab, not from click
+					if (e.relatedTarget !== null) {
+						this.handleMenuFocus(item);
+					}
 				});
 			});
 

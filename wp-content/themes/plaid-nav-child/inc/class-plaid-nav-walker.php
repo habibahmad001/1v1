@@ -153,25 +153,45 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 
 			$item_output .= '</a>';
 		} else {
-			// Submenu item with icon
-			$icon = $this->get_item_icon($item);
-			$item_output .= '<a' . $attributes . '>';
-			$item_output .= $icon;
+			// Increment item counter
+			$this->submenu_item_count++;
 
-			// Use simpler structure for dropdowns, structured for mega menus
-			if ($this->current_menu_type === 'dropdown') {
-				// Simple dropdown: just the title as text
-				$item_output .= '<span class="plaid-dropdown-link-text">' . esc_html($item->title) . '</span>';
+			// Skip rendering if we're beyond 10 items (they'll be in "More+")
+			if ($this->submenu_item_count > 10) {
+				$item_output = '';
 			} else {
-				// Mega menu: structured with h4 and optional description
-				$item_output .= '<h4 class="plaid-mega-link-title">' . esc_html($item->title) . '</h4>';
+				// Submenu item with icon, title, and description
+				$icon = $this->get_item_icon($item);
 
-				if ($has_description) {
-					$item_output .= '<p class="plaid-mega-link-description">' . esc_html($item->description) . '</p>';
+				// Get description or use a default based on title
+				$description = '';
+				if (!empty($item->description)) {
+					$description = esc_html($item->description);
+				} else {
+					// Generate a default description based on the title
+					$description = $this->get_default_description($item->title);
+				}
+
+				$item_output .= '<a' . $attributes . '>';
+				$item_output .= $icon;
+				$item_output .= '<div class="plaid-dropdown-link-content">';
+				$item_output .= '<span class="plaid-dropdown-link-title">' . esc_html($item->title) . '</span>';
+				$item_output .= '<span class="plaid-dropdown-link-description">' . $description . '</span>';
+				$item_output .= '</div>';
+				$item_output .= '</a>';
+
+				// Add "More+" link after 10th item if there are more
+				if ($this->submenu_item_count === 10 && isset($this->total_child_count) && $this->total_child_count > 10) {
+					$remaining = $this->total_child_count - 10;
+					$item_output .= '<a href="#" class="plaid-dropdown-link plaid-dropdown-link--more">';
+					$item_output .= '<span class="plaid-dropdown-link-icon"><i class="fa-solid fa-ellipsis"></i></span>';
+					$item_output .= '<div class="plaid-dropdown-link-content">';
+					$item_output .= '<span class="plaid-dropdown-link-title">More+</span>';
+					$item_output .= '<span class="plaid-dropdown-link-description">View ' . $remaining . ' more items</span>';
+					$item_output .= '</div>';
+					$item_output .= '</a>';
 				}
 			}
-
-			$item_output .= '</a>';
 		}
 
 		$item_output .= isset($args->after) ? $args->after : '';
@@ -305,5 +325,47 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 		} else {
 			return '4';
 		}
+	}
+
+	/**
+	 * Get default description for menu item based on title
+	 */
+	private function get_default_description($title) {
+		$title_lower = strtolower($title);
+
+		// Generate contextual descriptions based on keywords
+		$description_map = array(
+			'domestic' => 'Tools and resources for domestic markets',
+			'medical' => 'Healthcare and medical equipment solutions',
+			'tools' => 'Essential tools and utilities',
+			'equipment' => 'Professional equipment and supplies',
+			'hospital' => 'Hospital and healthcare services',
+			'health' => 'Health and wellness products',
+			'doctor' => 'Connect with medical professionals',
+			'nurse' => 'Nursing and caregiver resources',
+			'pharmacy' => 'Pharmaceutical and pharmacy services',
+			'products' => 'Explore our product offerings',
+			'services' => 'Professional services and solutions',
+			'solutions' => 'Comprehensive solutions for your needs',
+			'features' => 'Discover key features and benefits',
+			'pricing' => 'View pricing plans and options',
+			'about' => 'Learn more about us',
+			'contact' => 'Get in touch with our team',
+			'support' => 'Help and support resources',
+			'help' => 'FAQs and help documentation',
+			'blog' => 'Latest news and articles',
+			'careers' => 'Join our growing team',
+			'partners' => 'Partner with us',
+			'community' => 'Join our community',
+		);
+
+		foreach ($description_map as $keyword => $description) {
+			if (strpos($title_lower, $keyword) !== false) {
+				return $description;
+			}
+		}
+
+		// Default fallback description
+		return 'Explore this section';
 	}
 }
