@@ -155,7 +155,7 @@ body {
 	margin: 0 auto;
 	padding: 0 32px;
 	height: 71px;
-	background: #b5d1e1;
+	background: rgba(181, 209, 225, 0.5);
 	border: 1px solid transparent;
 	border-radius: 40px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -281,7 +281,7 @@ body {
 	color: var(--plaid-nav-text);
 	letter-spacing: -0.01em;
 	line-height: 1.5;
-	border-radius: 20px; /* Rounded borders */
+	border-radius: 40px; /* Rounded borders */
 	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
 	            background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
 	            border-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
@@ -336,14 +336,17 @@ body {
 }
 
 /* ============================================
-   DROPDOWN MENU
+   DROPDOWN MENU - Plaid.com style (full width)
    ============================================ */
 .plaid-dropdown {
 	position: absolute;
 	top: calc(100% + 8px);
-	left: 50%;
-	transform: translateX(-50%) translateY(-4px);
-	min-width: 200px;
+	left: 0;
+	right: 0;
+	transform: translateY(-4px);
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
 	background: var(--plaid-nav-dropdown-bg);
 	border: 1px solid var(--plaid-nav-border);
 	border-radius: var(--plaid-nav-radius-lg);
@@ -357,13 +360,26 @@ body {
 	z-index: var(--plaid-nav-z-dropdown);
 }
 
-.plaid-nav-item:hover .plaid-dropdown,
-.plaid-nav-item:focus-within .plaid-dropdown,
+/* Position dropdown relative to viewport for full width */
+.plaid-header-container .plaid-dropdown {
+	position: fixed !important;
+	top: 125px !important; /* Below the header: 12px padding + 71px container + 12px padding + 30px gap */
+	left: 50% !important;
+	transform: translateX(-50%) translateY(-4px) !important;
+	width: 100%;
+	max-width: 1200px;
+	z-index: var(--plaid-nav-z-dropdown);
+}
+
+/* When active, show the dropdown - CLICK ONLY (no hover) */
+.plaid-header-container .plaid-dropdown.active,
 .plaid-dropdown.active {
-	opacity: 1;
-	visibility: visible;
-	pointer-events: auto;
-	transform: translateX(-50%) translateY(0);
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	display: block !important;
+	top: 125px !important; /* Ensure consistent positioning when active */
+	transform: translateX(-50%) translateY(0) !important;
 }
 
 .plaid-dropdown-inner {
@@ -375,8 +391,10 @@ body {
 }
 
 .plaid-dropdown-link {
-	display: block;
-	padding: 10px 16px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 20px;
 	font-family: var(--plaid-font-primary);
 	font-size: var(--plaid-nav-font-size);
 	font-weight: var(--plaid-nav-weight-medium);
@@ -385,23 +403,56 @@ body {
 	line-height: 1.5;
 	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
 	            background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	text-decoration: none;
 }
 
 .plaid-dropdown-link:hover {
 	color: var(--plaid-nav-accent);
 	background-color: var(--plaid-nav-hover-bg);
+	text-decoration: none;
+}
+
+/* Dropdown link icon styling */
+.plaid-dropdown-link-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	color: var(--plaid-nav-text-secondary);
+	font-size: 16px;
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+}
+
+.plaid-dropdown-link:hover .plaid-dropdown-link-icon {
+	color: var(--plaid-nav-accent);
+}
+
+/* Dropdown link text styling */
+.plaid-dropdown-link-text {
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: var(--plaid-nav-weight-medium);
+	color: var(--plaid-nav-text);
+	letter-spacing: -0.01em;
+	line-height: 1.5;
+}
+
+.plaid-dropdown-link:hover .plaid-dropdown-link-text {
+	color: var(--plaid-nav-accent);
 }
 
 /* ============================================
-   MEGA MENU
+   MEGA MENU - Plaid.com style (full width)
    ============================================ */
 .plaid-mega-menu {
-	position: absolute;
-	top: calc(100% + 8px);
-	left: 50%;
-	transform: translateX(-50%) translateY(-4px);
-	min-width: 600px;
-	max-width: 1000px;
+	position: fixed !important;
+	top: 125px !important; /* Below the header: 12px padding + 71px container + 12px padding + 30px gap */
+	left: 50% !important;
+	transform: translateX(-50%) translateY(-4px) !important;
+	width: 100%;
+	max-width: 1200px;
 	background: var(--plaid-nav-dropdown-bg);
 	border: 1px solid var(--plaid-nav-border);
 	border-radius: var(--plaid-nav-radius-lg);
@@ -415,13 +466,15 @@ body {
 	z-index: var(--plaid-nav-z-dropdown);
 }
 
-.plaid-nav-item:hover .plaid-mega-menu,
-.plaid-nav-item:focus-within .plaid-mega-menu,
-.plaid-mega-menu.active {
-	opacity: 1;
-	visibility: visible;
-	pointer-events: auto;
-	transform: translateX(-50%) translateY(0);
+/* When active, show the mega menu - CLICK ONLY (no hover) */
+.plaid-mega-menu.active,
+.plaid-header-container .plaid-mega-menu.active {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: translateX(-50%) translateY(0) !important;
+	display: block !important;
+	top: 125px !important; /* Ensure consistent positioning when active */
 }
 
 .plaid-mega-menu-inner {
@@ -471,8 +524,9 @@ body {
 
 .plaid-mega-link {
 	display: flex;
-	flex-direction: column;
-	padding: 10px 12px;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
 	border-radius: var(--plaid-nav-radius-sm);
 	transition: background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
 	text-decoration: none;
@@ -483,6 +537,39 @@ body {
 	background-color: var(--plaid-nav-hover-bg);
 }
 
+/* Icon styling for submenu items */
+.plaid-mega-link-icon,
+.plaid-dropdown-link-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	color: var(--plaid-nav-text-secondary);
+	font-size: 16px;
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+}
+
+.plaid-mega-link:hover .plaid-mega-link-icon,
+.plaid-dropdown-link:hover .plaid-dropdown-link-icon {
+	color: var(--plaid-nav-accent);
+}
+
+/* Dropdown link text styling */
+.plaid-dropdown-link-text {
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: var(--plaid-nav-weight-medium);
+	color: var(--plaid-nav-text);
+	letter-spacing: -0.01em;
+	line-height: 1.5;
+}
+
+.plaid-dropdown-link:hover .plaid-dropdown-link-text {
+	color: var(--plaid-nav-accent);
+}
+
 .plaid-mega-link-title {
 	font-family: var(--plaid-font-primary);
 	font-size: var(--plaid-nav-font-size);
@@ -490,7 +577,7 @@ body {
 	color: var(--plaid-nav-text);
 	letter-spacing: -0.01em;
 	line-height: 1.4;
-	margin: 0 0 2px 0;
+	margin: 0;
 }
 
 .plaid-mega-link:hover .plaid-mega-link-title {
@@ -559,6 +646,7 @@ body {
 }
 
 .plaid-nav-button--ghost {
+	display: none;
 	background: rgba(26, 26, 26, 0.05);
 	color: #1a1a1a;
 	border: 2px solid rgba(26, 26, 26, 0.2);
@@ -806,7 +894,9 @@ body {
 }
 
 .plaid-mobile-submenu-link {
-	display: block;
+	display: flex;
+	align-items: center;
+	gap: 12px;
 	padding: 12px 0;
 	font-family: var(--plaid-font-primary);
 	font-size: var(--plaid-nav-font-size);
@@ -817,6 +907,23 @@ body {
 }
 
 .plaid-mobile-submenu-link:hover {
+	color: var(--plaid-nav-accent);
+}
+
+/* Mobile submenu link icon */
+.plaid-mobile-submenu-link-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+	color: var(--plaid-nav-text-secondary);
+	font-size: 14px;
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+}
+
+.plaid-mobile-submenu-link:hover .plaid-mobile-submenu-link-icon {
 	color: var(--plaid-nav-accent);
 }
 

@@ -107,7 +107,10 @@ class Plaid_Mobile_Walker extends Walker_Nav_Menu {
 
 			$item_output .= '</div>';
 		} else {
+			// Submenu item with icon
+			$icon = $this->get_item_icon($item);
 			$item_output .= '<a' . $attributes . '>';
+			$item_output .= $icon;
 			$item_output .= esc_html($item->title);
 			$item_output .= '</a>';
 
@@ -136,5 +139,47 @@ class Plaid_Mobile_Walker extends Walker_Nav_Menu {
 		return '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 			<path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 		</svg>';
+	}
+
+	/**
+	 * Get icon for menu item based on title/URL
+	 */
+	private function get_item_icon($item) {
+		$icon_map = array(
+			'products' => 'fa-box',
+			'solutions' => 'fa-lightbulb',
+			'developers' => 'fa-code',
+			'resources' => 'fa-book',
+			'pricing' => 'fa-tag',
+			'payments' => 'fa-credit-card',
+			'auth' => 'fa-shield-halved',
+			'identity' => 'fa-user-check',
+			'balance' => 'fa-scale-balanced',
+			'fraud' => 'fa-user-secret',
+			'risk' => 'fa-triangle-exclamation',
+			'transactions' => 'fa-receipt',
+			'investments' => 'fa-chart-line',
+			'transfer' => 'fa-money-bill-transfer',
+			'link' => 'fa-link',
+			'apis' => 'fa-api',
+			'documentation' => 'fa-file-code',
+			'support' => 'fa-headset',
+			'contact' => 'fa-envelope',
+			'login' => 'fa-right-to-bracket',
+			'about' => 'fa-info-circle',
+			'blog' => 'fa-newspaper',
+			'careers' => 'fa-briefcase',
+			'security' => 'fa-lock',
+		);
+
+		$title_lower = strtolower($item->title);
+		foreach ($icon_map as $keyword => $icon) {
+			if (strpos($title_lower, $keyword) !== false) {
+				return '<span class="plaid-mobile-submenu-link-icon"><i class="fa-solid ' . $icon . '"></i></span>';
+			}
+		}
+
+		// Default icon
+		return '<span class="plaid-mobile-submenu-link-icon"><i class="fa-solid fa-chevron-right"></i></span>';
 	}
 }

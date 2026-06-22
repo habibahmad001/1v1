@@ -51,6 +51,14 @@ function plaid_nav_child_enqueue_assets() {
 		wp_get_theme(get_template())->get('Version')
 	);
 
+	// Font Awesome for icons
+	wp_enqueue_style(
+		'font-awesome',
+		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+		array(),
+		'6.5.1'
+	);
+
 	// Child theme stylesheet - load AFTER parent
 	wp_enqueue_style(
 		'plaid-nav-child-style',
@@ -198,7 +206,7 @@ function render_navigation_ctas() {
 	$login_url = get_option('plaid_nav_login_url', '#login');
 	$contact_url = get_option('plaid_nav_contact_url', '#contact');
 	$login_text = get_option('plaid_nav_login_text', __('Log in', 'plaid-nav-child'));
-	$contact_text = get_option('plaid_nav_contact_text', __('Contact sales', 'plaid-nav-child'));
+	$contact_text = get_option('plaid_nav_contact_text', __('Contact', 'plaid-nav-child'));
 
 	?>
 	<a href="<?php echo esc_url($login_url); ?>" class="plaid-nav-button plaid-nav-button--ghost">

@@ -104,34 +104,15 @@
 
 				if (!menu) return;
 
-				// Hover enter
-				link.addEventListener('mouseenter', (e) => {
-					this.handleMenuEnter(e, item);
+				// Click to toggle menu - CLICK ONLY (no hover)
+				link.addEventListener('click', (e) => {
+					e.preventDefault();
+					this.toggleMenu(item);
 				});
 
-				// Hover leave
-				link.addEventListener('mouseleave', (e) => {
-					this.handleMenuLeave(e, item);
-				});
-
-				// Menu hover enter (prevent close)
-				menu.addEventListener('mouseenter', () => {
-					clearTimeout(this.state.closeTimer);
-				});
-
-				// Menu hover leave
-				menu.addEventListener('mouseleave', () => {
-					this.startCloseTimer(item);
-				});
-
-				// Focus
+				// Keyboard navigation - focus opens menu
 				link.addEventListener('focus', () => {
 					this.handleMenuFocus(item);
-				});
-
-				// Click for touch devices
-				link.addEventListener('click', (e) => {
-					this.handleMenuClick(e, item);
 				});
 			});
 
@@ -265,6 +246,8 @@
 		 */
 		openMenu(item) {
 			if (this.state.currentOpenMenu === item) return;
+				console.log('openMenu called', item);
+
 
 			if (this.state.currentOpenMenu) {
 				this.closeMenu(this.state.currentOpenMenu);
@@ -276,11 +259,35 @@
 			const menu = dropdown || megaMenu;
 
 			if (link && menu) {
+				// Dynamic positioning based on header container
+				const headerContainer = document.querySelector(this.config.selectors.container);
+				if (headerContainer) {
+					const rect = headerContainer.getBoundingClientRect();
+					const topPosition = rect.bottom + 30; // Header bottom + 30px gap
+					menu.style.top = topPosition + 'px';
+				}
+
 				link.setAttribute('aria-expanded', 'true');
 				menu.classList.add('active');
 				this.state.currentOpenMenu = item;
 			}
 		},
+
+			/**
+			 * Toggle menu (open/close) - Plaid.com click behavior
+			 */
+			toggleMenu(item) {
+				if (this.state.currentOpenMenu === item) {
+					// If already open, close it
+					this.closeMenu(item);
+				} else {
+					// If different menu or none open, open this one
+					if (this.state.currentOpenMenu) {
+						this.closeMenu(this.state.currentOpenMenu);
+					}
+					this.openMenu(item);
+				}
+			},
 
 		/**
 		 * Close menu
