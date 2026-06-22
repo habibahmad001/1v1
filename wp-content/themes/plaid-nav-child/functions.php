@@ -51,7 +51,7 @@ function plaid_nav_child_enqueue_assets() {
 		wp_get_theme(get_template())->get('Version')
 	);
 
-	// Child theme stylesheet
+	// Child theme stylesheet - load AFTER parent
 	wp_enqueue_style(
 		'plaid-nav-child-style',
 		get_stylesheet_directory_uri() . '/style.css',
@@ -59,7 +59,7 @@ function plaid_nav_child_enqueue_assets() {
 		$theme_version
 	);
 
-	// Navigation stylesheet
+	// Navigation stylesheet - load AFTER child theme
 	wp_enqueue_style(
 		'plaid-navigation-css',
 		get_stylesheet_directory_uri() . '/assets/css/navigation.css',
@@ -82,9 +82,12 @@ function plaid_nav_child_enqueue_assets() {
 		'ajaxUrl' => admin_url('admin-ajax.php'),
 		'siteUrl' => site_url(),
 		'themeUrl' => get_stylesheet_directory_uri(),
+		'hoverDelay' => 150,
+		'closeDelay' => 300,
+		'desktopBreakpoint' => 768
 	));
 }
-add_action('wp_enqueue_scripts', 'plaid_nav_child_enqueue_assets');
+add_action('wp_enqueue_scripts', 'plaid_nav_child_enqueue_assets', 20);
 
 /**
  * Add skip link for accessibility
@@ -143,21 +146,14 @@ function render_custom_navigation() {
  * Render Logo
  */
 function render_plaid_logo() {
-	$custom_logo_id = get_theme_mod('custom_logo');
-	$logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : '';
+	// Use the uploaded logo
+	$logo_url = 'http://localhost/1v1/wp-content/uploads/2026/06/heydearwomen-logo-1080-x-1350-px.png';
 	$site_title = get_bloginfo('name');
 	$home_url = esc_url(home_url('/'));
 
 	?>
 	<a href="<?php echo $home_url; ?>" class="plaid-logo" aria-label="<?php echo esc_attr($site_title); ?>">
-		<?php if ($logo_url) : ?>
-			<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-logo-icon">
-		<?php else : ?>
-			<svg class="plaid-logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<rect width="32" height="32" rx="6" fill="#0052ff"/>
-				<path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white"/>
-			</svg>
-		<?php endif; ?>
+		<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-logo-icon">
 		<span class="plaid-logo-text"><?php echo esc_html($site_title); ?></span>
 	</a>
 	<?php
@@ -273,10 +269,6 @@ function render_mobile_navigation() {
 				'echo' => true,
 			));
 			?>
-		</div>
-
-		<div class="plaid-mobile-footer">
-			<?php render_navigation_ctas(); ?>
 		</div>
 	</div>
 	<?php

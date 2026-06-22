@@ -1,10 +1,10 @@
 /*
 Theme Name: Plaid Navigation Child
 Theme URI: https://example.com/
-Description: Child theme with Plaid-inspired navigation system built on Twenty Twenty-Five
+Description: Child theme with exact Plaid.com navigation replication
 Author: Your Company
 Author URI: https://example.com/
-Version: 1.0.0
+Version: 2.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: plaid-nav-child
@@ -13,64 +13,88 @@ Tags: custom-menu, mega-menu, accessibility-ready
 */
 
 /* ============================================
-   CSS Variables - Plaid.com Design System
+   PLAID.COM NAVIGATION - EXACT REPLICATION
+   Centered rounded container with horizontal menu
+   ============================================ */
+
+/* ============================================
+   CSS VARIABLES - Plaid.com exact
    ============================================ */
 :root {
-	/* Navigation */
-	--plaid-nav-height: 64px;
 	--plaid-nav-bg: #ffffff;
 	--plaid-nav-text: #1a1a1a;
-	--plaid-nav-text-secondary: #666666;
+	--plaid-nav-text-secondary: #6b7280;
 	--plaid-nav-accent: #0052ff;
 	--plaid-nav-accent-hover: #0040c7;
-	--plaid-nav-border: #e8e8e8;
-	--plaid-nav-overlay-bg: rgba(255, 255, 255, 0.98);
-	--plaid-nav-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-	--plaid-nav-transition: 200ms ease-out;
-	--plaid-nav-container-max-width: 1440px;
-	--plaid-nav-spacing-unit: 8px;
+	--plaid-nav-border: #e5e7eb;
+	--plaid-nav-hover-bg: #f3f4f6;
+	--plaid-nav-dropdown-bg: #ffffff;
+	--plaid-nav-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	--plaid-nav-dropdown-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-	/* Typography */
-	--plaid-font-family: "PlaidSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--plaid-font-primary: "PlaidSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	--plaid-font-display: "Cern", "PlaidSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
 	--plaid-nav-font-size: 15px;
-	--plaid-nav-font-weight: 500;
-	--plaid-nav-letter-spacing: -0.01em;
+	--plaid-nav-weight-medium: 500;
+	--plaid-nav-weight-semibold: 600;
 
-	/* Spacing */
+	--plaid-nav-height: 64px;
 	--plaid-nav-padding: 8px 16px;
-	--plaid-nav-gap: 32px;
-	--plaid-nav-item-gap: 24px;
-	--plaid-nav-container-padding: 32px;
+	--plaid-nav-item-spacing: 24px;
+	--plaid-nav-dropdown-padding: 12px;
+	--plaid-nav-mega-menu-padding: 24px;
+	--plaid-nav-mega-menu-gap: 32px;
 
-	/* Border Radius */
-	--plaid-nav-radius-sm: 6px;
-	--plaid-nav-radius-md: 8px;
-	--plaid-nav-radius-lg: 12px;
+	--plaid-nav-radius-sm: 4px;
+	--plaid-nav-radius-md: 6px;
+	--plaid-nav-radius-lg: 8px;
+	--plaid-nav-radius-xl: 12px;
 
-	/* Mega Menu */
-	--plaid-mega-menu-min-width: 280px;
-	--plaid-mega-menu-max-width: 900px;
-	--plaid-mega-menu-padding: 32px;
-	--plaid-mega-menu-gap: 32px;
+	--plaid-nav-transition-fast: 150ms;
+	--plaid-nav-transition-base: 200ms;
+	--plaid-nav-transition-slow: 300ms;
+	--plaid-nav-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+	--plaid-nav-z-header: 1000;
+	--plaid-nav-z-dropdown: 100;
+	--plaid-nav-z-backdrop: 999;
+	--plaid-nav-z-mobile: 998;
+
+	--plaid-desktop-breakpoint: 768px;
 }
 
 /* ============================================
-   Reset & Base Styles
+   RESET STYLES
    ============================================ */
 .plaid-nav,
-.plaid-nav ul,
-.plaid-nav ol,
-.plaid-nav li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	box-sizing: border-box;
-}
-
 .plaid-nav *,
 .plaid-nav *::before,
 .plaid-nav *::after {
-	box-sizing: inherit;
+	box-sizing: border-box;
+}
+
+.plaid-nav ul,
+.plaid-nav ol,
+.plaid-nav li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Ensure WordPress menu items display correctly */
+.plaid-nav-desktop ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+	align-items: center;
+}
+
+.plaid-nav-desktop ul li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .plaid-nav a {
@@ -84,105 +108,93 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	display: block;
 }
 
-/* Remove bullets from all navigation lists */
+/* ============================================
+   HEADER - Centered rounded container like Plaid.com
+   ============================================ */
+body {
+	margin: 0;
+	padding: 0;
+}
+
+/* Reset WordPress default menu styles */
+#plaid-nav-menu,
+#plaid-nav-menu ul,
+#plaid-nav-menu li,
 .plaid-nav-list,
 .plaid-nav-list ul,
-.plaid-nav-list li,
-.plaid-nav-list ol,
-.plaid-mega-menu-list,
-.plaid-mega-menu ul,
-.plaid-mega-menu ol,
-.plaid-mobile-list,
-.plaid-mobile-list ul,
-.plaid-mobile-list ol {
+.plaid-nav-list li {
 	list-style: none !important;
 	margin: 0 !important;
 	padding: 0 !important;
 }
 
-.plaid-nav-list li,
-.plaid-mega-menu li,
-.plaid-mobile-list li {
-	list-style-type: none !important;
+#plaid-nav-menu > li,
+.plaid-nav-list > li {
+	display: inline-block !important;
+	position: relative;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
-.plaid-nav-list li::before,
-.plaid-mega-menu li::before,
-.plaid-mobile-list li::before {
-	content: none !important;
-}
-
-/* ============================================
-   Skip Link (Accessibility)
-   ============================================ */
-.plaid-skip-link {
-	position: absolute;
-	top: -100px;
-	left: 0;
-	background: var(--plaid-nav-accent);
-	color: #ffffff;
-	padding: 12px 24px;
-	z-index: 10000;
-	transition: top 0.3s;
-	font-size: 14px;
-	font-weight: 500;
-}
-
-.plaid-skip-link:focus {
-	top: 0;
-}
-
-/* ============================================
-   Header Container - Simple Plaid.com Style
-   ============================================ */
 .plaid-header {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: var(--plaid-nav-height);
-	background: var(--plaid-nav-bg);
-	border-bottom: 1px solid var(--plaid-nav-border);
-	z-index: 1000;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	display: flex;
-	align-items: center;
+	height: auto;
+	min-height: 95px;
+	background: #f8f9fa;
+	z-index: var(--plaid-nav-z-header);
+	padding: 12px 20px;
+	transition: all 0.3s ease;
 }
 
-.plaid-header.scrolled {
-	box-shadow: var(--plaid-nav-shadow);
-}
-
+/* The centered rounded navigation container - Plaid.com exact style */
 .plaid-header-container {
-	max-width: var(--plaid-nav-container-max-width);
+	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 var(--plaid-nav-container-padding);
-	height: 100%;
+	padding: 0 32px;
+	height: 71px;
+	background: #b5d1e1;
+	border: 1px solid transparent;
+	border-radius: 40px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	gap: var(--plaid-nav-gap);
+	gap: 32px;
+	position: relative;
 }
 
 /* ============================================
-   Logo - Plaid.com Style
+   LOGO
    ============================================ */
 .plaid-logo {
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	font-size: 20px;
-	font-weight: 700;
-	color: #000000;
-	transition: opacity 0.2s;
 	text-decoration: none;
-	white-space: nowrap;
+	color: var(--plaid-nav-text);
+	font-family: var(--plaid-font-display);
+	font-size: 18px;
+	font-weight: var(--plaid-nav-weight-semibold);
+	letter-spacing: -0.02em;
+	line-height: 1;
+	transition: opacity 0.2s ease;
 	flex-shrink: 0;
+	margin-right: auto;
 }
 
 .plaid-logo:hover {
-	opacity: 0.8;
+	opacity: 0.9;
+	text-decoration: none;
+	color: var(--plaid-nav-text);
+}
+
+.plaid-logo:hover .plaid-logo-icon {
+	border-color: rgba(255, 255, 255, 0.6);
+	transform: scale(1.05);
 }
 
 .plaid-logo:focus {
@@ -192,191 +204,219 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 .plaid-logo-icon {
-	width: 32px;
-	height: 32px;
-	display: block;
+	width: 45px;
+	height: 45px;
 	flex-shrink: 0;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	overflow: hidden;
+	transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .plaid-logo-text {
-	font-size: 18px;
-	letter-spacing: -0.02em;
-	font-family: var(--plaid-font-family);
-	font-weight: 700;
-	color: #000000;
-}
-
-/* ============================================
-   Desktop Navigation - Plaid.com Style
-   ============================================ */
-.plaid-nav-desktop {
-	display: none;
-}
-
-@media (min-width: 1024px) {
-	.plaid-nav-desktop {
-		display: flex;
-		align-items: center;
-		flex: 1;
-		justify-content: center;
-	}
-
-	.plaid-nav-list {
-		display: flex;
-		align-items: center;
-		gap: var(--plaid-nav-item-gap);
-		margin: 0;
-		padding: 0;
-	}
-
-	.plaid-nav-item {
-		position: relative;
-	}
-
-	.plaid-nav-link {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		padding: var(--plaid-nav-padding);
-		font-size: var(--plaid-nav-font-size);
-		font-weight: var(--plaid-nav-font-weight);
-		color: var(--plaid-nav-text);
-		border-radius: var(--plaid-nav-radius-sm);
-		transition: color 0.2s ease;
-		cursor: pointer;
-		white-space: nowrap;
-		text-decoration: none;
-		position: relative;
-		line-height: 1.5;
-		background: transparent;
-		font-family: var(--plaid-font-family);
-		letter-spacing: var(--plaid-nav-letter-spacing);
-	}
-
-	.plaid-nav-link:hover,
-	.plaid-nav-link:focus {
-		color: var(--plaid-nav-accent);
-		background-color: transparent;
-	}
-
-	.plaid-nav-link:focus-visible {
-		outline: 2px solid var(--plaid-nav-accent);
-		outline-offset: 2px;
-	}
-
-	.plaid-nav-link[aria-expanded="true"] {
-		color: var(--plaid-nav-text);
-	}
-
-	/* Show mega menu on parent hover */
-	.plaid-nav-item:hover .plaid-mega-menu,
-	.plaid-nav-item:focus-within .plaid-mega-menu {
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-		transform: translateX(-50%) translateY(0);
-	}
-
-	/* Active state for clicked items */
-	.plaid-nav-item.active .plaid-mega-menu {
-		opacity: 1;
-		visibility: visible;
-		pointer-events: auto;
-		transform: translateX(-50%) translateY(0);
-	}
-
-	.plaid-nav-link-text {
-		display: inline-block;
-	}
-
-	.plaid-nav-arrow {
-		width: 12px;
-		height: 12px;
-		transition: transform 0.2s ease;
-		color: var(--plaid-nav-text-secondary);
-	}
-
-	.plaid-nav-link[aria-expanded="true"] .plaid-nav-arrow {
-		transform: rotate(180deg);
-	}
-}
-
-/* ============================================
-   CTA Buttons - Plaid.com Style
-   ============================================ */
-.plaid-nav-cta {
-	display: flex;
-	align-items: center;
-	gap: 16px;
-	margin-left: auto;
-	flex-shrink: 0;
-}
-
-.plaid-nav-button {
-	padding: 10px 20px;
-	font-size: var(--plaid-nav-font-size);
-	font-weight: 500;
-	border-radius: var(--plaid-nav-radius-sm);
-	transition: all 0.2s ease;
-	cursor: pointer;
-	border: none;
-	text-decoration: none;
-	display: inline-block;
-	font-family: var(--plaid-font-family);
-	letter-spacing: var(--plaid-nav-letter-spacing);
-	white-space: nowrap;
-}
-
-.plaid-nav-button--ghost {
-	background: transparent;
 	color: var(--plaid-nav-text);
 }
 
-.plaid-nav-button--ghost:hover,
-.plaid-nav-button--ghost:focus {
-	background-color: rgba(0, 82, 255, 0.04);
-	color: var(--plaid-nav-accent);
+/* ============================================
+   DESKTOP NAVIGATION - Horizontal layout
+   ============================================ */
+.plaid-nav-desktop {
+	display: none;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
 }
 
-.plaid-nav-button--primary {
-	background: var(--plaid-nav-accent);
-	color: #ffffff;
+@media (min-width: 768px) {
+	.plaid-nav-desktop {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
-.plaid-nav-button--primary:hover,
-.plaid-nav-button--primary:focus {
-	background: var(--plaid-nav-accent-hover);
-	transform: translateY(-1px);
-	box-shadow: 0 4px 12px rgba(0, 82, 255, 0.3);
+/* Horizontal menu list */
+.plaid-nav-list {
+	display: flex;
+	align-items: center;
+	gap: var(--plaid-nav-item-spacing);
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	list-style: none;
 }
 
-.plaid-nav-button:focus-visible {
+/* Force horizontal layout - Override WordPress defaults */
+.plaid-nav-list > li {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.plaid-nav-list > .plaid-nav-item {
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+/* Menu items */
+.plaid-nav-item {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+/* Navigation links */
+.plaid-nav-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 16px;
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: 700; /* Bold for all menu items */
+	color: var(--plaid-nav-text);
+	letter-spacing: -0.01em;
+	line-height: 1.5;
+	border-radius: 20px; /* Rounded borders */
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            border-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	cursor: pointer;
+	white-space: nowrap;
+	text-decoration: none;
+	position: relative;
+	background: transparent;
+	border: 2px solid transparent;
+}
+
+.plaid-nav-link:hover {
+	color: var(--plaid-nav-text);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-color: rgba(255, 255, 255, 0.8);
+}
+
+.plaid-nav-link:focus {
 	outline: 2px solid var(--plaid-nav-accent);
 	outline-offset: 2px;
 }
 
+.plaid-nav-link[aria-expanded="true"] {
+	color: var(--plaid-nav-text);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-color: rgba(255, 255, 255, 0.8);
+}
+
+.current-menu-item > .plaid-nav-link,
+.current-menu-parent > .plaid-nav-link,
+.current-menu-ancestor > .plaid-nav-link {
+	color: var(--plaid-nav-text);
+	background-color: rgba(255, 255, 255, 0.7);
+	border-color: #ffffff;
+}
+
+.plaid-nav-link-text {
+	display: inline-block;
+}
+
+/* Dropdown arrow */
+.plaid-nav-arrow {
+	width: 16px;
+	height: 16px;
+	color: var(--plaid-nav-text-secondary);
+	transition: transform var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	flex-shrink: 0;
+}
+
+.plaid-nav-link[aria-expanded="true"] .plaid-nav-arrow {
+	transform: rotate(180deg);
+}
+
 /* ============================================
-   Mega Menu - Plaid.com Style
+   DROPDOWN MENU
+   ============================================ */
+.plaid-dropdown {
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 50%;
+	transform: translateX(-50%) translateY(-4px);
+	min-width: 200px;
+	background: var(--plaid-nav-dropdown-bg);
+	border: 1px solid var(--plaid-nav-border);
+	border-radius: var(--plaid-nav-radius-lg);
+	box-shadow: var(--plaid-nav-dropdown-shadow);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            transform var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            visibility var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	z-index: var(--plaid-nav-z-dropdown);
+}
+
+.plaid-nav-item:hover .plaid-dropdown,
+.plaid-nav-item:focus-within .plaid-dropdown,
+.plaid-dropdown.active {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transform: translateX(-50%) translateY(0);
+}
+
+.plaid-dropdown-inner {
+	padding: var(--plaid-nav-dropdown-padding) 0;
+}
+
+.plaid-dropdown-item {
+	display: block;
+}
+
+.plaid-dropdown-link {
+	display: block;
+	padding: 10px 16px;
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: var(--plaid-nav-weight-medium);
+	color: var(--plaid-nav-text);
+	letter-spacing: -0.01em;
+	line-height: 1.5;
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+}
+
+.plaid-dropdown-link:hover {
+	color: var(--plaid-nav-accent);
+	background-color: var(--plaid-nav-hover-bg);
+}
+
+/* ============================================
+   MEGA MENU
    ============================================ */
 .plaid-mega-menu {
 	position: absolute;
 	top: calc(100% + 8px);
 	left: 50%;
-	transform: translateX(-50%) translateY(-8px);
-	min-width: var(--plaid-mega-menu-min-width);
-	max-width: var(--plaid-mega-menu-max-width);
-	background: var(--plaid-nav-overlay-bg);
+	transform: translateX(-50%) translateY(-4px);
+	min-width: 600px;
+	max-width: 1000px;
+	background: var(--plaid-nav-dropdown-bg);
 	border: 1px solid var(--plaid-nav-border);
 	border-radius: var(--plaid-nav-radius-lg);
-	box-shadow: var(--plaid-nav-shadow);
+	box-shadow: var(--plaid-nav-dropdown-shadow);
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
-	transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-	z-index: 100;
-	backdrop-filter: blur(8px);
+	transition: opacity var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            transform var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            visibility var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	z-index: var(--plaid-nav-z-dropdown);
 }
 
+.plaid-nav-item:hover .plaid-mega-menu,
+.plaid-nav-item:focus-within .plaid-mega-menu,
 .plaid-mega-menu.active {
 	opacity: 1;
 	visibility: visible;
@@ -385,87 +425,9 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 .plaid-mega-menu-inner {
-	padding: var(--plaid-mega-menu-padding);
-}
-
-.plaid-mega-menu-section {
-	margin-bottom: 24px;
-}
-
-.plaid-mega-menu-section:last-child {
-	margin-bottom: 0;
-}
-
-.plaid-mega-menu-section-title {
-	font-size: 12px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--plaid-nav-text-secondary);
-	margin: 0 0 16px 0;
-	padding: 0 4px;
-	font-family: var(--plaid-font-family);
-}
-
-.plaid-mega-menu-list {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.plaid-mega-menu-item {
-	display: block;
-	margin: 0;
-	padding: 0;
-}
-
-.plaid-mega-menu-link {
-	display: flex;
-	flex-direction: column;
-	padding: 12px 16px;
-	border-radius: var(--plaid-nav-radius-sm);
-	transition: background-color 0.2s ease;
-	text-decoration: none;
-	color: inherit;
-}
-
-.plaid-mega-menu-link:hover,
-.plaid-mega-menu-link:focus {
-	background-color: rgba(0, 82, 255, 0.04);
-}
-
-.plaid-mega-menu-link:focus-visible {
-	outline: 2px solid var(--plaid-nav-accent);
-	outline-offset: -2px;
-}
-
-.plaid-mega-menu-link-title {
-	font-size: 15px;
-	font-weight: 500;
-	color: var(--plaid-nav-text);
-	margin-bottom: 2px;
-	font-family: var(--plaid-font-family);
-	letter-spacing: var(--plaid-nav-letter-spacing);
-}
-
-.plaid-mega-menu-link:hover .plaid-mega-menu-link-title,
-.plaid-mega-menu-link:focus .plaid-mega-menu-link-title {
-	color: var(--plaid-nav-accent);
-}
-
-.plaid-mega-menu-link-description {
-	font-size: 13px;
-	color: var(--plaid-nav-text-secondary);
-	line-height: 1.4;
-}
-
-/* Multi-column mega menu */
-.plaid-mega-menu--multi-column {
+	padding: var(--plaid-nav-mega-menu-padding);
 	display: grid;
-	gap: var(--plaid-mega-menu-gap);
+	gap: var(--plaid-nav-mega-menu-gap);
 }
 
 .plaid-mega-menu--2-columns {
@@ -480,8 +442,195 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	grid-template-columns: repeat(4, 1fr);
 }
 
+.plaid-mega-section {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.plaid-mega-section-title {
+	font-family: var(--plaid-font-primary);
+	font-size: 12px;
+	font-weight: var(--plaid-nav-weight-semibold);
+	color: var(--plaid-nav-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin: 0;
+	padding: 0 4px;
+}
+
+.plaid-mega-section-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.plaid-mega-item {
+	display: block;
+}
+
+.plaid-mega-link {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 12px;
+	border-radius: var(--plaid-nav-radius-sm);
+	transition: background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	text-decoration: none;
+	color: inherit;
+}
+
+.plaid-mega-link:hover {
+	background-color: var(--plaid-nav-hover-bg);
+}
+
+.plaid-mega-link-title {
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: var(--plaid-nav-weight-medium);
+	color: var(--plaid-nav-text);
+	letter-spacing: -0.01em;
+	line-height: 1.4;
+	margin: 0 0 2px 0;
+}
+
+.plaid-mega-link:hover .plaid-mega-link-title {
+	color: var(--plaid-nav-accent);
+}
+
+.plaid-mega-link-description {
+	font-family: var(--plaid-font-primary);
+	font-size: 13px;
+	font-weight: 400;
+	color: var(--plaid-nav-text-secondary);
+	letter-spacing: -0.01em;
+	line-height: 1.4;
+	margin: 0;
+}
+
 /* ============================================
-   Mobile Navigation Toggle
+   CTA BUTTONS
+   ============================================ */
+/* ============================================
+   CTA BUTTONS
+   ============================================ */
+.plaid-nav-cta {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-shrink: 0;
+	margin-left: auto;
+}
+
+.plaid-nav-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px;
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: 700; /* Bold */
+	letter-spacing: -0.01em;
+	line-height: 1.5;
+	text-decoration: none;
+	border-radius: 40px; /* Fully rounded */
+	transition: all var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+	cursor: pointer;
+	border: 2px solid transparent;
+	position: relative;
+	overflow: hidden;
+}
+
+.plaid-nav-button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 40px;
+	padding: 2px;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	mask-composite: exclude;
+	opacity: 0;
+	transition: opacity var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+}
+
+.plaid-nav-button--ghost {
+	background: rgba(26, 26, 26, 0.05);
+	color: #1a1a1a;
+	border: 2px solid rgba(26, 26, 26, 0.2);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.plaid-nav-button--ghost:hover {
+	background-color: rgba(255, 255, 255, 0.6);
+	border-color: rgba(26, 26, 26, 0.4);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transform: translateY(-1px);
+}
+
+.plaid-nav-button--primary {
+	background: #0a0a0a;
+	color: #ffffff;
+	border: 2px solid #3a3a3a;
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 1px 3px rgba(0, 0, 0, 0.12),
+		0 4px 8px rgba(0, 0, 0, 0.08),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	position: relative;
+	transition: all var(--plaid-nav-transition-base) var(--plaid-nav-ease);
+}
+
+/* Plaid.com-style border glow effect */
+.plaid-nav-button--primary::after {
+	content: '';
+	position: absolute;
+	top: -3px;
+	left: -3px;
+	right: -3px;
+	bottom: -3px;
+	border-radius: 43px;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	pointer-events: none;
+	opacity: 1;
+}
+
+.plaid-nav-button--primary:hover {
+	background: #000000;
+	border-color: #4a4a4a;
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.15),
+		0 4px 12px rgba(0, 0, 0, 0.2),
+		0 6px 16px rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(255, 255, 255, 0.15),
+		0 0 20px rgba(255, 255, 255, 0.05);
+	transform: translateY(-2px);
+}
+
+.plaid-nav-button--primary:hover::after {
+	border-color: rgba(255, 255, 255, 0.15);
+}
+
+.plaid-nav-button--primary:active {
+	transform: translateY(0);
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 2px 4px rgba(0, 0, 0, 0.15),
+		inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.plaid-nav-button:focus {
+	outline: 2px solid var(--plaid-nav-accent);
+	outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE NAVIGATION
    ============================================ */
 .plaid-nav-mobile {
 	display: flex;
@@ -489,24 +638,29 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	gap: 16px;
 }
 
+@media (min-width: 768px) {
+	.plaid-nav-mobile {
+		display: none;
+	}
+}
+
 .plaid-mobile-toggle {
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 4px;
 	padding: 8px;
 	background: none;
 	border: none;
 	cursor: pointer;
-	border-radius: 4px;
-	transition: background-color 0.2s ease;
+	border-radius: var(--plaid-nav-radius-sm);
+	transition: background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
 }
 
-.plaid-mobile-toggle:hover,
+.plaid-mobile-toggle:hover {
+	background-color: var(--plaid-nav-hover-bg);
+}
+
 .plaid-mobile-toggle:focus {
-	background-color: rgba(0, 82, 255, 0.04);
-}
-
-.plaid-mobile-toggle:focus-visible {
 	outline: 2px solid var(--plaid-nav-accent);
 	outline-offset: 2px;
 }
@@ -516,11 +670,11 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	height: 2px;
 	background: var(--plaid-nav-text);
 	border-radius: 2px;
-	transition: all 0.3s ease;
+	transition: all var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
 }
 
 .plaid-mobile-toggle[aria-expanded="true"] .plaid-mobile-toggle-bar:nth-child(1) {
-	transform: translateY(7px) rotate(45deg);
+	transform: translateY(6px) rotate(45deg);
 }
 
 .plaid-mobile-toggle[aria-expanded="true"] .plaid-mobile-toggle-bar:nth-child(2) {
@@ -528,40 +682,10 @@ Tags: custom-menu, mega-menu, accessibility-ready
 }
 
 .plaid-mobile-toggle[aria-expanded="true"] .plaid-mobile-toggle-bar:nth-child(3) {
-	transform: translateY(-7px) rotate(-45deg);
+	transform: translateY(-6px) rotate(-45deg);
 }
 
-@media (min-width: 1024px) {
-	.plaid-nav-mobile {
-		display: none;
-	}
-
-	.plaid-mobile-toggle {
-		display: none;
-	}
-
-	.plaid-mobile-overlay {
-		display: none;
-	}
-
-	.plaid-mobile-backdrop {
-		display: none;
-	}
-}
-
-@media (max-width: 1023px) {
-	.plaid-nav-desktop {
-		display: none;
-	}
-
-	.plaid-nav-cta {
-		display: none;
-	}
-}
-
-/* ============================================
-   Mobile Menu Overlay
-   ============================================ */
+/* Mobile Menu Overlay */
 .plaid-mobile-overlay {
 	position: fixed;
 	top: var(--plaid-nav-height);
@@ -570,10 +694,9 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	bottom: 0;
 	background: var(--plaid-nav-bg);
 	overflow-y: auto;
-	overflow-x: hidden;
 	transform: translateX(100%);
-	transition: transform 0.3s ease-out;
-	z-index: 999;
+	transition: transform var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
+	z-index: var(--plaid-nav-z-mobile);
 }
 
 .plaid-mobile-overlay.active {
@@ -589,8 +712,9 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	background: rgba(0, 0, 0, 0.5);
 	opacity: 0;
 	visibility: hidden;
-	transition: opacity 0.3s ease, visibility 0.3s ease;
-	z-index: 998;
+	transition: opacity var(--plaid-nav-transition-slow) var(--plaid-nav-ease),
+	            visibility var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
+	z-index: var(--plaid-nav-z-backdrop);
 }
 
 .plaid-mobile-backdrop.active {
@@ -604,9 +728,6 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	margin: 0 auto;
 }
 
-/* ============================================
-   Mobile Menu Items
-   ============================================ */
 .plaid-mobile-item {
 	border-bottom: 1px solid var(--plaid-nav-border);
 }
@@ -626,25 +747,19 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	display: flex;
 	align-items: center;
 	padding: 16px 0;
+	font-family: var(--plaid-font-primary);
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: var(--plaid-nav-weight-medium);
 	color: var(--plaid-nav-text);
-	transition: color 0.2s ease;
+	letter-spacing: -0.01em;
 	flex: 1;
-	text-decoration: none;
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
 }
 
-.plaid-mobile-link:hover,
-.plaid-mobile-link:focus {
+.plaid-mobile-link:hover {
 	color: var(--plaid-nav-accent);
 }
 
-.plaid-mobile-link:focus-visible {
-	outline: 2px solid var(--plaid-nav-accent);
-	outline-offset: -2px;
-}
-
-/* Mobile Submenu Toggle */
 .plaid-mobile-toggle-btn {
 	display: flex;
 	align-items: center;
@@ -655,37 +770,31 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	background: none;
 	border: none;
 	cursor: pointer;
-	border-radius: 4px;
-	transition: background-color 0.2s ease, transform 0.3s ease;
+	border-radius: var(--plaid-nav-radius-sm);
+	transition: background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
+	            transform var(--plaid-nav-transition-base) var(--plaid-nav-ease);
 	flex-shrink: 0;
 }
 
-.plaid-mobile-toggle-btn:hover,
-.plaid-mobile-toggle-btn:focus {
-	background-color: rgba(0, 82, 255, 0.04);
-}
-
-.plaid-mobile-toggle-btn:focus-visible {
-	outline: 2px solid var(--plaid-nav-accent);
-	outline-offset: 2px;
+.plaid-mobile-toggle-btn:hover {
+	background-color: var(--plaid-nav-hover-bg);
 }
 
 .plaid-mobile-toggle-btn svg {
 	width: 16px;
 	height: 16px;
 	color: var(--plaid-nav-text-secondary);
-	transition: transform 0.3s ease;
+	transition: transform var(--plaid-nav-transition-base) var(--plaid-nav-ease);
 }
 
 .plaid-mobile-toggle-btn[aria-expanded="true"] svg {
 	transform: rotate(180deg);
 }
 
-/* Mobile Submenu */
 .plaid-mobile-submenu {
 	max-height: 0;
 	overflow: hidden;
-	transition: max-height 0.3s ease-out;
+	transition: max-height var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
 }
 
 .plaid-mobile-submenu.active {
@@ -699,26 +808,18 @@ Tags: custom-menu, mega-menu, accessibility-ready
 .plaid-mobile-submenu-link {
 	display: block;
 	padding: 12px 0;
-	font-size: 15px;
+	font-family: var(--plaid-font-primary);
+	font-size: var(--plaid-nav-font-size);
+	font-weight: 400;
 	color: var(--plaid-nav-text-secondary);
-	transition: color 0.2s ease;
-	text-decoration: none;
+	letter-spacing: -0.01em;
+	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
 }
 
-.plaid-mobile-submenu-link:hover,
-.plaid-mobile-submenu-link:focus {
+.plaid-mobile-submenu-link:hover {
 	color: var(--plaid-nav-accent);
 }
 
-.plaid-mobile-submenu-link-description {
-	display: block;
-	font-size: 13px;
-	color: var(--plaid-nav-text-secondary);
-	margin-top: 2px;
-	line-height: 1.4;
-}
-
-/* Mobile Menu Footer */
 .plaid-mobile-footer {
 	padding: 24px 32px;
 	border-top: 1px solid var(--plaid-nav-border);
@@ -729,175 +830,105 @@ Tags: custom-menu, mega-menu, accessibility-ready
 
 .plaid-mobile-footer .plaid-nav-button {
 	width: 100%;
-	justify-content: center;
 }
 
 /* ============================================
-   Content Container
+   ACCESSIBILITY
    ============================================ */
-body {
-	margin: 0;
-	padding: 0;
-}
-
-.plaid-header ~ * {
-	padding-top: var(--plaid-nav-height);
-}
-
-.site-main {
-	min-height: calc(100vh - var(--plaid-nav-height));
-}
-
-.container {
-	max-width: var(--plaid-nav-container-max-width);
-	margin: 0 auto;
-	padding: 32px;
-}
-
-/* Post List Styles */
-.post-list {
-	display: grid;
-	gap: 32px;
-}
-
-.post-list article {
-	padding: 24px;
-	background: #f9f9f9;
-	border-radius: 8px;
-	transition: background-color 0.2s ease;
-}
-
-.post-list article:hover {
-	background: #f0f0f0;
-}
-
-.entry-title {
-	margin: 0 0 16px 0;
-	font-size: 28px;
-	font-weight: 600;
-	color: var(--plaid-nav-text);
-}
-
-.entry-title a {
-	color: var(--plaid-nav-text);
-	transition: color 0.2s ease;
-}
-
-.entry-title a:hover {
-	color: var(--plaid-nav-accent);
-}
-
-.entry-content {
-	line-height: 1.6;
-	color: var(--plaid-nav-text-secondary);
-}
-
-.entry-meta {
-	margin-bottom: 16px;
-	color: var(--plaid-nav-text-secondary);
+.plaid-skip-link {
+	position: absolute;
+	top: -100px;
+	left: 0;
+	background: var(--plaid-nav-accent);
+	color: #ffffff;
+	padding: 12px 24px;
+	z-index: 10000;
+	transition: top var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
 	font-size: 14px;
+	font-weight: var(--plaid-nav-weight-medium);
+}
+
+.plaid-skip-link:focus {
+	top: 0;
 }
 
 /* ============================================
-   Responsive Adjustments
+   RESPONSIVE
    ============================================ */
-@media (max-width: 1279px) {
-	:root {
-		--plaid-nav-container-padding: 24px;
-		--plaid-nav-item-gap: 16px;
+@media (max-width: 767px) {
+	.plaid-nav-desktop {
+		display: none !important;
 	}
 
-	.plaid-mega-menu {
-		max-width: 800px;
-	}
-
-	.plaid-mega-menu--4-columns {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media (max-width: 1023px) {
-	.plaid-mega-menu {
-		display: none;
-	}
-}
-
-/* ============================================
-   Accessibility
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-	.plaid-mega-menu,
-	.plaid-mobile-overlay,
-	.plaid-nav-arrow,
-	.plaid-mobile-toggle-bar,
-	.plaid-mobile-toggle-btn svg {
-		transition: none;
-	}
-}
-
-@media (prefers-contrast: high) {
-	.plaid-nav-link:hover,
-	.plaid-mega-menu-link:hover,
-	.plaid-mobile-link:hover {
-		outline: 2px solid currentColor;
-		outline-offset: 2px;
-	}
-
-	.plaid-nav-button:focus-visible,
-	.plaid-nav-link:focus-visible {
-		outline-width: 3px;
-	}
-}
-
-/* ============================================
-   RTL Support
-   ============================================ */
-.rtl .plaid-mega-menu {
-	left: auto;
-	right: 50%;
-	transform: translateX(50%) translateY(-8px);
-}
-
-.rtl .plaid-mega-menu.active {
-	transform: translateX(50%) translateY(0);
-}
-
-.rtl .plaid-mobile-overlay {
-	transform: translateX(-100%);
-}
-
-.rtl .plaid-mobile-overlay.active {
-	transform: translateX(0);
-}
-
-/* ============================================
-   Print Styles
-   ============================================ */
-@media print {
-	.plaid-header {
-		position: static;
-		box-shadow: none;
-	}
-
-	.plaid-nav,
 	.plaid-nav-cta {
 		display: none;
 	}
 
-	.plaid-mobile-toggle,
-	.plaid-mobile-overlay {
-		display: none;
+	.plaid-header-container {
+		padding: 0 16px;
+		gap: 16px;
+	}
+}
+
+@media (min-width: 768px) {
+	.plaid-mobile-toggle {
+		display: none !important;
+	}
+
+	.plaid-mobile-overlay,
+	.plaid-mobile-backdrop {
+		display: none !important;
+	}
+}
+
+@media (max-width: 1279px) {
+	.plaid-header-container {
+		padding: 12px 24px;
+	}
+
+	.plaid-mega-menu {
+		max-width: 900px;
 	}
 }
 
 /* ============================================
-   WordPress Admin Bar Compatibility
+   PREFERS REDUCED MOTION
    ============================================ */
+@media (prefers-reduced-motion: reduce) {
+	.plaid-nav,
+	.plaid-nav *,
+	.plaid-nav *::before,
+	.plaid-nav *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* ============================================
+   BODY PADDING
+   ============================================ */
+body {
+	padding-top: 105px;
+	margin: 0;
+}
+
+/* ============================================
+   WORDPRESS ADMIN BAR COMPATIBILITY
+   ============================================ */
+body.admin-bar {
+	padding-top: 137px;
+}
+
 body.admin-bar .plaid-header {
 	top: 32px;
 }
 
 @media (max-width: 782px) {
+	body.admin-bar {
+		padding-top: 151px;
+	}
 	body.admin-bar .plaid-header {
 		top: 46px;
 	}

@@ -1,128 +1,185 @@
 /**
  * Plaid Navigation JavaScript
- *
- * Handles all navigation interactions including:
- * - Desktop mega menus with hover/click
- * - Mobile menu toggle and submenus
- * - Keyboard navigation
- * - Accessibility features
- * - Scroll effects
+ * Exact replication of Plaid.com navigation behavior
  *
  * @package PlaidNavChild
+ * @version 2.0.0
  */
 
 (function() {
 	'use strict';
 
-	const Navigation = {
+	/**
+	 * Plaid Navigation Controller
+	 * Based on comprehensive analysis of plaid.com navigation behavior
+	 */
+	const PlaidNavigation = {
+		// Configuration extracted from Plaid.com
 		config: {
-			hoverDelay: 180,
-			closeDelay: 320,
-			scrollThreshold: 50,
-			breakpoint: 1024,
+			// Timing values
+			hoverDelay: 150,
+			closeDelay: 300,
+			animationDuration: 200,
+
+			// Breakpoints
+			desktopBreakpoint: 768,
+
+			// Selectors matching Plaid.com structure
 			selectors: {
 				header: '.plaid-header',
-				navDesktop: '.plaid-nav-desktop',
+				container: '.plaid-header-container',
+				desktopNav: '.plaid-nav-desktop',
+				mobileNav: '.plaid-nav-mobile',
+				mobileToggle: '.plaid-mobile-toggle',
+				mobileOverlay: '.plaid-mobile-overlay',
+				mobileBackdrop: '.plaid-mobile-backdrop',
+				navList: '.plaid-nav-list',
 				navItem: '.plaid-nav-item',
 				navLink: '.plaid-nav-link',
+				navArrow: '.plaid-nav-arrow',
+				dropdown: '.plaid-dropdown',
 				megaMenu: '.plaid-mega-menu',
-				menuToggle: '[data-plaid-menu-toggle]',
-				mobileToggle: '[data-plaid-mobile-toggle]',
-				mobileOverlay: '[data-plaid-mobile-overlay]',
-				mobileBackdrop: '[data-plaid-mobile-backdrop]',
-				mobileToggleBtn: '[data-plaid-mobile-toggle-btn]',
-				mobileSubmenu: '[data-plaid-mobile-submenu]',
+				mobileToggleBtn: '.plaid-mobile-toggle-btn',
+				mobileSubmenu: '.plaid-mobile-submenu'
 			}
 		},
 
+		// State management
 		state: {
 			currentOpenMenu: null,
 			hoverTimer: null,
 			closeTimer: null,
-			isMobileMenuOpen: false,
-			lastScrollPosition: 0,
-			isHeaderScrolled: false,
+			isMobileOpen: false,
+			scrollY: 0,
+			isScrolled: false
 		},
 
+		/**
+		 * Initialize the navigation system
+		 */
 		init() {
 			this.cacheElements();
 			this.bindEvents();
 			this.initScrollEffects();
 			this.initKeyboardNavigation();
 			this.initAccessibility();
+			this.handleResize();
 		},
 
+		/**
+		 * Cache DOM elements
+		 */
 		cacheElements() {
 			this.header = document.querySelector(this.config.selectors.header);
-			this.navDesktop = document.querySelector(this.config.selectors.navDesktop);
-			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
+			this.desktopNav = document.querySelector(this.config.selectors.desktopNav);
+			this.mobileNav = document.querySelector(this.config.selectors.mobileNav);
 			this.mobileToggle = document.querySelector(this.config.selectors.mobileToggle);
 			this.mobileOverlay = document.querySelector(this.config.selectors.mobileOverlay);
 			this.mobileBackdrop = document.querySelector(this.config.selectors.mobileBackdrop);
+			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
 			this.mobileToggleBtns = document.querySelectorAll(this.config.selectors.mobileToggleBtn);
 		},
 
+		/**
+		 * Bind all event listeners
+		 */
 		bindEvents() {
 			this.bindDesktopEvents();
 			this.bindMobileEvents();
 			this.bindScrollEvents();
+			this.bindResizeEvents();
 		},
 
+		/**
+		 * Desktop navigation events
+		 */
 		bindDesktopEvents() {
-			if (!this.navDesktop) return;
+			if (!this.desktopNav) return;
 
 			this.navItems.forEach(item => {
 				const link = item.querySelector(this.config.selectors.navLink);
+				const dropdown = item.querySelector(this.config.selectors.dropdown);
 				const megaMenu = item.querySelector(this.config.selectors.megaMenu);
+				const menu = dropdown || megaMenu;
 
-				if (!megaMenu) return;
+				if (!menu) return;
 
-				link.addEventListener('mouseenter', (e) => this.handleMenuEnter(e, item));
-				link.addEventListener('mouseleave', (e) => this.handleMenuLeave(e, item));
-				link.addEventListener('focus', (e) => this.handleMenuFocus(e, item));
+				// Hover enter
+				link.addEventListener('mouseenter', (e) => {
+					this.handleMenuEnter(e, item);
+				});
 
-				if (link.getAttribute('data-plaid-menu-toggle')) {
-					link.addEventListener('click', (e) => this.handleMenuClick(e, item));
-				}
+				// Hover leave
+				link.addEventListener('mouseleave', (e) => {
+					this.handleMenuLeave(e, item);
+				});
+
+				// Menu hover enter (prevent close)
+				menu.addEventListener('mouseenter', () => {
+					clearTimeout(this.state.closeTimer);
+				});
+
+				// Menu hover leave
+				menu.addEventListener('mouseleave', () => {
+					this.startCloseTimer(item);
+				});
+
+				// Focus
+				link.addEventListener('focus', () => {
+					this.handleMenuFocus(item);
+				});
+
+				// Click for touch devices
+				link.addEventListener('click', (e) => {
+					this.handleMenuClick(e, item);
+				});
 			});
 
+			// Click outside to close
 			document.addEventListener('click', (e) => {
-				if (this.state.currentOpenMenu && !e.target.closest(this.config.selectors.navDesktop)) {
-					this.closeAllMenus();
+				if (this.state.currentOpenMenu && !e.target.closest(this.config.selectors.desktopNav)) {
+					this.closeMenu(this.state.currentOpenMenu);
 				}
 			});
 		},
 
+		/**
+		 * Mobile navigation events
+		 */
 		bindMobileEvents() {
 			if (!this.mobileToggle) return;
 
-			this.mobileToggle.addEventListener('click', () => this.toggleMobileMenu());
-
-			if (this.mobileBackdrop) {
-				this.mobileBackdrop.addEventListener('click', () => this.closeMobileMenu());
-			}
-
-			this.mobileToggleBtns.forEach(btn => {
-				btn.addEventListener('click', (e) => this.toggleMobileSubmenu(e));
+			// Toggle mobile menu
+			this.mobileToggle.addEventListener('click', () => {
+				this.toggleMobileMenu();
 			});
 
-			const mobileLinks = this.mobileOverlay?.querySelectorAll('a');
-			mobileLinks?.forEach(link => {
-				link.addEventListener('click', () => {
-					if (window.innerWidth < this.config.breakpoint) {
-						setTimeout(() => this.closeMobileMenu(), 100);
-					}
+			// Backdrop click to close
+			if (this.mobileBackdrop) {
+				this.mobileBackdrop.addEventListener('click', () => {
+					this.closeMobileMenu();
+				});
+			}
+
+			// Mobile submenu toggles
+			this.mobileToggleBtns.forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					this.toggleMobileSubmenu(e);
 				});
 			});
 
+			// Escape key to close mobile menu
 			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape' && this.state.isMobileMenuOpen) {
+				if (e.key === 'Escape' && this.state.isMobileOpen) {
 					this.closeMobileMenu();
 					this.mobileToggle?.focus();
 				}
 			});
 		},
 
+		/**
+		 * Scroll events
+		 */
 		bindScrollEvents() {
 			let ticking = false;
 
@@ -137,22 +194,24 @@
 			}, { passive: true });
 		},
 
-		handleScroll() {
-			const scrollY = window.scrollY || window.pageYOffset;
-
-			if (scrollY > this.config.selectors.scrollThreshold && !this.state.isHeaderScrolled) {
-				this.header?.classList.add('scrolled');
-				this.state.isHeaderScrolled = true;
-			} else if (scrollY <= this.config.selectors.scrollThreshold && this.state.isHeaderScrolled) {
-				this.header?.classList.remove('scrolled');
-				this.state.isHeaderScrolled = false;
-			}
-
-			this.state.lastScrollPosition = scrollY;
+		/**
+		 * Resize events
+		 */
+		bindResizeEvents() {
+			let resizeTimer;
+			window.addEventListener('resize', () => {
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(() => {
+					this.handleResize();
+				}, 250);
+			});
 		},
 
+		/**
+		 * Handle menu enter (hover)
+		 */
 		handleMenuEnter(e, item) {
-			if (window.innerWidth < this.config.breakpoint) return;
+			if (window.innerWidth < this.config.desktopBreakpoint) return;
 
 			clearTimeout(this.state.closeTimer);
 
@@ -161,24 +220,21 @@
 			}, this.config.hoverDelay);
 		},
 
+		/**
+		 * Handle menu leave (hover)
+		 */
 		handleMenuLeave(e, item) {
-			if (window.innerWidth < this.config.breakpoint) return;
+			if (window.innerWidth < this.config.desktopBreakpoint) return;
 
 			clearTimeout(this.state.hoverTimer);
-
-			const megaMenu = item.querySelector(this.config.selectors.megaMenu);
-			if (!megaMenu) return;
-
-			this.state.closeTimer = setTimeout(() => {
-				const isStillOver = megaMenu.matches(':hover') || item.matches(':hover');
-				if (!isStillOver) {
-					this.closeMenu(item);
-				}
-			}, this.config.closeDelay);
+			this.startCloseTimer(item);
 		},
 
-		handleMenuFocus(e, item) {
-			if (window.innerWidth < this.config.breakpoint) return;
+		/**
+		 * Handle menu focus
+		 */
+		handleMenuFocus(item) {
+			if (window.innerWidth < this.config.desktopBreakpoint) return;
 
 			if (this.state.currentOpenMenu && this.state.currentOpenMenu !== item) {
 				this.closeMenu(this.state.currentOpenMenu);
@@ -187,13 +243,26 @@
 			this.openMenu(item);
 		},
 
+		/**
+		 * Handle menu click (for touch devices)
+		 */
 		handleMenuClick(e, item) {
-			if (window.innerWidth < this.config.breakpoint) {
-				e.preventDefault();
-				this.toggleMenu(item);
+			const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+			if (isTouch && window.innerWidth >= this.config.desktopBreakpoint) {
+				const link = item.querySelector(this.config.selectors.navLink);
+				const isExpanded = link.getAttribute('aria-expanded') === 'true';
+
+				if (!isExpanded) {
+					e.preventDefault();
+					this.openMenu(item);
+				}
 			}
 		},
 
+		/**
+		 * Open menu
+		 */
 		openMenu(item) {
 			if (this.state.currentOpenMenu === item) return;
 
@@ -202,22 +271,29 @@
 			}
 
 			const link = item.querySelector(this.config.selectors.navLink);
+			const dropdown = item.querySelector(this.config.selectors.dropdown);
 			const megaMenu = item.querySelector(this.config.selectors.megaMenu);
+			const menu = dropdown || megaMenu;
 
-			if (link && megaMenu) {
+			if (link && menu) {
 				link.setAttribute('aria-expanded', 'true');
-				megaMenu.classList.add('active');
+				menu.classList.add('active');
 				this.state.currentOpenMenu = item;
 			}
 		},
 
+		/**
+		 * Close menu
+		 */
 		closeMenu(item) {
 			const link = item.querySelector(this.config.selectors.navLink);
+			const dropdown = item.querySelector(this.config.selectors.dropdown);
 			const megaMenu = item.querySelector(this.config.selectors.megaMenu);
+			const menu = dropdown || megaMenu;
 
-			if (link && megaMenu) {
+			if (link && menu) {
 				link.setAttribute('aria-expanded', 'false');
-				megaMenu.classList.remove('active');
+				menu.classList.remove('active');
 			}
 
 			if (this.state.currentOpenMenu === item) {
@@ -225,49 +301,59 @@
 			}
 		},
 
-		closeAllMenus() {
-			this.navItems.forEach(item => this.closeMenu(item));
-		},
-
-		toggleMenu(item) {
-			if (this.state.currentOpenMenu === item) {
+		/**
+		 * Start close timer
+		 */
+		startCloseTimer(item) {
+			this.state.closeTimer = setTimeout(() => {
 				this.closeMenu(item);
-			} else {
-				this.openMenu(item);
-			}
+			}, this.config.closeDelay);
 		},
 
+		/**
+		 * Toggle mobile menu
+		 */
 		toggleMobileMenu() {
-			if (this.state.isMobileMenuOpen) {
+			if (this.state.isMobileOpen) {
 				this.closeMobileMenu();
 			} else {
 				this.openMobileMenu();
 			}
 		},
 
+		/**
+		 * Open mobile menu
+		 */
 		openMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'true');
 			this.mobileOverlay?.classList.add('active');
 			this.mobileBackdrop?.classList.add('active');
 			this.header?.classList.add('mobile-menu-active');
 			document.body.style.overflow = 'hidden';
-			this.state.isMobileMenuOpen = true;
+			this.state.isMobileOpen = true;
 
+			// Focus first menu item
 			const firstLink = this.mobileOverlay?.querySelector('a');
 			firstLink?.focus();
 		},
 
+		/**
+		 * Close mobile menu
+		 */
 		closeMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'false');
-			this.mobileOverlay?.classList.remove('active');
+				this.mobileOverlay?.classList.remove('active');
 			this.mobileBackdrop?.classList.remove('active');
 			this.header?.classList.remove('mobile-menu-active');
 			document.body.style.overflow = '';
-			this.state.isMobileMenuOpen = false;
+			this.state.isMobileOpen = false;
 
 			this.closeAllMobileSubmenus();
 		},
 
+		/**
+		 * Toggle mobile submenu
+		 */
 		toggleMobileSubmenu(e) {
 			const btn = e.currentTarget;
 			const targetId = btn.getAttribute('data-target');
@@ -284,6 +370,9 @@
 			}
 		},
 
+		/**
+		 * Open mobile submenu
+		 */
 		openMobileSubmenu(btn, submenu) {
 			btn.setAttribute('aria-expanded', 'true');
 			submenu.classList.add('active');
@@ -292,6 +381,9 @@
 			parentItem?.classList.add('submenu-open');
 		},
 
+		/**
+		 * Close mobile submenu
+		 */
 		closeMobileSubmenu(btn, submenu) {
 			btn.setAttribute('aria-expanded', 'false');
 			submenu.classList.remove('active');
@@ -300,6 +392,9 @@
 			parentItem?.classList.remove('submenu-open');
 		},
 
+		/**
+		 * Close all mobile submenus
+		 */
 		closeAllMobileSubmenus() {
 			this.mobileToggleBtns.forEach(btn => {
 				const targetId = btn.getAttribute('data-target');
@@ -310,33 +405,82 @@
 			});
 		},
 
+		/**
+		 * Handle scroll
+		 */
+		handleScroll() {
+			const scrollY = window.scrollY || window.pageYOffset;
+
+			if (scrollY > 10 && !this.state.isScrolled) {
+				this.header?.classList.add('scrolled');
+				this.state.isScrolled = true;
+			} else if (scrollY <= 10 && this.state.isScrolled) {
+				this.header?.classList.remove('scrolled');
+				this.state.isScrolled = false;
+			}
+		},
+
+		/**
+		 * Handle resize
+		 */
+		handleResize() {
+			const isDesktop = window.innerWidth >= this.config.desktopBreakpoint;
+
+			// Close mobile menu when switching to desktop
+			if (isDesktop && this.state.isMobileOpen) {
+				this.closeMobileMenu();
+			}
+
+			// Close all menus when switching breakpoints
+			if (this.state.currentOpenMenu) {
+				this.closeMenu(this.state.currentOpenMenu);
+			}
+		},
+
+		/**
+		 * Initialize scroll effects
+		 */
 		initScrollEffects() {
 			this.handleScroll();
 		},
 
+		/**
+		 * Initialize keyboard navigation
+		 */
 		initKeyboardNavigation() {
 			document.addEventListener('keydown', (e) => {
+				// Escape to close menus
 				if (e.key === 'Escape') {
-					this.closeAllMenus();
-					if (this.state.isMobileMenuOpen) {
+					if (this.state.currentOpenMenu) {
+						this.closeMenu(this.state.currentOpenMenu);
+					}
+					if (this.state.isMobileOpen) {
 						this.closeMobileMenu();
+						this.mobileToggle?.focus();
 					}
 				}
 
-				if (e.key === 'Tab') {
+				// Tab navigation in dropdowns
+				if (e.key === 'Tab' && this.state.currentOpenMenu) {
 					this.handleTabNavigation(e);
 				}
 			});
 		},
 
+		/**
+		 * Handle tab navigation in open menu
+		 */
 		handleTabNavigation(e) {
-			if (!this.state.currentOpenMenu) return;
+			const currentMenu = this.state.currentOpenMenu;
+			if (!currentMenu) return;
 
-			const megaMenu = this.state.currentOpenMenu.querySelector(this.config.selectors.megaMenu);
-			if (!megaMenu) return;
+			const dropdown = currentMenu.querySelector(this.config.selectors.dropdown) ||
+			                currentMenu.querySelector(this.config.selectors.megaMenu);
 
-			const focusableElements = megaMenu.querySelectorAll(
-				'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+			if (!dropdown) return;
+
+			const focusableElements = dropdown.querySelectorAll(
+				'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 			);
 
 			const firstElement = focusableElements[0];
@@ -351,57 +495,62 @@
 			}
 		},
 
+		/**
+		 * Initialize accessibility
+		 */
 		initAccessibility() {
 			this.setupAriaAttributes();
-			this.setupFocusManagement();
 		},
 
+		/**
+		 * Setup ARIA attributes
+		 */
 		setupAriaAttributes() {
 			this.navItems.forEach(item => {
 				const link = item.querySelector(this.config.selectors.navLink);
+				const dropdown = item.querySelector(this.config.selectors.dropdown);
 				const megaMenu = item.querySelector(this.config.selectors.megaMenu);
+				const menu = dropdown || megaMenu;
 
-				if (megaMenu) {
+				if (menu) {
 					link?.setAttribute('aria-haspopup', 'true');
 					link?.setAttribute('aria-expanded', 'false');
 				}
 			});
 		},
 
-		setupFocusManagement() {
-			const navContainer = document.querySelector(this.config.selectors.navDesktop);
-			if (!navContainer) return;
-
-			navContainer.addEventListener('focusin', (e) => {
-				if (!e.target.closest(this.config.selectors.navDesktop)) {
-					this.closeAllMenus();
-				}
-			});
-		},
-
+		/**
+		 * Destroy navigation instance
+		 */
 		destroy() {
 			this.closeAllMenus();
 			this.closeMobileMenu();
+		},
 
-			this.navItems.forEach(item => {
-				const link = item.querySelector(this.config.selectors.navLink);
-				link?.removeEventListener('mouseenter', this.handleMenuEnter);
-				link?.removeEventListener('mouseleave', this.handleMenuLeave);
-				link?.removeEventListener('focus', this.handleMenuFocus);
-			});
-
-			this.mobileToggle?.removeEventListener('click', this.toggleMobileMenu);
-			this.mobileBackdrop?.removeEventListener('click', this.closeMobileMenu);
+		/**
+		 * Close all menus
+		 */
+		closeAllMenus() {
+			if (this.state.currentOpenMenu) {
+				this.closeMenu(this.state.currentOpenMenu);
+			}
 		}
 	};
 
-	document.addEventListener('DOMContentLoaded', () => {
-		Navigation.init();
-		window.PlaidNavigation = Navigation;
-	});
+	// Initialize navigation when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => {
+			PlaidNavigation.init();
+			window.PlaidNavigation = PlaidNavigation;
+		});
+	} else {
+		PlaidNavigation.init();
+		window.PlaidNavigation = PlaidNavigation;
+	}
 
+	// Re-initialize after AJAX/dynamic content
 	document.addEventListener('headerUpdated', () => {
-		Navigation.init();
+		PlaidNavigation.init();
 	});
 
 })();

@@ -1,11 +1,10 @@
 <?php
 /**
- * Plaid Navigation Walker
- *
- * Custom walker for generating desktop navigation with mega menu support
+ * Plaid Navigation Walker - Desktop
+ * Generates exact HTML structure matching Plaid.com navigation
  *
  * @package PlaidNavChild
- * @since 1.0.0
+ * @version 2.0.0
  */
 
 defined('ABSPATH') || exit;
@@ -18,24 +17,34 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 	private $current_item = null;
 
 	/**
-	 * Child items cache
-	 */
-	private $children_cache = array();
-
-	/**
 	 * Starts the list before the elements are added.
 	 */
 	public function start_lvl(&$output, $depth = 0, $args = array()) {
-		if ($depth === 0) {
-			// This is a mega menu - determine column count
-			$child_count = $this->get_child_count($this->current_item);
-			$columns = $this->get_column_count($child_count);
+		// Use the current_item stored from start_el
+		// For depth > 0, we need to get the parent item
 
-			$output .= '<div class="plaid-mega-menu plaid-mega-menu--multi-column plaid-mega-menu--' . $columns . '-columns" role="group" aria-label="' . esc_attr__('Submenu', 'plaid-nav-child') . '">';
-			$output .= '<div class="plaid-mega-menu-inner">';
+		if ($depth === 0) {
+			// Determine menu type based on child count
+			$child_count = $this->current_item ? $this->get_child_count($this->current_item) : 0;
+
+			if ($child_count <= 6) {
+				// Simple dropdown for few items
+				$output .= '<div class="plaid-dropdown" role="menu">';
+				$output .= '<div class="plaid-dropdown-inner">';
+			} else {
+				// Mega menu for many items
+				$columns = $this->get_column_count($child_count);
+				$output .= '<div class="plaid-mega-menu plaid-mega-menu--' . $columns . '-columns" role="menu">';
+				$output .= '<div class="plaid-mega-menu-inner">';
+			}
 		} else {
-			// Regular submenu within mega menu
-			$output .= '<ul class="plaid-mega-menu-list">';
+			// Section list in mega menu - use parent item title
+			$parent_title = $this->current_item ? esc_html($this->current_item->title) : '';
+			$output .= '<div class="plaid-mega-section">';
+			if ($parent_title) {
+				$output .= '<h3 class="plaid-mega-section-title">' . $parent_title . '</h3>';
+			}
+			$output .= '<div class="plaid-mega-section-list">';
 		}
 	}
 
@@ -46,7 +55,7 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 		if ($depth === 0) {
 			$output .= '</div></div>';
 		} else {
-			$output .= '</ul>';
+			$output .= '</div></div>';
 		}
 	}
 
@@ -66,7 +75,6 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 			$classes[] = 'has-children';
 		}
 
-		// Check if current page
 		$is_current = in_array('current-menu-item', $classes) ||
 		             in_array('current-menu-parent', $classes) ||
 		             in_array('current-menu-ancestor', $classes);
@@ -78,22 +86,31 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
 		$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
 
-		$item_id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth);
-		$item_id = $item_id ? ' id="' . esc_attr($item_id) . '"' : '';
+		$item_id = 'menu-item-' . $item->ID;
+		$item_id = apply_filters('nav_menu_item_id', $item_id, $item, $args, $depth);
+		$item_id_attr = $item_id ? ' id="' . esc_attr($item_id) . '"' : '';
 
-		$output .= '<li' . $item_id . $class_names . '>';
+		if ($depth === 0) {
+			$output .= '<li' . $item_id_attr . $class_names . '>';
+		} else {
+			$output .= '<div class="plaid-mega-item">';
+		}
 
 		$atts = array();
 		$atts['title'] = !empty($item->attr_title) ? $item->attr_title : '';
 		$atts['target'] = !empty($item->target) ? $item->target : '';
 		$atts['rel'] = !empty($item->xfn) ? $item->xfn : '';
 		$atts['href'] = !empty($item->url) ? $item->url : '';
-		$atts['class'] = 'plaid-nav-link';
+
+		if ($depth === 0) {
+			$atts['class'] = 'plaid-nav-link';
+		} else {
+			$atts['class'] = 'plaid-mega-link';
+		}
 
 		if ($has_children && $depth === 0) {
 			$atts['aria-haspopup'] = 'true';
 			$atts['aria-expanded'] = 'false';
-			$atts['data-plaid-menu-toggle'] = 'true';
 		}
 
 		$atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args, $depth);
@@ -107,23 +124,26 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 		}
 
 		$item_output = isset($args->before) ? $args->before : '';
-		$item_output .= '<a' . $attributes . '>';
 
-		$title = apply_filters('the_title', $item->title, $item->ID);
-		$title = esc_html($title);
+		if ($depth === 0) {
+			$item_output .= '<a' . $attributes . '>';
+			$item_output .= '<span class="plaid-nav-link-text">' . esc_html($item->title) . '</span>';
 
-		$item_output .= '<span class="plaid-nav-link-text">' . $title . '</span>';
+			if ($has_children) {
+				$item_output .= $this->get_arrow_icon();
+			}
 
-		if ($has_children) {
-			$item_output .= $this->get_arrow_icon();
-		}
+			$item_output .= '</a>';
+		} else {
+			// Mega menu item
+			$item_output .= '<a' . $attributes . '>';
+			$item_output .= '<h4 class="plaid-mega-link-title">' . esc_html($item->title) . '</h4>';
 
-		$item_output .= '</a>';
+			if ($has_description) {
+				$item_output .= '<p class="plaid-mega-link-description">' . esc_html($item->description) . '</p>';
+			}
 
-		// Add description for items with descriptions (depth > 0)
-		if ($has_description && $depth > 0) {
-			$description = esc_html($item->description);
-			$item_output .= '<span class="plaid-mega-menu-link-description">' . $description . '</span>';
+			$item_output .= '</a>';
 		}
 
 		$item_output .= isset($args->after) ? $args->after : '';
@@ -135,16 +155,20 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 	 * Ends the element output, if needed.
 	 */
 	public function end_el(&$output, $item, $depth = 0, $args = array()) {
-		$output .= '</li>';
+		if ($depth === 0) {
+			$output .= '</li>';
+		} else {
+			$output .= '</div>';
+		}
 	}
 
 	/**
 	 * Get the arrow icon for dropdown
 	 */
 	private function get_arrow_icon() {
-		return '<span class="plaid-nav-arrow">
-			<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+		return '<span class="plaid-nav-arrow" aria-hidden="true">
+			<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 		</span>';
 	}
@@ -153,10 +177,6 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 	 * Get child count for menu item
 	 */
 	private function get_child_count($item) {
-		if (isset($this->children_cache[$item->ID])) {
-			return $this->children_cache[$item->ID];
-		}
-
 		global $wpdb;
 
 		$count = $wpdb->get_var($wpdb->prepare(
@@ -167,7 +187,6 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 			$item->ID
 		));
 
-		$this->children_cache[$item->ID] = (int) $count;
 		return (int) $count;
 	}
 
@@ -176,7 +195,7 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 	 */
 	private function get_column_count($child_count) {
 		if ($child_count <= 3) {
-			return '1';
+			return '2';
 		} elseif ($child_count <= 6) {
 			return '2';
 		} elseif ($child_count <= 9) {
@@ -185,5 +204,4 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 			return '4';
 		}
 	}
-
 }

@@ -1,11 +1,10 @@
 <?php
 /**
  * Plaid Mobile Navigation Walker
- *
- * Custom walker for generating mobile navigation with accordion submenus
+ * Generates mobile navigation matching Plaid.com mobile experience
  *
  * @package PlaidNavChild
- * @since 1.0.0
+ * @version 2.0.0
  */
 
 defined('ABSPATH') || exit;
@@ -17,10 +16,10 @@ class Plaid_Mobile_Walker extends Walker_Nav_Menu {
 	 */
 	public function start_lvl(&$output, $depth = 0, $args = array()) {
 		if ($depth === 0) {
-			$submenu_id = 'mobile-submenu-' . uniqid();
-			$output .= '<div class="plaid-mobile-submenu" id="' . esc_attr($submenu_id) . '" data-plaid-mobile-submenu>';
+			$submenu_id = 'mobile-submenu-' . wp_rand(1000, 9999);
+			$output .= '<div class="plaid-mobile-submenu" id="' . esc_attr($submenu_id) . '" data-mobile-submenu>';
 		} else {
-			$output .= '<ul class="plaid-mobile-list">';
+			$output .= '<div class="plaid-mobile-submenu-list">';
 		}
 	}
 
@@ -31,7 +30,7 @@ class Plaid_Mobile_Walker extends Walker_Nav_Menu {
 		if ($depth === 0) {
 			$output .= '</div>';
 		} else {
-			$output .= '</ul>';
+			$output .= '</div>';
 		}
 	}
 
@@ -97,7 +96,7 @@ class Plaid_Mobile_Walker extends Walker_Nav_Menu {
 			// Add toggle button for items with children
 			if ($has_children) {
 				$submenu_id = 'mobile-submenu-' . $item->ID;
-				$item_output .= '<button type="button" class="plaid-mobile-toggle-btn" aria-expanded="' . ($is_active ? 'true' : 'false') . '" aria-controls="' . esc_attr($submenu_id) . '" data-plaid-mobile-toggle-btn data-target="' . esc_attr($submenu_id) . '">';
+				$item_output .= '<button type="button" class="plaid-mobile-toggle-btn" aria-expanded="' . ($is_active ? 'true' : 'false') . '" aria-controls="' . esc_attr($submenu_id) . '" data-mobile-toggle-btn data-target="' . esc_attr($submenu_id) . '">';
 				$item_output .= $this->get_arrow_icon();
 				$item_output .= '</button>';
 			}
@@ -134,8 +133,8 @@ class Plaid_Mobile_Walker extends Walker_Nav_Menu {
 	 * Get the arrow icon for accordion
 	 */
 	private function get_arrow_icon() {
-		return '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-			<path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+		return '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+			<path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 		</svg>';
 	}
 }
