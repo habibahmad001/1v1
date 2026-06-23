@@ -1080,21 +1080,25 @@ body {
 }
 
 @media (min-width: 768px) {
-	.plaid-mobile-toggle {
-		display: none !important;
-	}
-
+	/* Completely hide mobile navigation on desktop */
+	.plaid-mobile-toggle,
 	.plaid-mobile-overlay,
-	.plaid-mobile-backdrop {
+	.plaid-mobile-backdrop,
+	.plaid-mobile-menu-inner,
+	.plaid-mobile-list,
+	.plaid-mobile-list *,
+	#plaid-mobile-nav,
+	#plaid-mobile-nav * {
 		display: none !important;
+		visibility: hidden !important;
+		opacity: 0 !important;
+		position: absolute !important;
+		left: -9999px !important;
 	}
 
-	/* Hide all mobile menu items on desktop */
-	.plaid-mobile-item,
-	.plaid-mobile-link-wrapper,
-	.plaid-mobile-link,
-	.plaid-mobile-submenu {
-		display: none !important;
+	/* Show ghost button on desktop */
+	.plaid-nav-button--ghost {
+		display: inline-flex !important;
 	}
 }
 
