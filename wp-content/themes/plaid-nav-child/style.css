@@ -1088,6 +1088,14 @@ body {
 	.plaid-mobile-backdrop {
 		display: none !important;
 	}
+
+	/* Hide all mobile menu items on desktop */
+	.plaid-mobile-item,
+	.plaid-mobile-link-wrapper,
+	.plaid-mobile-link,
+	.plaid-mobile-submenu {
+		display: none !important;
+	}
 }
 
 @media (max-width: 1279px) {
