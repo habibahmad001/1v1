@@ -238,9 +238,60 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 	}
 
 	/**
-	 * Get icon for menu item based on title/URL
+	 * Get icon for menu item based on CSS classes, then title
 	 */
 	private function get_item_icon($item) {
+		$icon_class = ($this->current_menu_type === 'dropdown') ? 'plaid-dropdown-link-icon' : 'plaid-mega-link-icon';
+
+		// First, check if Font Awesome icon class is present in CSS classes
+		$classes = empty($item->classes) ? array() : (array) $item->classes;
+
+		// Look for Font Awesome icon classes (fa-*, fas fa-*, far fa-*, fab fa-*, etc.)
+		$fa_icon_class = null;
+		$fa_style_prefix = 'fa-solid'; // Default to solid if not specified
+
+		foreach ($classes as $class) {
+			$class_lower = strtolower(trim($class));
+
+			// Check for style prefixes
+			if (in_array($class_lower, array('fas', 'fa-solid'))) {
+				$fa_style_prefix = 'fa-solid';
+				continue;
+			}
+			if (in_array($class_lower, array('far', 'fa-regular'))) {
+				$fa_style_prefix = 'fa-regular';
+				continue;
+			}
+			if (in_array($class_lower, array('fab', 'fa-brands'))) {
+				$fa_style_prefix = 'fa-brands';
+				continue;
+			}
+			if (in_array($class_lower, array('fal', 'fa-light'))) {
+				$fa_style_prefix = 'fa-light';
+				continue;
+			}
+			if (in_array($class_lower, array('fad', 'fa-duotone'))) {
+				$fa_style_prefix = 'fa-duotone';
+				continue;
+			}
+			if (in_array($class_lower, array('fass', 'fa-sharp'))) {
+				$fa_style_prefix = 'fa-sharp';
+				continue;
+			}
+
+			// Check for icon class (starts with fa-)
+			if (strpos($class_lower, 'fa-') === 0 && $class_lower !== 'fa-solid' && $class_lower !== 'fa-regular' && $class_lower !== 'fa-brands' && $class_lower !== 'fa-light' && $class_lower !== 'fa-duotone' && $class_lower !== 'fa-sharp') {
+				$fa_icon_class = $class_lower;
+				break;
+			}
+		}
+
+		// If Font Awesome icon class found, use it
+		if ($fa_icon_class) {
+			return '<span class="' . $icon_class . '"><i class="' . $fa_style_prefix . ' ' . $fa_icon_class . '"></i></span>';
+		}
+
+		// Fallback: Check title for keyword matches (legacy behavior)
 		$icon_map = array(
 			'products' => 'fa-box',
 			'solutions' => 'fa-lightbulb',
@@ -301,13 +352,11 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 		$title_lower = strtolower($item->title);
 		foreach ($icon_map as $keyword => $icon) {
 			if (strpos($title_lower, $keyword) !== false) {
-				$icon_class = ($this->current_menu_type === 'dropdown') ? 'plaid-dropdown-link-icon' : 'plaid-mega-link-icon';
 				return '<span class="' . $icon_class . '"><i class="fa-solid ' . $icon . '"></i></span>';
 			}
 		}
 
 		// Default icon
-		$icon_class = ($this->current_menu_type === 'dropdown') ? 'plaid-dropdown-link-icon' : 'plaid-mega-link-icon';
 		return '<span class="' . $icon_class . '"><i class="fa-solid fa-chevron-right"></i></span>';
 	}
 
