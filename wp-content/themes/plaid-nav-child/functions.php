@@ -206,7 +206,7 @@ function render_navigation_ctas() {
 	$login_url = get_option('plaid_nav_login_url', '#login');
 	$contact_url = get_option('plaid_nav_contact_url', '#contact');
 	$login_text = get_option('plaid_nav_login_text', __('Log in', 'plaid-nav-child'));
-	$contact_text = get_option('plaid_nav_contact_text', __('Contact', 'plaid-nav-child'));
+	$contact_text = get_option('plaid_nav_contact_text', __('Donate', 'plaid-nav-child'));
 
 	?>
 	<a href="<?php echo esc_url($login_url); ?>" class="plaid-nav-button plaid-nav-button--ghost">
