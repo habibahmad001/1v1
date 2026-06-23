@@ -383,17 +383,64 @@ body {
 }
 
 .plaid-dropdown-inner {
-	padding: var(--plaid-nav-dropdown-padding) 0;
+	padding: 0;
 }
 
-/* Column layout - 5 items per column, max 10 visible */
-.plaid-dropdown-inner--columns {
+/* 30/70 Split Layout - Sidebar + Content */
+.plaid-dropdown-inner--split {
+	display: flex;
+	gap: 0;
+	min-height: 300px;
+}
+
+/* Left sidebar - 30% width */
+.plaid-dropdown-sidebar {
+	width: 30%;
+	padding: 24px;
+	background: linear-gradient(135deg, rgba(235, 49, 179, 0.1) 0%, rgba(235, 49, 179, 0.05) 100%);
+	border-right: 1px solid rgba(235, 49, 179, 0.2);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.plaid-dropdown-sidebar-title {
+	font-family: var(--plaid-font-display);
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--plaid-nav-text);
+	margin: 0 0 12px 0;
+	letter-spacing: -0.02em;
+	line-height: 1.3;
+}
+
+.plaid-dropdown-sidebar-description {
+	font-family: var(--plaid-font-primary);
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--plaid-nav-text-secondary);
+	margin: 0;
+	letter-spacing: -0.01em;
+	line-height: 1.6;
+}
+
+/* Right content - 70% width */
+.plaid-dropdown-content {
+	width: 70%;
+	padding: 24px;
+	background: #ffffff;
+}
+
+/* Grid for items in content area */
+.plaid-dropdown-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 8px 24px;
 	max-height: 500px;
 	overflow: hidden;
 }
+
+/* Column layout - REMOVED: Using new split layout instead */
 
 .plaid-dropdown-item {
 	display: block;

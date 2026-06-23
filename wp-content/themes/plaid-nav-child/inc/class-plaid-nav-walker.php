@@ -49,7 +49,22 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 			// Use dropdown for all menus with our new layout (5 items per column, max 10 visible)
 			$this->current_menu_type = 'dropdown';
 			$output .= '<div class="plaid-dropdown" role="menu">';
-			$output .= '<div class="plaid-dropdown-inner plaid-dropdown-inner--columns">';
+			$output .= '<div class="plaid-dropdown-inner plaid-dropdown-inner--split">';
+
+			// Add 30% sidebar with parent menu info
+			if ($this->current_item) {
+				$parent_title = esc_html($this->current_item->title);
+				$parent_description = !empty($this->current_item->description) ? esc_html($this->current_item->description) : $this->get_default_description($this->current_item->title);
+
+				$output .= '<div class="plaid-dropdown-sidebar">';
+				$output .= '<h2 class="plaid-dropdown-sidebar-title">' . $parent_title . '</h2>';
+				$output .= '<p class="plaid-dropdown-sidebar-description">' . $parent_description . '</p>';
+				$output .= '</div>';
+			}
+
+			// Add 70% content wrapper for current items
+			$output .= '<div class="plaid-dropdown-content">';
+			$output .= '<div class="plaid-dropdown-grid">';
 
 			// Store total child count for "More+" logic
 			$this->total_child_count = $child_count;
@@ -69,7 +84,8 @@ class Plaid_Nav_Walker extends Walker_Nav_Menu {
 	 */
 	public function end_lvl(&$output, $depth = 0, $args = array()) {
 		if ($depth === 0) {
-			$output .= '</div></div>';
+			// Close grid, content wrapper, inner wrapper, and dropdown
+			$output .= '</div></div></div></div>';
 		} else {
 			$output .= '</div></div>';
 		}
