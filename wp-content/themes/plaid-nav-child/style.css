@@ -151,7 +151,8 @@ body {
 
 /* The centered rounded navigation container - Plaid.com exact style */
 .plaid-header-container {
-	max-width: 1200px;
+	/* max-width: 1200px; */
+	max-width: 85%;
 	margin: 0 auto;
 	padding: 0 32px;
 	height: 71px;
@@ -873,6 +874,111 @@ body {
 
 .plaid-mobile-toggle[aria-expanded="true"] .plaid-mobile-toggle-bar:nth-child(3) {
 	transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ============================================
+   MOBILE MENU - Simple toggle menu
+   ============================================ */
+.plaid-mobile-menu {
+	position: fixed;
+	top: 110px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #ffffff;
+	z-index: 999;
+	overflow-y: auto;
+}
+
+.plaid-mobile-menu.active {
+	display: block !important;
+}
+
+.plaid-mobile-menu-inner {
+	padding: 20px;
+}
+
+.plaid-mobile-menu-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.plaid-mobile-menu-list li {
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.plaid-mobile-menu-list li:last-child {
+	border-bottom: none;
+}
+
+.plaid-mobile-menu-list a {
+	display: block;
+	padding: 15px 0;
+	color: #1a1a1a;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.plaid-mobile-menu-list a:hover {
+	color: #eb31b3;
+}
+
+/* Hide dropdowns on mobile by default (will be toggled via JS) */
+.plaid-mobile-menu .plaid-dropdown {
+	display: none;
+	position: static;
+	top: auto;
+	left: auto;
+	right: auto;
+	transform: none;
+	width: 100%;
+	max-width: 100%;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	z-index: auto;
+}
+
+/* Show dropdown when active (toggled by JS) */
+.plaid-mobile-menu .plaid-dropdown[style*="display: block"] {
+	display: block !important;
+}
+
+.plaid-mobile-menu .plaid-dropdown-inner,
+.plaid-mobile-menu .plaid-dropdown-sidebar,
+.plaid-mobile-menu .plaid-dropdown-content,
+.plaid-mobile-menu .plaid-dropdown-grid {
+	display: block;
+	width: 100%;
+}
+
+.plaid-mobile-menu .plaid-dropdown-inner--split {
+	flex-direction: column;
+	min-height: auto;
+}
+
+/* Hide sidebar (heading & description) on mobile */
+.plaid-mobile-menu .plaid-dropdown-sidebar {
+	display: none !important;
+}
+
+.plaid-mobile-menu .plaid-dropdown-content {
+	width: 100%;
+	padding: 15px 0;
+}
+
+/* Admin bar adjustment for mobile menu */
+@media (max-width: 782px) {
+	body.admin-bar .plaid-mobile-menu {
+		top: 156px;
+	}
 }
 
 /* ============================================
