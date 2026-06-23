@@ -250,36 +250,8 @@ function render_mobile_navigation() {
 		$mobile_menu = $primary_menu;
 	}
 
-	if (!$mobile_menu) {
-		return;
-	}
-
-	?>
-	<div class="plaid-mobile-backdrop" data-plaid-mobile-backdrop aria-hidden="true"></div>
-
-	<div
-		class="plaid-mobile-overlay"
-		id="plaid-mobile-menu"
-		role="dialog"
-		aria-modal="true"
-		aria-label="<?php esc_attr_e('Mobile navigation', 'plaid-nav-child'); ?>"
-		data-plaid-mobile-overlay>
-
-		<div class="plaid-mobile-menu-inner">
-			<?php
-			wp_nav_menu(array(
-				'menu' => $mobile_menu->term_id,
-				'container' => '',
-				'menu_class' => 'plaid-mobile-list',
-				'fallback_cb' => false,
-				'walker' => new Plaid_Mobile_Walker(),
-				'items_wrap' => '<ul id="plaid-mobile-nav" class="%1$s">%3$s</ul>',
-				'echo' => true,
-			));
-			?>
-		</div>
-	</div>
-	<?php
+	// Mobile menu disabled - no content rendered
+	return;
 }
 
 /**

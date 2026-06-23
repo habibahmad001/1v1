@@ -820,7 +820,7 @@ body {
 }
 
 /* ============================================
-   MOBILE NAVIGATION
+   MOBILE NAVIGATION - Hamburger icon only
    ============================================ */
 .plaid-nav-mobile {
 	display: flex;
@@ -875,172 +875,6 @@ body {
 	transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile Menu Overlay */
-.plaid-mobile-overlay {
-	position: fixed;
-	top: var(--plaid-nav-height);
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: var(--plaid-nav-bg);
-	overflow-y: auto;
-	transform: translateX(100%);
-	transition: transform var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
-	z-index: var(--plaid-nav-z-mobile);
-}
-
-.plaid-mobile-overlay.active {
-	transform: translateX(0);
-}
-
-.plaid-mobile-backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity var(--plaid-nav-transition-slow) var(--plaid-nav-ease),
-	            visibility var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
-	z-index: var(--plaid-nav-z-backdrop);
-}
-
-.plaid-mobile-backdrop.active {
-	opacity: 1;
-	visibility: visible;
-}
-
-.plaid-mobile-menu-inner {
-	padding: 24px 32px;
-	max-width: 480px;
-	margin: 0 auto;
-}
-
-.plaid-mobile-item {
-	border-bottom: 1px solid var(--plaid-nav-border);
-}
-
-.plaid-mobile-item:last-child {
-	border-bottom: none;
-}
-
-.plaid-mobile-link-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 12px;
-}
-
-.plaid-mobile-link {
-	display: flex;
-	align-items: center;
-	padding: 16px 0;
-	font-family: var(--plaid-font-primary);
-	font-size: 16px;
-	font-weight: var(--plaid-nav-weight-medium);
-	color: var(--plaid-nav-text);
-	letter-spacing: -0.01em;
-	flex: 1;
-	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
-}
-
-.plaid-mobile-link:hover {
-	color: var(--plaid-nav-accent);
-}
-
-.plaid-mobile-toggle-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 32px;
-	height: 32px;
-	padding: 0;
-	background: none;
-	border: none;
-	cursor: pointer;
-	border-radius: var(--plaid-nav-radius-sm);
-	transition: background-color var(--plaid-nav-transition-base) var(--plaid-nav-ease),
-	            transform var(--plaid-nav-transition-base) var(--plaid-nav-ease);
-	flex-shrink: 0;
-}
-
-.plaid-mobile-toggle-btn:hover {
-	background-color: var(--plaid-nav-hover-bg);
-}
-
-.plaid-mobile-toggle-btn svg {
-	width: 16px;
-	height: 16px;
-	color: var(--plaid-nav-text-secondary);
-	transition: transform var(--plaid-nav-transition-base) var(--plaid-nav-ease);
-}
-
-.plaid-mobile-toggle-btn[aria-expanded="true"] svg {
-	transform: rotate(180deg);
-}
-
-.plaid-mobile-submenu {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
-}
-
-.plaid-mobile-submenu.active {
-	max-height: 1000px;
-}
-
-.plaid-mobile-submenu-item {
-	padding-left: 16px;
-}
-
-.plaid-mobile-submenu-link {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 12px 0;
-	font-family: var(--plaid-font-primary);
-	font-size: var(--plaid-nav-font-size);
-	font-weight: 400;
-	color: var(--plaid-nav-text-secondary);
-	letter-spacing: -0.01em;
-	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
-}
-
-.plaid-mobile-submenu-link:hover {
-	color: var(--plaid-nav-accent);
-}
-
-/* Mobile submenu link icon */
-.plaid-mobile-submenu-link-icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 20px;
-	height: 20px;
-	flex-shrink: 0;
-	color: var(--plaid-nav-text-secondary);
-	font-size: 14px;
-	transition: color var(--plaid-nav-transition-base) var(--plaid-nav-ease);
-}
-
-.plaid-mobile-submenu-link:hover .plaid-mobile-submenu-link-icon {
-	color: var(--plaid-nav-accent);
-}
-
-.plaid-mobile-footer {
-	padding: 24px 32px;
-	border-top: 1px solid var(--plaid-nav-border);
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-}
-
-.plaid-mobile-footer .plaid-nav-button {
-	width: 100%;
-}
-
 /* ============================================
    ACCESSIBILITY
    ============================================ */
@@ -1080,25 +914,8 @@ body {
 }
 
 @media (min-width: 768px) {
-	/* Completely hide mobile navigation on desktop */
-	.plaid-mobile-toggle,
-	.plaid-mobile-overlay,
-	.plaid-mobile-backdrop,
-	.plaid-mobile-menu-inner,
-	.plaid-mobile-list,
-	.plaid-mobile-list *,
-	#plaid-mobile-nav,
-	#plaid-mobile-nav * {
+	.plaid-mobile-toggle {
 		display: none !important;
-		visibility: hidden !important;
-		opacity: 0 !important;
-		position: absolute !important;
-		left: -9999px !important;
-	}
-
-	/* Show ghost button on desktop */
-	.plaid-nav-button--ghost {
-		display: inline-flex !important;
 	}
 }
 
