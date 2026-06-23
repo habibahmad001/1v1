@@ -31,7 +31,7 @@
 				desktopNav: '.plaid-nav-desktop',
 				mobileNav: '.plaid-nav-mobile',
 				mobileToggle: '.plaid-mobile-toggle',
-				mobileMenu: '.plaid-mobile-menu',
+				mobileOverlay: '.plaid-mobile-overlay',
 				mobileBackdrop: '.plaid-mobile-backdrop',
 				navList: '.plaid-nav-list',
 				navItem: '.plaid-nav-item',
@@ -74,15 +74,10 @@
 			this.desktopNav = document.querySelector(this.config.selectors.desktopNav);
 			this.mobileNav = document.querySelector(this.config.selectors.mobileNav);
 			this.mobileToggle = document.querySelector(this.config.selectors.mobileToggle);
-			this.mobileMenu = document.querySelector(this.config.selectors.mobileMenu);
+			this.mobileOverlay = document.querySelector(this.config.selectors.mobileOverlay);
 			this.mobileBackdrop = document.querySelector(this.config.selectors.mobileBackdrop);
 			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
 			this.mobileToggleBtns = document.querySelectorAll(this.config.selectors.mobileToggleBtn);
-				console.log('cacheElements:', {
-					mobileMenu: this.mobileMenu,
-					mobileToggle: this.mobileToggle,
-					selector: this.config.selectors.mobileMenu
-				});
 		},
 
 		/**
@@ -341,17 +336,15 @@
 		 * Open mobile menu
 		 */
 		openMobileMenu() {
-				console.log('openMobileMenu called', this.mobileMenu);
 			this.mobileToggle?.setAttribute('aria-expanded', 'true');
-			this.mobileMenu?.classList.add('active');
-			this.mobileMenu?.style.display = 'block';
+			this.mobileOverlay?.classList.add('active');
 			this.mobileBackdrop?.classList.add('active');
 			this.header?.classList.add('mobile-menu-active');
 			document.body.style.overflow = 'hidden';
 			this.state.isMobileOpen = true;
 
 			// Focus first menu item
-			const firstLink = this.mobileMenu?.querySelector('a');
+			const firstLink = this.mobileOverlay?.querySelector('a');
 			firstLink?.focus();
 		},
 
@@ -360,8 +353,7 @@
 		 */
 		closeMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'false');
-				this.mobileMenu?.classList.remove('active');
-				this.mobileMenu?.style.display = 'none';
+				this.mobileOverlay?.classList.remove('active');
 			this.mobileBackdrop?.classList.remove('active');
 			this.header?.classList.remove('mobile-menu-active');
 			document.body.style.overflow = '';
