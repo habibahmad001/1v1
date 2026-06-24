@@ -43,6 +43,15 @@ add_action('after_setup_theme', 'plaid_nav_child_setup');
 function plaid_nav_child_enqueue_assets() {
 	$theme_version = wp_get_theme()->get('Version');
 
+	// Get file modification times for cache busting
+	$child_style_path = get_stylesheet_directory() . '/style.css';
+	$nav_css_path = get_stylesheet_directory() . '/assets/css/navigation.css';
+	$nav_js_path = get_stylesheet_directory() . '/assets/js/navigation.js';
+
+	$child_style_version = file_exists($child_style_path) ? filemtime($child_style_path) : $theme_version;
+	$nav_css_version = file_exists($nav_css_path) ? filemtime($nav_css_path) : $theme_version;
+	$nav_js_version = file_exists($nav_js_path) ? filemtime($nav_js_path) : $theme_version;
+
 	// Parent theme stylesheet
 	wp_enqueue_style(
 		'twentytwentyfive-style',
@@ -64,7 +73,7 @@ function plaid_nav_child_enqueue_assets() {
 		'plaid-nav-child-style',
 		get_stylesheet_directory_uri() . '/style.css',
 		array('twentytwentyfive-style'),
-		$theme_version
+		$child_style_version
 	);
 
 	// Navigation stylesheet - load AFTER child theme
@@ -72,7 +81,7 @@ function plaid_nav_child_enqueue_assets() {
 		'plaid-navigation-css',
 		get_stylesheet_directory_uri() . '/assets/css/navigation.css',
 		array('plaid-nav-child-style'),
-		$theme_version
+		$nav_css_version
 	);
 
 	// Navigation JavaScript
@@ -80,7 +89,7 @@ function plaid_nav_child_enqueue_assets() {
 		'plaid-navigation-js',
 		get_stylesheet_directory_uri() . '/assets/js/navigation.js',
 		array(),
-		$theme_version,
+		$nav_js_version,
 		true
 	);
 
