@@ -250,7 +250,6 @@
 		 */
 		openMenu(item) {
 			if (this.state.currentOpenMenu === item) return;
-				console.log('openMenu called', item);
 
 
 			if (this.state.currentOpenMenu) {
