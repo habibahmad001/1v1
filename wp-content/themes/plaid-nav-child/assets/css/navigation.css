@@ -6,23 +6,23 @@
  */
 
 /* ============================================
-   Z-index Management
+   Z-index Management (using CSS variables from style.css)
    ============================================ */
 
 .plaid-header {
-	z-index: 1000;
+	z-index: var(--plaid-nav-z-header, 1000);
 }
 
 .plaid-mega-menu {
-	z-index: 100;
+	z-index: var(--plaid-nav-z-dropdown, 100);
 }
 
 .plaid-mobile-overlay {
-	z-index: 999;
+	z-index: var(--plaid-nav-z-mobile, 999);
 }
 
 .plaid-mobile-backdrop {
-	z-index: 998;
+	z-index: calc(var(--plaid-nav-z-mobile, 999) - 1);
 }
 
 /* ============================================

@@ -60,6 +60,7 @@ Tags: custom-menu, mega-menu, accessibility-ready
 	--plaid-nav-z-dropdown: 100;
 	--plaid-nav-z-backdrop: 999;
 	--plaid-nav-z-mobile: 998;
+	--plaid-nav-z-skip: 10000;
 
 	--plaid-desktop-breakpoint: 768px;
 }
@@ -364,7 +365,7 @@ body {
 /* Position dropdown relative to viewport for full width */
 .plaid-header-container .plaid-dropdown {
 	position: fixed !important;
-	top: 125px !important; /* Below the header: 12px padding + 71px container + 12px padding + 30px gap */
+	top: var(--plaid-dropdown-top, 125px) !important; /* Dynamic position set by JS */
 	left: 50% !important;
 	transform: translateX(-50%) translateY(-4px) !important;
 	width: 100%;
@@ -379,7 +380,7 @@ body {
 	visibility: visible !important;
 	pointer-events: auto !important;
 	display: block !important;
-	top: 125px !important; /* Ensure consistent positioning when active */
+	top: var(--plaid-dropdown-top, 125px) !important; /* Dynamic position set by JS */
 	transform: translateX(-50%) translateY(0) !important;
 }
 
@@ -548,7 +549,7 @@ body {
    ============================================ */
 .plaid-mega-menu {
 	position: fixed !important;
-	top: 125px !important; /* Below the header: 12px padding + 71px container + 12px padding + 30px gap */
+	top: var(--plaid-dropdown-top, 125px) !important; /* Dynamic position set by JS */
 	left: 50% !important;
 	transform: translateX(-50%) translateY(-4px) !important;
 	width: 100%;
@@ -574,7 +575,7 @@ body {
 	pointer-events: auto !important;
 	transform: translateX(-50%) translateY(0) !important;
 	display: block !important;
-	top: 125px !important; /* Ensure consistent positioning when active */
+	top: var(--plaid-dropdown-top, 125px) !important; /* Dynamic position set by JS */
 }
 
 .plaid-mega-menu-inner {
@@ -886,7 +887,7 @@ body {
 	right: 0;
 	bottom: 0;
 	background: #ffffff;
-	z-index: 999;
+	z-index: var(--plaid-nav-z-mobile);
 	overflow-y: auto;
 }
 
@@ -946,8 +947,8 @@ body {
 	z-index: auto;
 }
 
-/* Show dropdown when active (toggled by JS) */
-.plaid-mobile-menu .plaid-dropdown[style*="display: block"] {
+/* Show dropdown when active (toggled by JS via class) */
+.plaid-mobile-menu .plaid-dropdown.is-open {
 	display: block !important;
 }
 
@@ -991,7 +992,7 @@ body {
 	background: var(--plaid-nav-accent);
 	color: #ffffff;
 	padding: 12px 24px;
-	z-index: 10000;
+	z-index: var(--plaid-nav-z-skip, 10000);
 	transition: top var(--plaid-nav-transition-slow) var(--plaid-nav-ease);
 	font-size: 14px;
 	font-weight: var(--plaid-nav-weight-medium);

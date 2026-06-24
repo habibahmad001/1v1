@@ -74,10 +74,9 @@
 			this.desktopNav = document.querySelector(this.config.selectors.desktopNav);
 			this.mobileNav = document.querySelector(this.config.selectors.mobileNav);
 			this.mobileToggle = document.querySelector(this.config.selectors.mobileToggle);
-			this.mobileOverlay = document.querySelector(this.config.selectors.mobileOverlay);
-			this.mobileBackdrop = document.querySelector(this.config.selectors.mobileBackdrop);
+			this.mobileBackdrop = document.getElementById('plaid-mobile-backdrop');
+			this.mobileMenu = document.getElementById('plaid-mobile-menu');
 			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
-			this.mobileToggleBtns = document.querySelectorAll(this.config.selectors.mobileToggleBtn);
 		},
 
 		/**
@@ -146,18 +145,47 @@
 				});
 			}
 
-			// Mobile submenu toggles
-			this.mobileToggleBtns.forEach(btn => {
-				btn.addEventListener('click', (e) => {
-					this.toggleMobileSubmenu(e);
-				});
-			});
+			// Mobile submenu toggles - use event delegation
+			this.bindMobileSubmenus();
 
 			// Escape key to close mobile menu
 			document.addEventListener('keydown', (e) => {
 				if (e.key === 'Escape' && this.state.isMobileOpen) {
 					this.closeMobileMenu();
 					this.mobileToggle?.focus();
+				}
+			});
+		},
+
+		/**
+		 * Bind mobile submenu toggles
+		 */
+		bindMobileSubmenus() {
+			const mobileMenu = document.getElementById('plaid-mobile-menu');
+			if (!mobileMenu) return;
+
+			// Use event delegation for dynamically added submenus
+			mobileMenu.addEventListener('click', (e) => {
+				const link = e.target.closest('.plaid-nav-link');
+				if (!link) return;
+
+				const parentItem = link.closest('.plaid-nav-item');
+				if (!parentItem || !parentItem.classList.contains('has-children')) return;
+
+				const dropdown = parentItem.querySelector('.plaid-dropdown');
+				if (!dropdown) return;
+
+				e.preventDefault();
+				e.stopPropagation();
+
+				const isExpanded = link.getAttribute('aria-expanded') === 'true';
+
+				if (isExpanded) {
+					link.setAttribute('aria-expanded', 'false');
+					dropdown.classList.remove('is-open');
+				} else {
+					link.setAttribute('aria-expanded', 'true');
+					dropdown.classList.add('is-open');
 				}
 			});
 		},
@@ -263,16 +291,23 @@
 
 			if (link && menu) {
 				// Dynamic positioning based on header container
-				const headerContainer = document.querySelector(this.config.selectors.container);
-				if (headerContainer) {
-					const rect = headerContainer.getBoundingClientRect();
-					const topPosition = rect.bottom + 30; // Header bottom + 30px gap
-					menu.style.top = topPosition + 'px';
-				}
+				this.updateDropdownPosition();
 
 				link.setAttribute('aria-expanded', 'true');
 				menu.classList.add('active');
 				this.state.currentOpenMenu = item;
+			}
+		},
+
+		/**
+		 * Update dropdown position dynamically
+		 */
+		updateDropdownPosition() {
+			const headerContainer = document.querySelector(this.config.selectors.container);
+			if (headerContainer) {
+				const rect = headerContainer.getBoundingClientRect();
+				const topPosition = rect.bottom + 30; // Header bottom + 30px gap
+				document.documentElement.style.setProperty('--plaid-dropdown-top', topPosition + 'px');
 			}
 		},
 
@@ -336,14 +371,16 @@
 		 */
 		openMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'true');
-			this.mobileOverlay?.classList.add('active');
+			this.mobileMenu?.classList.add('active');
+			this.mobileMenu?.style.setProperty('display', 'block', 'important');
 			this.mobileBackdrop?.classList.add('active');
+			this.mobileBackdrop?.style.setProperty('display', 'block', 'important');
 			this.header?.classList.add('mobile-menu-active');
 			document.body.style.overflow = 'hidden';
 			this.state.isMobileOpen = true;
 
 			// Focus first menu item
-			const firstLink = this.mobileOverlay?.querySelector('a');
+			const firstLink = this.mobileMenu?.querySelector('a');
 			firstLink?.focus();
 		},
 
@@ -352,8 +389,10 @@
 		 */
 		closeMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'false');
-				this.mobileOverlay?.classList.remove('active');
+			this.mobileMenu?.classList.remove('active');
+			this.mobileMenu?.style.setProperty('display', 'none', 'important');
 			this.mobileBackdrop?.classList.remove('active');
+			this.mobileBackdrop?.style.setProperty('display', 'none', 'important');
 			this.header?.classList.remove('mobile-menu-active');
 			document.body.style.overflow = '';
 			this.state.isMobileOpen = false;
@@ -406,11 +445,17 @@
 		 * Close all mobile submenus
 		 */
 		closeAllMobileSubmenus() {
-			this.mobileToggleBtns.forEach(btn => {
-				const targetId = btn.getAttribute('data-target');
-				const submenu = document.getElementById(targetId);
-				if (submenu && btn.getAttribute('aria-expanded') === 'true') {
-					this.closeMobileSubmenu(btn, submenu);
+			const mobileMenu = document.getElementById('plaid-mobile-menu');
+			if (!mobileMenu) return;
+
+			const parentItems = mobileMenu.querySelectorAll('.plaid-nav-item.has-children');
+			parentItems.forEach(parentItem => {
+				const link = parentItem.querySelector('.plaid-nav-link');
+				const dropdown = parentItem.querySelector('.plaid-dropdown');
+
+				if (link && dropdown && link.getAttribute('aria-expanded') === 'true') {
+					link.setAttribute('aria-expanded', 'false');
+					dropdown.classList.remove('is-open');
 				}
 			});
 		},
@@ -445,6 +490,9 @@
 			if (this.state.currentOpenMenu) {
 				this.closeMenu(this.state.currentOpenMenu);
 			}
+
+			// Update dropdown position on resize
+			this.updateDropdownPosition();
 		},
 
 		/**
