@@ -977,9 +977,12 @@ body {
 
 /* Admin bar adjustment for mobile menu */
 @media (max-width: 782px) {
-	body.admin-bar .plaid-mobile-menu {
-		top: 156px;
-	}
+	    body.admin-bar .plaid-mobile-menu {
+			top: 5%;
+			z-index: 9999;
+			border-radius: 30px;
+			border: 1px solid #ccc;
+		}
 }
 
 /* ============================================

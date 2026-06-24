@@ -20,6 +20,7 @@
 			hoverDelay: 150,
 			closeDelay: 300,
 			animationDuration: 200,
+				panelAnimationDuration: 300,
 
 			// Breakpoints
 			desktopBreakpoint: 768,
@@ -211,71 +212,70 @@
 		/**
 		 * Bind panel navigation events
 		 */
-		/**
-		 * Bind panel navigation events
-		 */
 		bindPanelNavigation(signal) {
 			const mobileMenu = document.getElementById('plaid-mobile-menu');
-			console.log('[PanelNav] bindPanelNavigation called, mobileMenu:', mobileMenu);
 			if (!mobileMenu) return;
 
 			// Use event delegation for panel arrow clicks
 			mobileMenu.addEventListener('click', (e) => {
 				const arrowBtn = e.target.closest(this.config.selectors.mobilePanelArrow);
-				console.log('[PanelNav] Click detected, arrowBtn:', arrowBtn, 'e.target:', e.target);
 				if (!arrowBtn) return;
 
 				e.preventDefault();
 				e.stopPropagation();
 
 				const targetId = arrowBtn.getAttribute('data-panel-target');
-				console.log('[PanelNav] targetId:', targetId);
 				if (targetId) {
 					this.navigateToPanel(targetId);
 				}
 			}, { signal });
 		},
 
+			/**
+			 * Navigate to a specific panel
+			 */
+			navigateToPanel(targetId) {
+				const targetPanel = document.getElementById('plaid-mobile-panel-' + targetId);
+				if (!targetPanel) return;
 
-				/**
-				 * Navigate to a specific panel - simple show/hide, no animations
-				 */
-				navigateToPanel(targetId) {
-					console.log('[PanelNav] navigateToPanel called with targetId:', targetId);
-					const targetPanel = document.getElementById('plaid-mobile-panel-' + targetId);
-					console.log('[PanelNav] Looking for panel ID: plaid-mobile-panel-' + targetId);
-					console.log('[PanelNav] targetPanel found:', targetPanel);
-					if (!targetPanel) {
-						console.error('[PanelNav] Panel not found! Available panels:', document.querySelectorAll('.plaid-mobile-panel'));
-						return;
-					}
+				const currentPanel = this.state.currentPanel;
+				if (!currentPanel) return;
 
-					const currentPanel = this.state.currentPanel;
-					console.log('[PanelNav] currentPanel:', currentPanel);
-					if (!currentPanel) {
-						console.error('[PanelNav] currentPanel is null!');
-						return;
-					}
+				// Push current panel to stack for back navigation
+				this.state.panelStack.push(currentPanel);
 
-					// Push current panel to stack for back navigation
-					this.state.panelStack.push(currentPanel);
+				// Animate panels
+				currentPanel.classList.remove('active');
+				currentPanel.classList.add('sliding-out');
 
-					// Hide current panel, show target panel
-					console.log('[PanelNav] Hiding current panel, showing target panel');
-					currentPanel.classList.remove('active');
+				targetPanel.classList.add('sliding-in');
+
+				// After animation starts, set active class
+				requestAnimationFrame(() => {
 					targetPanel.classList.add('active');
+				});
 
-					// Update current panel
-					this.state.currentPanel = targetPanel;
+				// Clean up animation classes after transition
+				setTimeout(() => {
+					currentPanel.classList.remove('sliding-out');
+					currentPanel.classList.add('slid-out');
+					targetPanel.classList.remove('sliding-in');
+				}, this.config.panelAnimationDuration);
 
-					// Update header to show back button
-					this.updateMobileHeader(true);
+				// Update current panel
+				this.state.currentPanel = targetPanel;
 
-					// Focus first item in new panel
-					const firstLink = targetPanel.querySelector('a, button');
-					firstLink?.focus();
-					console.log('[PanelNav] Navigation complete');
-				},
+				// Update header to show back button
+				this.updateMobileHeader(true);
+
+				// Focus first item in new panel
+				const firstLink = targetPanel.querySelector('a, button');
+				firstLink?.focus();
+			},
+
+			/**
+			 * Navigate back to previous panel
+			 */
 			navigateBack() {
 				if (this.state.panelStack.length === 0) return;
 
@@ -284,9 +284,18 @@
 
 				if (!previousPanel || !currentPanel) return;
 
-				// Hide current panel, show previous panel
+				// Animate panels
 				currentPanel.classList.remove('active');
+				currentPanel.classList.add('sliding-out-right');
+
+				previousPanel.classList.remove('slid-out');
 				previousPanel.classList.add('active');
+
+				// Clean up animation classes after transition
+				setTimeout(() => {
+					currentPanel.classList.remove('sliding-out-right');
+					previousPanel.classList.remove('slid-out');
+				}, this.config.panelAnimationDuration);
 
 				// Update current panel
 				this.state.currentPanel = previousPanel;
@@ -300,6 +309,9 @@
 				firstLink?.focus();
 			},
 
+			/**
+			 * Update mobile menu header (toggle logo vs back button)
+			 */
 			updateMobileHeader(showBack) {
 				if (!this.mobileLogo || !this.mobileBackBtn) return;
 
@@ -555,7 +567,7 @@
 			// Reset all panel classes
 			const allPanels = document.querySelectorAll(this.config.selectors.mobilePanel);
 			allPanels.forEach(panel => {
-			panel.classList.remove('active');
+				panel.classList.remove('active', 'sliding-out', 'sliding-in', 'slid-out', 'sliding-out-right');
 			});
 
 			// Ensure root panel is active

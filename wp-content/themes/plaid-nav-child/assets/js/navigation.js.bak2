@@ -40,16 +40,7 @@
 				dropdown: '.plaid-dropdown',
 				megaMenu: '.plaid-mega-menu',
 				mobileToggleBtn: '.plaid-mobile-toggle-btn',
-				mobileSubmenu: '.plaid-mobile-submenu',
-				mobileMenu: '.plaid-mobile-menu',
-				mobilePanels: '.plaid-mobile-panels',
-				mobilePanel: '.plaid-mobile-panel',
-				mobilePanelRoot: '.plaid-mobile-panel--root',
-				mobilePanelArrow: '.plaid-mobile-panel-arrow',
-				mobileBackBtn: '.plaid-mobile-back-btn',
-				mobileCloseBtn: '.plaid-mobile-close-btn',
-				mobileLogo: '.plaid-mobile-menu-logo',
-				mobileMenuHeader: '.plaid-mobile-menu-header'
+				mobileSubmenu: '.plaid-mobile-submenu'
 			}
 		},
 
@@ -60,9 +51,7 @@
 			closeTimer: null,
 			isMobileOpen: false,
 			scrollY: 0,
-			isScrolled: false,
-			panelStack: [],
-			currentPanel: null
+			isScrolled: false
 		},
 
 		// Track if events have been bound to prevent duplicates
@@ -101,13 +90,6 @@
 			this.mobileBackdrop = document.getElementById('plaid-mobile-backdrop');
 			this.mobileMenu = document.getElementById('plaid-mobile-menu');
 			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
-
-			// Panel navigation elements
-			this.mobilePanels = document.querySelector(this.config.selectors.mobilePanels);
-			this.mobileCloseBtn = document.getElementById('plaid-mobile-close-btn');
-			this.mobileBackBtn = document.getElementById('plaid-mobile-back-btn');
-			this.mobileLogo = document.getElementById('plaid-mobile-logo');
-			this.rootPanel = document.querySelector(this.config.selectors.mobilePanelRoot);
 		},
 
 		/**
@@ -176,143 +158,54 @@
 				}, { signal });
 			}
 
-			// Close button in mobile menu header
-			if (this.mobileCloseBtn) {
-				this.mobileCloseBtn.addEventListener('click', () => {
-					this.closeMobileMenu();
-				}, { signal });
-			}
-
-			// Back button for panel navigation
-			if (this.mobileBackBtn) {
-				this.mobileBackBtn.addEventListener('click', () => {
-					this.navigateBack();
-				}, { signal });
-			}
-
-			// Panel arrow clicks - use event delegation
-			this.bindPanelNavigation(signal);
+			// Mobile submenu toggles - use event delegation
+			this.bindMobileSubmenus(signal);
 
 			// Escape key to close mobile menu
 			document.addEventListener('keydown', (e) => {
 				if (e.key === 'Escape' && this.state.isMobileOpen) {
-					if (this.state.panelStack.length > 0) {
-						// If in a submenu, go back
-						this.navigateBack();
-					} else {
-						// Otherwise close the menu
-						this.closeMobileMenu();
-						this.mobileToggle?.focus();
-					}
+					this.closeMobileMenu();
+					this.mobileToggle?.focus();
 				}
 			}, { signal });
 		},
 
 		/**
-		 * Bind panel navigation events
+		 * Bind mobile submenu toggles
 		 */
-		/**
-		 * Bind panel navigation events
-		 */
-		bindPanelNavigation(signal) {
+		bindMobileSubmenus(signal) {
 			const mobileMenu = document.getElementById('plaid-mobile-menu');
-			console.log('[PanelNav] bindPanelNavigation called, mobileMenu:', mobileMenu);
 			if (!mobileMenu) return;
 
-			// Use event delegation for panel arrow clicks
+			// Use event delegation for dynamically added submenus
 			mobileMenu.addEventListener('click', (e) => {
-				const arrowBtn = e.target.closest(this.config.selectors.mobilePanelArrow);
-				console.log('[PanelNav] Click detected, arrowBtn:', arrowBtn, 'e.target:', e.target);
-				if (!arrowBtn) return;
+				const link = e.target.closest('.plaid-nav-link');
+				if (!link) return;
+
+				const parentItem = link.closest('.plaid-nav-item');
+				if (!parentItem || !parentItem.classList.contains('has-children')) return;
+
+				const dropdown = parentItem.querySelector('.plaid-dropdown');
+				if (!dropdown) return;
 
 				e.preventDefault();
 				e.stopPropagation();
 
-				const targetId = arrowBtn.getAttribute('data-panel-target');
-				console.log('[PanelNav] targetId:', targetId);
-				if (targetId) {
-					this.navigateToPanel(targetId);
+				const isExpanded = link.getAttribute('aria-expanded') === 'true';
+
+				if (isExpanded) {
+					link.setAttribute('aria-expanded', 'false');
+					dropdown.classList.remove('is-open');
+				} else {
+					link.setAttribute('aria-expanded', 'true');
+					dropdown.classList.add('is-open');
 				}
 			}, { signal });
 		},
 
-
-				/**
-				 * Navigate to a specific panel - simple show/hide, no animations
-				 */
-				navigateToPanel(targetId) {
-					console.log('[PanelNav] navigateToPanel called with targetId:', targetId);
-					const targetPanel = document.getElementById('plaid-mobile-panel-' + targetId);
-					console.log('[PanelNav] Looking for panel ID: plaid-mobile-panel-' + targetId);
-					console.log('[PanelNav] targetPanel found:', targetPanel);
-					if (!targetPanel) {
-						console.error('[PanelNav] Panel not found! Available panels:', document.querySelectorAll('.plaid-mobile-panel'));
-						return;
-					}
-
-					const currentPanel = this.state.currentPanel;
-					console.log('[PanelNav] currentPanel:', currentPanel);
-					if (!currentPanel) {
-						console.error('[PanelNav] currentPanel is null!');
-						return;
-					}
-
-					// Push current panel to stack for back navigation
-					this.state.panelStack.push(currentPanel);
-
-					// Hide current panel, show target panel
-					console.log('[PanelNav] Hiding current panel, showing target panel');
-					currentPanel.classList.remove('active');
-					targetPanel.classList.add('active');
-
-					// Update current panel
-					this.state.currentPanel = targetPanel;
-
-					// Update header to show back button
-					this.updateMobileHeader(true);
-
-					// Focus first item in new panel
-					const firstLink = targetPanel.querySelector('a, button');
-					firstLink?.focus();
-					console.log('[PanelNav] Navigation complete');
-				},
-			navigateBack() {
-				if (this.state.panelStack.length === 0) return;
-
-				const currentPanel = this.state.currentPanel;
-				const previousPanel = this.state.panelStack.pop();
-
-				if (!previousPanel || !currentPanel) return;
-
-				// Hide current panel, show previous panel
-				currentPanel.classList.remove('active');
-				previousPanel.classList.add('active');
-
-				// Update current panel
-				this.state.currentPanel = previousPanel;
-
-				// Update header (show logo if at root, otherwise show back)
-				const showBack = this.state.panelStack.length > 0;
-				this.updateMobileHeader(showBack);
-
-				// Focus first item in previous panel
-				const firstLink = previousPanel.querySelector('a, button');
-				firstLink?.focus();
-			},
-
-			updateMobileHeader(showBack) {
-				if (!this.mobileLogo || !this.mobileBackBtn) return;
-
-				if (showBack) {
-					// Show back button, hide logo
-					this.mobileBackBtn.style.display = 'flex';
-					this.mobileLogo.style.display = 'none';
-				} else {
-					// Show logo, hide back button
-					this.mobileLogo.style.display = 'flex';
-					this.mobileBackBtn.style.display = 'none';
-				}
-			},
+		/**
+		 * Scroll events
+		 */
 		bindScrollEvents(signal) {
 			let ticking = false;
 
@@ -492,20 +385,21 @@
 		openMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'true');
 			this.mobileMenu?.classList.add('active');
-			this.mobileMenu?.style.setProperty('display', 'flex', 'important');
+			this.mobileMenu?.style.setProperty('display', 'block', 'important');
 			this.mobileBackdrop?.classList.add('active');
 			this.mobileBackdrop?.style.setProperty('display', 'block', 'important');
 			this.header?.classList.add('mobile-menu-active');
 			document.body.style.overflow = 'hidden';
 			this.state.isMobileOpen = true;
 
-			// Reset panel navigation
-			this.resetPanelNavigation();
-
 			// Focus first menu item
-			const firstLink = this.rootPanel?.querySelector('a, button');
+			const firstLink = this.mobileMenu?.querySelector('a');
 			firstLink?.focus();
 		},
+
+		/**
+		 * Close mobile menu
+		 */
 		closeMobileMenu() {
 			this.mobileToggle?.setAttribute('aria-expanded', 'false');
 			this.mobileMenu?.classList.remove('active');
@@ -516,56 +410,72 @@
 			document.body.style.overflow = '';
 			this.state.isMobileOpen = false;
 
-			this.resetPanelNavigation();
+			this.closeAllMobileSubmenus();
 		},
 
 		/**
 		 * Toggle mobile submenu
 		 */
+		toggleMobileSubmenu(e) {
+			const btn = e.currentTarget;
+			const targetId = btn.getAttribute('data-target');
+			const submenu = document.getElementById(targetId);
+
+			if (!submenu) return;
+
+			const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+			if (isExpanded) {
+				this.closeMobileSubmenu(btn, submenu);
+			} else {
+				this.openMobileSubmenu(btn, submenu);
+			}
+		},
 
 		/**
 		 * Open mobile submenu
 		 */
+		openMobileSubmenu(btn, submenu) {
+			btn.setAttribute('aria-expanded', 'true');
+			submenu.classList.add('active');
+
+			const parentItem = btn.closest('.plaid-mobile-item');
+			parentItem?.classList.add('submenu-open');
+		},
 
 		/**
 		 * Close mobile submenu
 		 */
+		closeMobileSubmenu(btn, submenu) {
+			btn.setAttribute('aria-expanded', 'false');
+			submenu.classList.remove('active');
+
+			const parentItem = btn.closest('.plaid-mobile-item');
+			parentItem?.classList.remove('submenu-open');
+		},
 
 		/**
 		 * Close all mobile submenus
 		 */
+		closeAllMobileSubmenus() {
+			const mobileMenu = document.getElementById('plaid-mobile-menu');
+			if (!mobileMenu) return;
+
+			const parentItems = mobileMenu.querySelectorAll('.plaid-nav-item.has-children');
+			parentItems.forEach(parentItem => {
+				const link = parentItem.querySelector('.plaid-nav-link');
+				const dropdown = parentItem.querySelector('.plaid-dropdown');
+
+				if (link && dropdown && link.getAttribute('aria-expanded') === 'true') {
+					link.setAttribute('aria-expanded', 'false');
+					dropdown.classList.remove('is-open');
+				}
+			});
+		},
 
 		/**
 		 * Handle scroll
-
-		/**
-		 * Reset panel navigation to initial state
 		 */
-		resetPanelNavigation() {
-			// Clear panel stack
-			this.state.panelStack = [];
-			this.state.currentPanel = this.rootPanel;
-				// Re-cache root panel in case it wasn't available during init
-				if (!this.rootPanel) {
-					this.rootPanel = document.querySelector(this.config.selectors.mobilePanelRoot);
-				}
-
-				this.state.currentPanel = this.rootPanel;
-
-			// Reset all panel classes
-			const allPanels = document.querySelectorAll(this.config.selectors.mobilePanel);
-			allPanels.forEach(panel => {
-			panel.classList.remove('active');
-			});
-
-			// Ensure root panel is active
-			if (this.rootPanel) {
-				this.rootPanel.classList.add('active');
-			}
-
-			// Reset header to show logo
-			this.updateMobileHeader(false);
-		},
 		handleScroll() {
 			const scrollY = window.scrollY || window.pageYOffset;
 

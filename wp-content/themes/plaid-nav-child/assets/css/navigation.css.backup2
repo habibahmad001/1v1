@@ -159,9 +159,8 @@ body.mobile-menu-open {
 }
 
 /* ============================================
-/* ============================================
-   MOBILE PANEL NAVIGATION
-   Simple show/hide - no animations
+   MOBILE SLIDING PANEL NAVIGATION
+   Panel-based navigation like Plaid.com mobile menu
    ============================================ */
 
 /* Mobile Menu Container */
@@ -173,14 +172,9 @@ body.mobile-menu-open {
 	bottom: 0;
 	background: #ffffff;
 	z-index: var(--plaid-nav-z-mobile);
-	display: none;
+	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-}
-
-/* Mobile Menu when active */
-.plaid-mobile-menu.active {
-	display: flex;
 }
 
 /* Mobile Menu Header */
@@ -207,6 +201,7 @@ body.mobile-menu-open {
 	gap: 12px;
 	text-decoration: none;
 	color: var(--plaid-nav-text);
+	transition: opacity 0.2s ease;
 }
 
 .plaid-mobile-menu-logo:hover {
@@ -239,6 +234,7 @@ body.mobile-menu-open {
 	font-weight: 600;
 	cursor: pointer;
 	border-radius: var(--plaid-nav-radius-md);
+	transition: background-color 0.2s ease;
 }
 
 .plaid-mobile-back-btn:hover {
@@ -268,6 +264,7 @@ body.mobile-menu-open {
 	color: var(--plaid-nav-text);
 	cursor: pointer;
 	border-radius: var(--plaid-nav-radius-md);
+	transition: background-color 0.2s ease;
 }
 
 .plaid-mobile-close-btn:hover {
@@ -286,9 +283,8 @@ body.mobile-menu-open {
 	overflow: hidden;
 }
 
-/* Individual Panel - simple show/hide, no animations */
+/* Individual Panel */
 .plaid-mobile-panel {
-	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -297,16 +293,48 @@ body.mobile-menu-open {
 	overflow-y: auto;
 	overflow-x: hidden;
 	background: #ffffff;
+	transform: translateX(100%);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	-webkit-overflow-scrolling: touch;
 }
 
 /* Root panel is visible by default when menu opens */
 .plaid-mobile-panel--root {
-	display: block;
+	transform: translateX(0);
+	z-index: 1;
 }
 
 /* Active panel (current visible panel) */
 .plaid-mobile-panel.active {
-	display: block;
+	transform: translateX(0);
+	z-index: 2;
+}
+
+/* Panel being slid out (to the left) */
+.plaid-mobile-panel.sliding-out {
+	transform: translateX(-30%);
+	z-index: 1;
+}
+
+/* Panel sliding in (from the right) */
+.plaid-mobile-panel.sliding-in {
+	transform: translateX(100%);
+	z-index: 2;
+}
+
+.plaid-mobile-panel.sliding-in.active {
+	transform: translateX(0);
+}
+
+/* Panel that was slid out (waiting to come back) */
+.plaid-mobile-panel.slid-out {
+	transform: translateX(-100%);
+}
+
+/* Panel being slid out to the right (for back navigation) */
+.plaid-mobile-panel.sliding-out-right {
+	transform: translateX(100%);
+	z-index: 1;
 }
 
 /* Panel List */
@@ -314,6 +342,11 @@ body.mobile-menu-open {
 	list-style: none;
 	margin: 0;
 	padding: 16px 20px;
+}
+
+/* Submenu panel lists - reduce left padding */
+.plaid-mobile-panel--submenu .plaid-mobile-panel-list {
+	padding: 16px 20px 16px 12px;
 }
 
 .plaid-mobile-panel-list::-webkit-scrollbar {
@@ -349,6 +382,7 @@ body.mobile-menu-open {
 	font-size: 16px;
 	font-weight: 600;
 	text-decoration: none;
+	transition: color 0.2s ease;
 }
 
 .plaid-mobile-panel-item-link:hover,
@@ -386,6 +420,7 @@ body.mobile-menu-open {
 	color: var(--plaid-nav-text);
 	cursor: pointer;
 	border-radius: var(--plaid-nav-radius-md);
+	transition: all 0.2s ease;
 	flex-shrink: 0;
 }
 
@@ -410,41 +445,11 @@ body.mobile-menu-open {
 	background: #f9fafb;
 }
 
-/* Submenu Panels Container */
+/* Submenu Panels Container (nested within parent item) */
 .plaid-mobile-submenu-panels {
-	/* Container for submenu panels - visibility controlled by child panels */
+	/* This is just a container for the actual panel */
 }
 
-/* Mobile Backdrop */
-.plaid-mobile-backdrop {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: calc(var(--plaid-nav-z-mobile) - 1);
-}
-
-.plaid-mobile-backdrop.active {
-	display: block;
-}
-
-/* Responsive Mobile Adjustments for Panels */
-@media (max-width: 767px) {
-	.plaid-header-container {
-		padding: 0 16px;
-	}
-
-	.plaid-mobile-menu-inner {
-		padding: 24px 16px;
-	}
-
-	.plaid-mobile-footer {
-		padding: 24px 16px;
-	}
-}
 /* Responsive Mobile Adjustments for Panels */
 @media (max-width: 767px) {
 	.plaid-mobile-menu-list a {
