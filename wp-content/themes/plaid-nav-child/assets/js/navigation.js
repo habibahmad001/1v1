@@ -177,59 +177,60 @@
 		/**
 		 * Mobile navigation events
 		 */
-		bindMobileEvents(signal) {
-			if (!this.mobileToggle) return;
-
-			// Toggle mobile menu
-			this.mobileToggle.addEventListener('click', () => {
-				this.toggleMobileMenu();
-			}, { signal });
-
-			// Backdrop click to close
-			if (this.mobileBackdrop) {
-				this.mobileBackdrop.addEventListener('click', () => {
-					this.closeMobileMenu();
-				}, { signal });
-			}
-
-			// Close button in mobile menu header
-			if (this.mobileCloseBtn) {
-				this.mobileCloseBtn.addEventListener('click', () => {
-					this.closeMobileMenu();
-				}, { signal });
-			}
-
-			// Back button for panel navigation
-			if (this.mobileBackBtn) {
-				this.mobileBackBtn.addEventListener('click', () => {
-					this.navigateBack();
-				}, { signal });
-			}
-
-			// Panel arrow clicks - use event delegation
-			this.bindPanelNavigation(signal);
-
-			// Escape key to close mobile menu
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape' && this.state.isMobileOpen) {
-					if (this.state.panelStack.length > 0) {
-						// If in a submenu, go back
-						this.navigateBack();
-					} else {
-						// Otherwise close the menu
-						this.closeMobileMenu();
-						this.mobileToggle?.focus();
-					}
+			/**
+			 * Mobile navigation events
+			 */
+			bindMobileEvents(signal) {
+				console.log('[PlaidNav] bindMobileEvents called, mobileToggle:', this.mobileToggle);
+				if (!this.mobileToggle) {
+					console.error('[PlaidNav] mobileToggle is null, cannot bind events');
+					return;
 				}
-			}, { signal });
-		},
 
-		/**
-		 * Bind panel navigation events
-		 */
-		/**
-		 * Bind panel navigation events
-		 */
+				// Toggle mobile menu
+				this.mobileToggle.addEventListener('click', (e) => {
+					console.log('[PlaidNav] Toggle button clicked!');
+					this.toggleMobileMenu();
+				}, { signal });
+
+				// Backdrop click to close
+				if (this.mobileBackdrop) {
+					this.mobileBackdrop.addEventListener('click', () => {
+						this.closeMobileMenu();
+					}, { signal });
+				}
+
+				// Close button in mobile menu header
+				if (this.mobileCloseBtn) {
+					this.mobileCloseBtn.addEventListener('click', () => {
+						this.closeMobileMenu();
+					}, { signal });
+				}
+
+				// Back button for panel navigation
+				if (this.mobileBackBtn) {
+					this.mobileBackBtn.addEventListener('click', () => {
+						this.navigateBack();
+					}, { signal });
+				}
+
+				// Panel arrow clicks - use event delegation
+				this.bindPanelNavigation(signal);
+
+				// Escape key to close mobile menu
+				document.addEventListener('keydown', (e) => {
+					if (e.key === 'Escape' && this.state.isMobileOpen) {
+						if (this.state.panelStack.length > 0) {
+							// If in a submenu, go back
+							this.navigateBack();
+						} else {
+							// Otherwise close the menu
+							this.closeMobileMenu();
+							this.mobileToggle?.focus();
+						}
+					}
+				}, { signal });
+			},
 		bindPanelNavigation(signal) {
 			const mobileMenu = document.getElementById('plaid-mobile-menu');
 			console.log('[PanelNav] bindPanelNavigation called, mobileMenu:', mobileMenu);
@@ -496,6 +497,7 @@
 		 */
 		toggleMobileMenu() {
 			if (this.state.isMobileOpen) {
+			console.log('[PlaidNav] toggleMobileMenu called, isMobileOpen:', this.state.isMobileOpen);
 				this.closeMobileMenu();
 			} else {
 				this.openMobileMenu();
