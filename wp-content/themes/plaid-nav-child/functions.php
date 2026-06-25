@@ -478,7 +478,7 @@ function render_mobile_navigation() {
 			<div class="plaid-mobile-menu-header-left">
 				<!-- Logo (shown on root level) -->
 				<a href="<?php echo $home_url; ?>" class="plaid-mobile-menu-logo" id="plaid-mobile-logo" aria-label="<?php echo esc_attr($site_title); ?>">
-					<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-mobile-logo-icon">
+					<img src="<?php echo esc_url($logo_path); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-mobile-logo-icon">
 				</a>
 				<!-- Back button (hidden on root level) -->
 				<button type="button" class="plaid-mobile-back-btn" id="plaid-mobile-back-btn" style="display: none;" onclick="plaidNavigateBack(event)" aria-label="<?php esc_attr_e('Go back', 'plaid-nav-child'); ?>">
