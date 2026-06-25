@@ -93,13 +93,21 @@
 		/**
 		 * Cache DOM elements
 		 */
+		/**
+		 * Cache DOM elements
+		 */
 		cacheElements() {
+			console.log('[PlaidNav] Initializing navigation...');
 			this.header = document.querySelector(this.config.selectors.header);
 			this.desktopNav = document.querySelector(this.config.selectors.desktopNav);
 			this.mobileNav = document.querySelector(this.config.selectors.mobileNav);
 			this.mobileToggle = document.querySelector(this.config.selectors.mobileToggle);
+			console.log('[PlaidNav] mobileToggle found:', this.mobileToggle);
+
 			this.mobileBackdrop = document.getElementById('plaid-mobile-backdrop');
 			this.mobileMenu = document.getElementById('plaid-mobile-menu');
+			console.log('[PlaidNav] mobileMenu found:', this.mobileMenu);
+
 			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
 
 			// Panel navigation elements
@@ -108,6 +116,14 @@
 			this.mobileBackBtn = document.getElementById('plaid-mobile-back-btn');
 			this.mobileLogo = document.getElementById('plaid-mobile-logo');
 			this.rootPanel = document.querySelector(this.config.selectors.mobilePanelRoot);
+			console.log('[PlaidNav] rootPanel found:', this.rootPanel);
+
+			if (!this.mobileToggle) {
+				console.error('[PlaidNav] Mobile toggle button not found! Selector: ' + this.config.selectors.mobileToggle);
+			}
+			if (!this.mobileMenu) {
+				console.error('[PlaidNav] Mobile menu not found!');
+			}
 		},
 
 		/**
