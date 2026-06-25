@@ -339,10 +339,32 @@ function plaid_navigation_inline_js() {
 
 	// Initialize panel navigation
 	document.addEventListener('DOMContentLoaded', function() {
-		console.log('Plaid nav inline JS loaded');
+		console.log('[MenuDebug] Plaid nav inline JS loaded');
+
+		// Debug: Check if menu exists
+		var mobileMenu = document.getElementById('plaid-mobile-menu');
+		console.log('[MenuDebug] Mobile menu element:', mobileMenu);
+
+		// Debug: Check root panel
+		var rootPanel = document.getElementById('plaid-mobile-panel-root');
+		console.log('[MenuDebug] Root panel element:', rootPanel);
+
+		if (rootPanel) {
+			// Debug: Check menu items in root panel
+			var menuItems = rootPanel.querySelectorAll('.plaid-mobile-panel-item');
+			console.log('[MenuDebug] Menu items in root panel:', menuItems.length);
+
+			// Debug: List first few menu items
+			for (var i = 0; i < Math.min(3, menuItems.length); i++) {
+				console.log('[MenuDebug] Menu item ' + i + ':', menuItems[i].textContent.trim());
+			}
+		}
+
+		// Debug: Check all panels
+		var allPanels = document.querySelectorAll('.plaid-mobile-panel');
+		console.log('[MenuDebug] Total panels found:', allPanels.length);
 
 		// Bind panel arrow clicks
-		var mobileMenu = document.getElementById('plaid-mobile-menu');
 		if (mobileMenu) {
 			mobileMenu.addEventListener('click', function(e) {
 				var arrowBtn = e.target.closest('.plaid-mobile-panel-arrow');
@@ -513,7 +535,14 @@ function render_mobile_navigation() {
  */
 function render_mobile_menu_panel($menu_id, $depth = 0) {
 	$menu_items = wp_get_nav_menu_items($menu_id);
-	if (!$menu_items) return;
+
+	// Debug: Log menu items
+	error_log('[MenuDebug] render_mobile_menu_panel - menu_id: ' . $menu_id . ', depth: ' . $depth . ', items found: ' . ($menu_items ? count($menu_items) : '0'));
+
+	if (!$menu_items) {
+		error_log('[MenuDebug] No menu items found for menu_id: ' . $menu_id);
+		return;
+	}
 
 	// Organize items by parent
 	$root_items = array();

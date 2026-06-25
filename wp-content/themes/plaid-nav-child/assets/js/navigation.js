@@ -97,16 +97,13 @@
 		 * Cache DOM elements
 		 */
 		cacheElements() {
-			console.log('[PlaidNav] Initializing navigation...');
 			this.header = document.querySelector(this.config.selectors.header);
 			this.desktopNav = document.querySelector(this.config.selectors.desktopNav);
 			this.mobileNav = document.querySelector(this.config.selectors.mobileNav);
 			this.mobileToggle = document.querySelector(this.config.selectors.mobileToggle);
-			console.log('[PlaidNav] mobileToggle found:', this.mobileToggle);
 
 			this.mobileBackdrop = document.getElementById('plaid-mobile-backdrop');
 			this.mobileMenu = document.getElementById('plaid-mobile-menu');
-			console.log('[PlaidNav] mobileMenu found:', this.mobileMenu);
 
 			this.navItems = document.querySelectorAll(this.config.selectors.navItem);
 
@@ -116,13 +113,10 @@
 			this.mobileBackBtn = document.getElementById('plaid-mobile-back-btn');
 			this.mobileLogo = document.getElementById('plaid-mobile-logo');
 			this.rootPanel = document.querySelector(this.config.selectors.mobilePanelRoot);
-			console.log('[PlaidNav] rootPanel found:', this.rootPanel);
 
 			if (!this.mobileToggle) {
-				console.error('[PlaidNav] Mobile toggle button not found! Selector: ' + this.config.selectors.mobileToggle);
 			}
 			if (!this.mobileMenu) {
-				console.error('[PlaidNav] Mobile menu not found!');
 			}
 		},
 
@@ -181,15 +175,12 @@
 			 * Mobile navigation events
 			 */
 			bindMobileEvents(signal) {
-				console.log('[PlaidNav] bindMobileEvents called, mobileToggle:', this.mobileToggle);
 				if (!this.mobileToggle) {
-					console.error('[PlaidNav] mobileToggle is null, cannot bind events');
 					return;
 				}
 
 				// Toggle mobile menu
 				this.mobileToggle.addEventListener('click', (e) => {
-					console.log('[PlaidNav] Toggle button clicked!');
 					this.toggleMobileMenu();
 				}, { signal });
 
@@ -233,20 +224,17 @@
 			},
 		bindPanelNavigation(signal) {
 			const mobileMenu = document.getElementById('plaid-mobile-menu');
-			console.log('[PanelNav] bindPanelNavigation called, mobileMenu:', mobileMenu);
 			if (!mobileMenu) return;
 
 			// Use event delegation for panel arrow clicks
 			mobileMenu.addEventListener('click', (e) => {
 				const arrowBtn = e.target.closest(this.config.selectors.mobilePanelArrow);
-				console.log('[PanelNav] Click detected, arrowBtn:', arrowBtn, 'e.target:', e.target);
 				if (!arrowBtn) return;
 
 				e.preventDefault();
 				e.stopPropagation();
 
 				const targetId = arrowBtn.getAttribute('data-panel-target');
-				console.log('[PanelNav] targetId:', targetId);
 				if (targetId) {
 					this.navigateToPanel(targetId);
 				}
@@ -258,19 +246,13 @@
 				 * Navigate to a specific panel - simple show/hide, no animations
 				 */
 				navigateToPanel(targetId) {
-					console.log('[PanelNav] navigateToPanel called with targetId:', targetId);
 					const targetPanel = document.getElementById('plaid-mobile-panel-' + targetId);
-					console.log('[PanelNav] Looking for panel ID: plaid-mobile-panel-' + targetId);
-					console.log('[PanelNav] targetPanel found:', targetPanel);
 					if (!targetPanel) {
-						console.error('[PanelNav] Panel not found! Available panels:', document.querySelectorAll('.plaid-mobile-panel'));
 						return;
 					}
 
 					const currentPanel = this.state.currentPanel;
-					console.log('[PanelNav] currentPanel:', currentPanel);
 					if (!currentPanel) {
-						console.error('[PanelNav] currentPanel is null!');
 						return;
 					}
 
@@ -278,7 +260,6 @@
 					this.state.panelStack.push(currentPanel);
 
 					// Hide current panel, show target panel
-					console.log('[PanelNav] Hiding current panel, showing target panel');
 					currentPanel.classList.remove('active');
 					targetPanel.classList.add('active');
 
@@ -291,7 +272,6 @@
 					// Focus first item in new panel
 					const firstLink = targetPanel.querySelector('a, button');
 					firstLink?.focus();
-					console.log('[PanelNav] Navigation complete');
 				},
 			navigateBack() {
 				if (this.state.panelStack.length === 0) return;
@@ -497,7 +477,6 @@
 		 */
 		toggleMobileMenu() {
 			if (this.state.isMobileOpen) {
-			console.log('[PlaidNav] toggleMobileMenu called, isMobileOpen:', this.state.isMobileOpen);
 				this.closeMobileMenu();
 			} else {
 				this.openMobileMenu();
