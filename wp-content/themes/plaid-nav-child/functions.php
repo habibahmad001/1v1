@@ -88,24 +88,30 @@ function plaid_nav_child_enqueue_assets() {
 	);
 
 	// Navigation JavaScript
-	wp_enqueue_script(
-		'plaid-navigation-js',
-		get_stylesheet_directory_uri() . '/assets/js/navigation.js',
-		array(),
-		$nav_js_version,
-		true
-	);
+	$nav_js_path = get_stylesheet_directory() . '/assets/js/navigation.js';
+	if (file_exists($nav_js_path)) {
+		wp_enqueue_script(
+			'plaid-navigation-js',
+			get_stylesheet_directory_uri() . '/assets/js/navigation.js',
+			array(),
+			$nav_js_version,
+			true
+		);
 
-	// Localize script for PHP data
-	wp_localize_script('plaid-navigation-js', 'plaidNavData', array(
-		'nonce' => wp_create_nonce('plaid-nav-nonce'),
-		'ajaxUrl' => admin_url('admin-ajax.php'),
-		'siteUrl' => site_url(),
-		'themeUrl' => get_stylesheet_directory_uri(),
-		'hoverDelay' => 150,
-		'closeDelay' => 300,
-		'desktopBreakpoint' => 768
-	));
+		// Localize script for PHP data
+		wp_localize_script('plaid-navigation-js', 'plaidNavData', array(
+			'nonce' => wp_create_nonce('plaid-nav-nonce'),
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'siteUrl' => site_url(),
+			'themeUrl' => get_stylesheet_directory_uri(),
+			'hoverDelay' => 150,
+			'closeDelay' => 300,
+			'desktopBreakpoint' => 768
+		));
+	} else {
+		// Fallback: add error logging
+		error_log('plaid-nav-child: navigation.js not found at ' . $nav_js_path);
+	}
 }
 add_action('wp_enqueue_scripts', 'plaid_nav_child_enqueue_assets', 20);
 
@@ -166,14 +172,14 @@ function render_custom_navigation() {
  * Render Logo
  */
 function render_plaid_logo() {
-	// Use the uploaded logo
-	$logo_url = 'http://localhost/1v1/wp-content/uploads/2026/06/heydearwomen-logo-1080-x-1350-px.png';
+	// Use relative path for logo from theme assets
+	$logo_path = get_stylesheet_directory_uri() . '/assets/images/heydearwomen-logo-1080-x-1350-px.png';
 	$site_title = get_bloginfo('name');
 	$home_url = esc_url(home_url('/'));
 
 	?>
 	<a href="<?php echo $home_url; ?>" class="plaid-logo" aria-label="<?php echo esc_attr($site_title); ?>">
-		<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-logo-icon">
+		<img src="<?php echo esc_url($logo_path); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-logo-icon">
 		<span class="plaid-logo-text"><?php echo esc_html($site_title); ?></span>
 	</a>
 	<?php
@@ -268,7 +274,7 @@ function render_mobile_navigation() {
 		return;
 	}
 
-	$logo_url = 'http://localhost/1v1/wp-content/uploads/2026/06/heydearwomen-logo-1080-x-1350-px.png';
+	$logo_path = get_stylesheet_directory_uri() . '/assets/images/heydearwomen-logo-1080-x-1350-px.png';
 	$site_title = get_bloginfo('name');
 	$home_url = esc_url(home_url('/'));
 
