@@ -169,6 +169,198 @@ function render_custom_navigation() {
 }
 
 /**
+ * Inline JavaScript functions for mobile navigation
+ * These are added directly in the HTML for reliability
+ */
+function plaid_navigation_inline_js() {
+	?>
+	<script>
+	// Mobile navigation state
+	var plaidMobileState = {
+		isOpen: false,
+		panelStack: [],
+		currentPanel: null
+	};
+
+	// Toggle mobile menu
+	function plaidToggleMobileMenu(e) {
+		console.log('plaidToggleMobileMenu called');
+		e.preventDefault();
+		e.stopPropagation();
+
+		var menu = document.getElementById('plaid-mobile-menu');
+		var backdrop = document.getElementById('plaid-mobile-backdrop');
+		var toggle = document.querySelector('.plaid-mobile-toggle');
+		var header = document.querySelector('.plaid-header');
+
+		if (!menu) return;
+
+		if (plaidMobileState.isOpen) {
+			// Close menu
+			menu.style.display = 'none';
+			menu.classList.remove('active');
+			backdrop.style.display = 'none';
+			backdrop.classList.remove('active');
+			header.classList.remove('mobile-menu-active');
+			document.body.style.overflow = '';
+			toggle.setAttribute('aria-expanded', 'false');
+			plaidMobileState.isOpen = false;
+			plaidResetPanels();
+		} else {
+			// Open menu
+			menu.style.display = 'flex';
+			menu.classList.add('active');
+			backdrop.style.display = 'block';
+			backdrop.classList.add('active');
+			header.classList.add('mobile-menu-active');
+			document.body.style.overflow = 'hidden';
+			toggle.setAttribute('aria-expanded', 'true');
+			plaidMobileState.isOpen = true;
+			plaidResetPanels();
+		}
+	}
+
+	// Close mobile menu
+	function plaidCloseMobileMenu(e) {
+		console.log('plaidCloseMobileMenu called');
+		if (e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+
+		var menu = document.getElementById('plaid-mobile-menu');
+		var backdrop = document.getElementById('plaid-mobile-backdrop');
+		var toggle = document.querySelector('.plaid-mobile-toggle');
+		var header = document.querySelector('.plaid-header');
+
+		if (!menu) return;
+
+		menu.style.display = 'none';
+		menu.classList.remove('active');
+		backdrop.style.display = 'none';
+		backdrop.classList.remove('active');
+		header.classList.remove('mobile-menu-active');
+		document.body.style.overflow = '';
+		if (toggle) toggle.setAttribute('aria-expanded', 'false');
+		plaidMobileState.isOpen = false;
+		plaidResetPanels();
+	}
+
+	// Navigate to panel
+	function plaidNavigateToPanel(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var targetId = e.currentTarget.getAttribute('data-panel-target');
+		console.log('plaidNavigateToPanel: ' + targetId);
+
+		var targetPanel = document.getElementById('plaid-mobile-panel-' + targetId);
+		if (!targetPanel) {
+			console.error('Panel not found: plaid-mobile-panel-' + targetId);
+			return;
+		}
+
+		var currentPanel = plaidMobileState.currentPanel;
+		if (!currentPanel) {
+			currentPanel = document.getElementById('plaid-mobile-panel-root');
+		}
+
+		if (currentPanel) {
+			plaidMobileState.panelStack.push(currentPanel);
+			currentPanel.classList.remove('active');
+		}
+
+		targetPanel.classList.add('active');
+		plaidMobileState.currentPanel = targetPanel;
+
+		// Update header
+		plaidUpdateMobileHeader(true);
+
+		// Focus first item
+		var firstLink = targetPanel.querySelector('a, button');
+		if (firstLink) firstLink.focus();
+	}
+
+	// Navigate back
+	function plaidNavigateBack(e) {
+		console.log('plaidNavigateBack called');
+		if (e) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+
+		if (plaidMobileState.panelStack.length === 0) return;
+
+		var currentPanel = plaidMobileState.currentPanel;
+		var previousPanel = plaidMobileState.panelStack.pop();
+
+		if (currentPanel) currentPanel.classList.remove('active');
+		if (previousPanel) previousPanel.classList.add('active');
+
+		plaidMobileState.currentPanel = previousPanel;
+		plaidUpdateMobileHeader(plaidMobileState.panelStack.length > 0);
+
+		if (previousPanel) {
+			var firstLink = previousPanel.querySelector('a, button');
+			if (firstLink) firstLink.focus();
+		}
+	}
+
+	// Update mobile header
+	function plaidUpdateMobileHeader(showBack) {
+		var logo = document.getElementById('plaid-mobile-logo');
+		var backBtn = document.getElementById('plaid-mobile-back-btn');
+
+		if (!logo || !backBtn) return;
+
+		if (showBack) {
+			backBtn.style.display = 'flex';
+			logo.style.display = 'none';
+		} else {
+			logo.style.display = 'flex';
+			backBtn.style.display = 'none';
+		}
+	}
+
+	// Reset panels
+	function plaidResetPanels() {
+		plaidMobileState.panelStack = [];
+		var rootPanel = document.getElementById('plaid-mobile-panel-root');
+		plaidMobileState.currentPanel = rootPanel;
+
+		var allPanels = document.querySelectorAll('.plaid-mobile-panel');
+		allPanels.forEach(function(panel) {
+			panel.classList.remove('active');
+		});
+
+		if (rootPanel) rootPanel.classList.add('active');
+		plaidUpdateMobileHeader(false);
+	}
+
+	// Initialize panel navigation
+	document.addEventListener('DOMContentLoaded', function() {
+		console.log('Plaid nav inline JS loaded');
+
+		// Bind panel arrow clicks
+		var mobileMenu = document.getElementById('plaid-mobile-menu');
+		if (mobileMenu) {
+			mobileMenu.addEventListener('click', function(e) {
+				var arrowBtn = e.target.closest('.plaid-mobile-panel-arrow');
+				if (arrowBtn) {
+					plaidNavigateToPanel(e);
+				}
+			});
+		}
+
+		// Set initial panel
+		plaidResetPanels();
+	});
+	</script>
+	<?php
+}
+add_action('wp_footer', 'plaid_navigation_inline_js');
+
+/**
  * Render Logo
  */
 function render_plaid_logo() {
@@ -247,7 +439,7 @@ function render_mobile_navigation_toggle() {
 		aria-label="<?php esc_attr_e('Toggle menu', 'plaid-nav-child'); ?>"
 		aria-expanded="false"
 		aria-controls="plaid-mobile-menu"
-		data-plaid-mobile-toggle>
+		onclick="plaidToggleMobileMenu(event)">
 		<span class="plaid-mobile-toggle-bar"></span>
 		<span class="plaid-mobile-toggle-bar"></span>
 		<span class="plaid-mobile-toggle-bar"></span>
@@ -289,7 +481,7 @@ function render_mobile_navigation() {
 					<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($site_title); ?>" class="plaid-mobile-logo-icon">
 				</a>
 				<!-- Back button (hidden on root level) -->
-				<button type="button" class="plaid-mobile-back-btn" id="plaid-mobile-back-btn" style="display: none;" aria-label="<?php esc_attr_e('Go back', 'plaid-nav-child'); ?>">
+				<button type="button" class="plaid-mobile-back-btn" id="plaid-mobile-back-btn" style="display: none;" onclick="plaidNavigateBack(event)" aria-label="<?php esc_attr_e('Go back', 'plaid-nav-child'); ?>">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 						<path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					</svg>
@@ -297,7 +489,7 @@ function render_mobile_navigation() {
 				</button>
 			</div>
 			<!-- Close button -->
-			<button type="button" class="plaid-mobile-close-btn" id="plaid-mobile-close-btn" aria-label="<?php esc_attr_e('Close menu', 'plaid-nav-child'); ?>">
+			<button type="button" class="plaid-mobile-close-btn" onclick="plaidCloseMobileMenu(event)" aria-label="<?php esc_attr_e('Close menu', 'plaid-nav-child'); ?>">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 					<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
